@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+    %}
+    <form method="POST">
+      <h3 align="center">User Info</h3>
+      <div class="form-group">
+        <label for="subject1">Subject Interest 1</label>
+        <input
+          type="subjectInterest"
+          class="form-control"
+          id="subject1"
+          name="subject1"
+          placeholder="Enter subject"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="subject2">Subject Interest 2</label>
+        <input
+          type="subjectInterest"
+          class="form-control"
+          id="subject2"
+          name="subject2"
+          placeholder="Enter subject"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="subject3">Subject Interest 3</label>
+        <input
+          type="subjectInterest"
+          class="form-control"
+          id="subject3"
+          name="subject3"
+          placeholder="Enter subject"
+        />
+      </div>
+
+      <br />
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
+    {% endblock %}
+    

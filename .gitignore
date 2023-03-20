@@ -1,0 +1,4 @@
+__pycahce __/
+venv/
+.env
+*instance/database.db
