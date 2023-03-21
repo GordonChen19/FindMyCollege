@@ -51,20 +51,25 @@ def add_info():
         db.session.add(subject_interests)
         db.session.commit()
         
+    return render_template("user_info.html", user=current_user)
+        
+@views.route('/academic-portfolio',methods=['POST','GET'])
+@login_required
+def add_portfolio():
+    if request.method==  'POST':
         curriculum=request.form.get('curriculum')
         if curriculum=='ALevel':
-            alevel_score=request.form.get('ALevel') #Need to put multiple fields together
+            alevel_score=request.form.get('value') #Need to put multiple fields together
             new_entry=Qualification(curriculum=curriculum,alevel_score=alevel_score,user_id=current_user.id)
         elif curriculum=='Polytechnic':
             polytechnic_score=request.form.get('Polytechnic')
             new_entry=Qualification(curriculum=curriculum,polytechnic_score=polytechnic_score,user_id=current_user.id)
+        elif curriculum=='IB':
+            ib_score=request.form.get('')
         db.session.add(new_entry)
         db.session.commit()
-        
-    return render_template("user_info.html", user=current_user)
-            
-        
-            
+    
+    return render_template("academic_portfolio.html", user=current_user)   
             
         
 

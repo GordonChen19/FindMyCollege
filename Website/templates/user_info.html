@@ -1,7 +1,7 @@
-{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
+{% extends "base.html" %} {% block title %}subject-interests{% endblock %} {% block content
     %}
     <form method="POST">
-      <h3 align="center">User Info</h3>
+      <h3 align="center">TELL US ABOUT YOURSELF</h3>
       <div class="form-group">
         <label for="subject1">Subject Interest 1</label>
         <input
@@ -37,13 +37,12 @@
 
       <div class="form-group">
         <label for="curriculum">Curriculum</label>
-        <input
-          type="curriculum"
-          class="form-control"
-          id="curriculum"
-          name="curriculum"
-          placeholder="Enter curriculum"
-        />
+
+        <select name="curriculum" id="curriculum">
+          <option value="ALevel">A Levels</option>
+          <option value="Polytechnic">Polytechnic</options>
+          <option value="IB">International Baccalaureatte</options>
+         </select>
       </div>
 
       <br />
@@ -67,6 +66,8 @@
         font-family: Arial, Helvetica, sans-serif;
         font-size: 40px;
       }
+    
+
       </style>
     
     {% endblock %}
