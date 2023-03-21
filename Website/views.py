@@ -51,15 +51,15 @@ def add_info():
         db.session.add(subject_interests)
         db.session.commit()
         
-        # curriculum=request.form.get('curriculum')
-        # if curriculum=='ALevel':
-        #     alevel_score=request.form.get('ALevel') #Need to put multiple fields together
-        #     new_entry=Qualification(curriculum=curriculum,alevel_score=alevel_score,user_id=current_user.id)
-        # elif curriculum=='Polytechnic':
-        #     polytechnic_score=request.form.get('Polytechnic')
-        #     new_entry=Qualification(curriculum=curriculum,polytechnic_score=polytechnic_score,user_id=current_user.id)
-        # db.session.add(new_entry)
-        # db.session.commit()
+        curriculum=request.form.get('curriculum')
+        if curriculum=='ALevel':
+            alevel_score=request.form.get('ALevel') #Need to put multiple fields together
+            new_entry=Qualification(curriculum=curriculum,alevel_score=alevel_score,user_id=current_user.id)
+        elif curriculum=='Polytechnic':
+            polytechnic_score=request.form.get('Polytechnic')
+            new_entry=Qualification(curriculum=curriculum,polytechnic_score=polytechnic_score,user_id=current_user.id)
+        db.session.add(new_entry)
+        db.session.commit()
         
     return render_template("user_info.html", user=current_user)
             
