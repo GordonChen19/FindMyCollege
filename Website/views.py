@@ -71,13 +71,16 @@ def add_portfolio():
         db.session.add(new_entry)
         db.session.commit()
         
+    def max_riasec_code(riasec_code):
+        riasec_array=[riasec_code.r_score,riasec_code.i_score,riasec_code.a_score,riasec_code.s_score,riasec_code.e_score,riasec_code.c_score]
+        code_array=['r','i','a','s','e','c']
+        print(max(riasec_array))
+        return code_array[riasec_array.index(max(riasec_array))]
         
-        df=pd.read_csv('Website/static/Degree.csv')
-        for _, row in df.iterrows():
-            degree = Degrees(school=row['School'], degree=row['Degree'],alevel_igp=row['A_Level_IGP'],polytechnic_igp=row['Poly_IGP'],employability=row['Percentage_Of_Employed_Graduates'],salary=row['Mean_Gross_Monthly_Salary'] )
-            db.session.add(degree)
-            db.session.commit()
-    
+    riasec_code=RIASEC_Scores.query.filter_by(user_id=current_user.id).first() #riasec_code for particular user_id
+    max_riasec_code = max_riasec_code(riasec_code)
+    print("The maximum riasec code is "+(max_riasec_code))
+
     return render_template("academic_portfolio.html", user=current_user)   
             
 @views.route('/TakeTest', methods=['POST', 'GET'])

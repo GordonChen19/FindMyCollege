@@ -53,3 +53,4 @@ class Degrees(db.Model):
     salary=db.Column(db.Integer)
     riasec_code=db.Column(db.String)
 
+
