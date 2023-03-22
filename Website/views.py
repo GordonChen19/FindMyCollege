@@ -4,6 +4,7 @@ from .models import *
 from . import db
 import json
 import sqlite3 as sql
+import pandas as pd
 
 conn=sql.connect('database.db')
 c=conn.cursor()
@@ -50,6 +51,7 @@ def add_info():
         subject_interests=Subject_interests(subject1=subject1,subject2=subject2,subject3=subject3,user_id=current_user.id)
         db.session.add(subject_interests)
         db.session.commit()
+        return redirect(url_for('views.add_portfolio'))
         
     return render_template("user_info.html", user=current_user)
         
@@ -68,6 +70,13 @@ def add_portfolio():
             ib_score=request.form.get('')
         db.session.add(new_entry)
         db.session.commit()
+        
+        
+        df=pd.read_csv('Website/static/Degree.csv')
+        for _, row in df.iterrows():
+            degree = Degrees(school=row['School'], degree=row['Degree'],alevel_igp=row['A_Level_IGP'],polytechnic_igp=row['Poly_IGP'],employability=row['Percentage_Of_Employed_Graduates'],salary=row['Mean_Gross_Monthly_Salary'] )
+            db.session.add(degree)
+            db.session.commit()
     
     return render_template("academic_portfolio.html", user=current_user)   
             

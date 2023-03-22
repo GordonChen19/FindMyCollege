@@ -1,0 +1,122 @@
+﻿School,Degree,A_Level_IGP,Poly_IGP,Percentage_Of_Employed_Graduates,Mean_Gross_Monthly_Salary
+NTU,Medicine,AAAA,,100,5404
+NTU,Renaissance Engineering,AAAA,,,
+NTU,Aerospace Engineering,AACB,3.55,94.4,4321
+NTU,Bioengineering,BBCC,3.57,90.9,3654
+NTU,Chemical & Biomolecular Engineering,BBCC,3.71,91.1,3959
+NTU,Civil Engineering,CCDD,3.49,97.7,3664
+NTU,Computer Engineering,AACC,3.65,95.8,4847
+NTU,Computer Science,AAAC,3.7,95.8,4942
+NTU,Data Science & Artificial Intelligence,AAAB,3.9,88.2,6749
+NTU,Electrical & Electronic Engineering,CCDC,3.44,93.9,4069
+NTU,Engineering,CCCC,,,
+NTU,Environmental Engineering,BCCD,3.56,96.6,3487
+NTU,Information Engineering & Media,BCCD,3.66,95.7,4325
+NTU,Martitime Studies,BCCD,3.5,98.4,3763
+NTU,Materials Engineering,BCCC,3.41,96.3,3801
+NTU,Mechnical Engineering,CCDD,3.37,94,4006
+NTU,Biological Sciences,AABC,3.71,96.8,3569
+NTU,Chemistry & Biological Chemistry,BBCC,3.57,90.2,3501
+NTU,Envrionmental Earth Systems Science,AAAC,,100,3888
+NTU,Mathematical Sciences,BCCB,3.36,91,4039
+NTU,Physics,CCDC,,84.5,3793
+NTU,Accountancy,BCCB,3.65,97.7,3539
+NTU,Business,BBCB,3.64,96.2,4362
+NTU,"Art, Design & Media",BCCC,3.38,86.2,3182
+NTU,Chinese,BCCB,3.42,87,3483
+NTU,Communication Studies,AABB,3.71,96.9,3548
+NTU,Economics,BBCC,3.57,93.5,3720
+NTU,Economics and Data Science,AABB,3.76,92.9,3822
+NTU,English,BBCB,3.34,95.5,3354
+NTU,History,BCCC,3.35,82.2,3800
+NTU,Linguistics & Multilingual Studies,ABCC,3.5,87.2,3398
+NTU,Philosophy,BBCC,3.5,88.5,3502
+NTU,Psychology,AACB,3.73,91.8,3362
+NTU,Public Policy & Global Affairs,AACB,3.6,83.3,4105
+NTU,Sociology,BBCC,3.61,91.3,3567
+NTU,Arts (Education),BCCC,,100,3718
+NTU,Science (Education),AACB,,100,3796
+NTU,Sport Science. & Management,BCCD,3.54,86.2,3438
+SMU,Accountancy,BBCC,3.63,98.7,3814
+SMU,Business Management,BBBB,3.73,96.6,4371
+SMU,Law,AAAA,,100,5433
+SMU,Economics,BBCB,3.61,91.8,4777
+SMU,Information Systems,BBBC,3.71,98.2,4906
+SMU,Computer Science,AABA,3.8,,
+SMU,Computing & Law,ABBA,,,
+SMU,Software Engineering,BBBC,3.71,,
+SMU,Social Sciences,BBBC,3.67,94.1,3836
+NUS,Law,AAAA,3.82,96.5,5627
+NUS,Medicine,AAAA,3.86,,
+NUS,Nursing,CCDB,3.42,96.2,3530
+NUS,Dentistry,AAAA,,100,4286
+NUS,Architecture,BBCC,3.56,97.7,4139
+NUS,Engineering,BCCB,3.56,,
+NUS,Industrial Design,BBCC,3.62,87.5,4178
+NUS,Landscape Architecture,BCCB,3.38,,
+NUS,Business Analytics,AAAA,3.81,100,5603
+NUS,Computer Science,AAAA,3.84,99.1,6002
+NUS,Information Security,AAAB,3.8,100,5095
+NUS,Information Systems,AAAB,3.76,97.5,5217
+NUS,Computer Engineering,AABB,3.88,97.4,5473
+NUS,Data Science & Economics,AAAB,,,
+NUS,Environmental Studies,AABC,,97.4,3658
+NUS,Food Science & Technology,AAAA,3.86,,
+NUS,Humanities & Sciences,ABBC,3.67,,
+NUS,Pharmaceutical Sciences,AAAA,,,
+NUS,Pharmacy,AAAA,3.86,95.9,3923
+NUS,"Philosophy, Politics & Economics",AAAA,,,
+NUS,Business Administration,AABC,3.68,94.7,5567
+NUS,Business Administration (Accountancy),AABB,3.78,100,3515
+NUS,Real Estate,BBCB,3.52,94.5,3863
+SIT,Information Security,,,100,5251
+SIT,Software Engineering,,,100,5215
+SIT,Computer Science,,,,
+SIT,Computer Science in Interactive Media and Game Development,,,,
+SIT,Computer Science in Real-Time Interactive Simulation,,,95.1,4984
+SIT,Applied Artificial Intelligence,,,,
+SIT,Digital Supply Chain,,,,
+SIT,Applied Computing (with specialisation in Fintech),,,,
+SIT,Dietetics & Nutrition,,,,
+SIT,Diagnostic Radiography,,,100,3880
+SIT,Physiotherapy,,,97.9,3591
+SIT,Occupational Therapy,,,100,3546
+SIT,Speech & Language Therapy,,,,
+SIT,Radiation Therapy,,,100,3328
+SIT,Nursing,,,98.3,3697
+SIT,Food Business Management,,,91.9,2817
+SIT,Accountancy,,,97.7,3431
+SIT,Hospitality Business,,,96.1,3216
+SIT,Air Transport Management,,,,
+SIT,Pharmaceutical Engineering,,,98.3,3736
+SIT,Food Technology,,,96.4,3322
+SIT,Chemical Engineering,,,79.2,3836
+SIT,Sustainable Infrastructure Engineering,,,98,3773
+SIT,Civil Engineering,,,92.8,3719
+SIT,Aerospace Engineering,,,100,3940
+SIT,Aircraft System Engineering,,,100,3394
+SIT,Electrical Power Engineering,,,98.3,3691
+SIT,Electronics & Data Engineering,,,,
+SIT,Mechanical Engineering,,,,
+SIT,Mechanical Design & Manufacturing Engineering,,,93.4,3787
+SIT,Naval Architecture & Marine Engineering,,,100,3592
+SIT,Computer Engineering,,,,
+SIT,Mechatronic Systems,,,89.3,3690
+SIT,Robotics Systems,,,,
+SIT,Digital Communications & Integrated Media,,,,
+SIT,Digital Art & Animation,,,80,3125
+SIT,User Experience & Game Design,,,,
+SUSS,Accountancy,,,98.6,3231
+SUSS,Business Analytics,,,93.5,4372
+SUSS,Early Childhood Education,,,93,2963
+SUSS,Finance,,,84.4,3862
+SUSS,Human Resource Management,,,95.6,3412
+SUSS,Marketing,,,92.4,3411
+SUSS,Public Safety & Security,,,,
+SUSS,Social Work,,,94.7,3461
+SUSS,Supply Chain Management,,,97.4,3381
+SUTD,Architecture & Sustainable Design,,,96.6,3842
+SUTD,Computer Science & Design,,,98.3,5030
+SUTD,Design & Artificial Intelligence,,,,
+SUTD,Engineering Product Development,,,95.5,4778
+SUTD,Engineering Systems & Design,,,95.5,4778

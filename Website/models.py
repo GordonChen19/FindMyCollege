@@ -44,10 +44,12 @@ class Subject_interests(db.Model):
     subject3=db.Column(db.String(50))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-class IGP(db.Model):
+class Degrees(db.Model):
     school=db.Column(db.String(150),primary_key=True)
     degree=db.Column(db.String(150),primary_key=True)
     alevel_igp=db.Column(db.String(150))
     polytechnic_igp=db.Column(db.Float)
-    
+    employability=db.Column(db.Float)
+    salary=db.Column(db.Integer)
+    riasec_code=db.Column(db.String)
 
