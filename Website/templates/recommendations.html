@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}recommendations{% endblock %} {% block content
+    %}
+    <form method="POST">
+      <h3 align="center">Recommendations</h3>
+
+
+      <div class="form-group">
+        <label for="curriculum">Curriculum</label>
+
+        <select name="curriculum" id="curriculum">
+          <option value="ALevel">A Levels</option>
+          <option value="Polytechnic">Polytechnic</options>
+          <option value="IB">International Baccalaureatte</options>
+         </select>
+      </div>
+
+      <br />
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <style>
+      body {
+        background-image: url("static/NTU2.jpeg");
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: cover;
+        color:white
+      }
+      h3 {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        margin-right: 80px;
+        margin-left: 80px;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 40px;
+      }
+    
+
+      </style>
+    
+    {% endblock %}
+    

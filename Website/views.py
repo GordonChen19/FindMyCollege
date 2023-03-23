@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash, jsonify, url_for,r
 from flask_login import login_required, current_user
 from .models import *
 from . import db
+from sqlalchemy import or_
 import json
 import sqlite3 as sql
 import pandas as pd
@@ -70,6 +71,7 @@ def add_portfolio():
             ib_score=request.form.get('')
         db.session.add(new_entry)
         db.session.commit()
+        return redirect(url_for('views.recommend_course'))
 
     return render_template("academic_portfolio.html", user=current_user)   
             
@@ -119,10 +121,15 @@ def recommend_course():
         
         #Find user's riasec code and match with course riasec_codes
         riasec_code=RIASEC_Scores.query.filter_by(user_id=current_user.id).first() #riasec_code for particular user_id
-        r1,r2,r3 = max_riasec_code(riasec_code)
-        course_recommendations=Degrees.query.filter_by((r1 in riasec_code) or (r2 in riasec_code) or (r3 in riasec_code)).all()
-        #The above line could be an error
         
+        subject_interests=Subject_interests.query.filter_by(user_id=current_user.id).first()
+        
+        r1,r2 = max_riasec_code(riasec_code)
+        filter_by_riasec_code=Degrees.query.filter(or_(Degrees.riasec_code.like(f'%{r1}%'), Degrees.riasec_code.like(f'%{r2}%'))).all()
+        for degree in filter_by_riasec_code:
+            print(degree.degree)
+        
+    return render_template("recommendations.html", user=current_user)
         
         
         
