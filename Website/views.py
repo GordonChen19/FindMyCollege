@@ -112,7 +112,7 @@ def recommend_course():
             code_array=['r','i','a','s','e','c']
             top_r=[]
             print(max(riasec_array))
-            for i in range(2):
+            for i in range(3):
                 max_index=riasec_array.index(max(riasec_array))
                 top_r.append(code_array[max_index])
                 riasec_array.pop(max_index)
@@ -120,11 +120,17 @@ def recommend_course():
             return top_r #Function calculates users top 2 riasec codes
         
         #Find user's riasec code and match with course riasec_codes
-        riasec_code=RIASEC_Scores.query.filter_by(user_id=current_user.id).first() #riasec_code for particular user_id
-        
+        riasec_code=RIASEC_Scores.query.filter_by(user_id=current_user.id).first() #riasec_code for particular user_id 
         subject_interests=Subject_interests.query.filter_by(user_id=current_user.id).first()
         
-        r1,r2 = max_riasec_code(riasec_code)
+        r1,r2,r3= max_riasec_code(riasec_code)
+        #abc, ab, ac, bc, a, b, c <- for both riasec_code ranking and subject__interest ranking
+        # Find the intersection of two tables
+        # Find the product of the two scores for or remaining
+        
+        #x+y  3*4  1*6
+        #Create a new recommendations list, display everything that remains
+        
         filter_by_riasec_code=Degrees.query.filter(or_(Degrees.riasec_code.like(f'%{r1}%'), Degrees.riasec_code.like(f'%{r2}%'))).all()
         for degree in filter_by_riasec_code:
             print(degree.degree)
