@@ -70,16 +70,6 @@ def add_portfolio():
             ib_score=request.form.get('')
         db.session.add(new_entry)
         db.session.commit()
-        
-    def max_riasec_code(riasec_code):
-        riasec_array=[riasec_code.r_score,riasec_code.i_score,riasec_code.a_score,riasec_code.s_score,riasec_code.e_score,riasec_code.c_score]
-        code_array=['r','i','a','s','e','c']
-        print(max(riasec_array))
-        return code_array[riasec_array.index(max(riasec_array))]
-        
-    riasec_code=RIASEC_Scores.query.filter_by(user_id=current_user.id).first() #riasec_code for particular user_id
-    max_riasec_code = max_riasec_code(riasec_code)
-    print("The maximum riasec code is "+(max_riasec_code))
 
     return render_template("academic_portfolio.html", user=current_user)   
             
@@ -111,3 +101,26 @@ def receive_input():
 
     return render_template("take_test.html", user=current_user)
 
+@views.route('/Recommendations',methods=['POST','GET'])
+@login_required
+def recommend_course():
+    if request.method=='POST': 
+        def max_riasec_code(riasec_code):
+            riasec_array=[riasec_code.r_score,riasec_code.i_score,riasec_code.a_score,riasec_code.s_score,riasec_code.e_score,riasec_code.c_score]
+            code_array=['r','i','a','s','e','c']
+            top_r=[]
+            print(max(riasec_array))
+            for i in range(2):
+                max_index=riasec_array.index(max(riasec_array))
+                top_r.append(code_array[max_index])
+                riasec_array.pop(max_index)
+                code_array.pop(max_index)
+            return top_r #Function calculates users top 2 riasec codes
+        
+        #Find user's riasec code and match with course riasec_codes
+        riasec_code=RIASEC_Scores.query.filter_by(user_id=current_user.id).first() #riasec_code for particular user_id
+        r1,r2,r3 = max_riasec_code(riasec_code)
+        course_recommendations=Degrees.query.filter_by((r1 in riasec_code) or (r2 in riasec_code) or (r3 in riasec_code)).all()
+        
+        
+        

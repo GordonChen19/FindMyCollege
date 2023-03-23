@@ -22,7 +22,7 @@ def login():
                 Degrees.query.delete()
                 df=pd.read_csv('Website/static/Degree.csv') #Load Degree dataset into database
                 for _, row in df.iterrows():
-                    degree = Degrees(school=row['School'], degree=row['Degree'],alevel_igp=row['A_Level_IGP'],polytechnic_igp=row['Poly_IGP'],employability=row['Percentage_Of_Employed_Graduates'],salary=row['Mean_Gross_Monthly_Salary'] )
+                    degree = Degrees(school=row['School'], degree=row['Degree'],alevel_igp=row['A_Level_IGP'],polytechnic_igp=row['Poly_IGP'],employability=row['Percentage_Of_Employed_Graduates'],salary=row['Mean_Gross_Monthly_Salary'],riasec_code=row['riasec_code'])
                     db.session.add(degree)
                     db.session.commit()
                 print("Done loading")
@@ -71,7 +71,7 @@ def sign_up():
             Degrees.query.delete()
             df=pd.read_csv('Website/static/Degree.csv') #Load Degree dataset into database
             for _, row in df.iterrows():
-                degree = Degrees(school=row['School'], degree=row['Degree'],alevel_igp=row['A_Level_IGP'],polytechnic_igp=row['Poly_IGP'],employability=row['Percentage_Of_Employed_Graduates'],salary=row['Mean_Gross_Monthly_Salary'] )
+                degree = Degrees(school=row['School'], degree=row['Degree'],alevel_igp=row['A_Level_IGP'],polytechnic_igp=row['Poly_IGP'],employability=row['Percentage_Of_Employed_Graduates'],salary=row['Mean_Gross_Monthly_Salary'],riasec_code=row['riasec_code'])
                 db.session.add(degree)
                 db.session.commit()
 

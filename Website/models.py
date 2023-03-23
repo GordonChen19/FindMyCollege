@@ -51,6 +51,6 @@ class Degrees(db.Model):
     polytechnic_igp=db.Column(db.Float)
     employability=db.Column(db.Float)
     salary=db.Column(db.Integer)
-    riasec_code=db.Column(db.String)
+    riasec_code=db.Column(db.String(50))
 
 
