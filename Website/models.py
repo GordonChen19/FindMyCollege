@@ -54,6 +54,6 @@ class Degrees(db.Model):
     riasec_code=db.Column(db.String(10))
     related_subject1=db.Column(db.String(50))
     related_subject2=db.Column(db.String(50))
-    related_subejct3=db.Column(db.String(50))
+    related_subject3=db.Column(db.String(50))
     additional_information=db.Column(db.String(500))
 
