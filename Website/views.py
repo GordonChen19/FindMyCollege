@@ -121,6 +121,8 @@ def recommend_course():
         riasec_code=RIASEC_Scores.query.filter_by(user_id=current_user.id).first() #riasec_code for particular user_id
         r1,r2,r3 = max_riasec_code(riasec_code)
         course_recommendations=Degrees.query.filter_by((r1 in riasec_code) or (r2 in riasec_code) or (r3 in riasec_code)).all()
+        #The above line could be an error
+        
         
         
         

@@ -52,5 +52,8 @@ class Degrees(db.Model):
     employability=db.Column(db.Float)
     salary=db.Column(db.Integer)
     riasec_code=db.Column(db.String(50))
+    related_subject1=db.Column(db.String(50))
+    related_subject2=db.Column(db.String(50))
+    related_subejct3=db.Column(db.String(50))
 
 
