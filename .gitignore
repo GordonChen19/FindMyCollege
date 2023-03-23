@@ -1,4 +1,4 @@
-__pycache __/
+__pycache__/
 venv/
 .env
 *instance/database.db
