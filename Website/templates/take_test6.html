@@ -1,0 +1,129 @@
+{% extends "base.html" %} {% block title %}FindMyCollege{% endblock %} {% block content %}
+
+<body>
+  <div id="main">
+    <div id="header">
+    <h1>Take our Personality Test</h1>
+    </div>
+    
+    <h2>Please answer every question:</h2>
+
+
+			
+		<div class="entry-content" itemprop="text">
+			<script ez-screx="true">
+if (typeof jQuery == 'undefined'){
+  __ez.scxr.getDW(document).write(unescape("%3Cscript src='https://code.jquery.com/jquery-3.4.1.min.js' integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=' crossorigin='anonymous'%3E%3C/script%3E"));    
+  }</script><style>.tsemail button,.tsemail input[type=button],.tsemail input[type=submit]{background:#ddd;padding:0 12px;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;color:#444;display:inline-block;font-size:11px;font-weight:700;text-decoration:none;cursor:pointer;line-height:27px;border:none}.tsemail input[type=email]{border:1px solid #ccc;width:200px;padding:6px 4px;outline:0;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;color:#777;display:inline-block;background:#fff;box-sizing:border-box;-moz-box-sizing:border-box}.tstitle{font-size:17px;background-color:#7EBADA;padding:3px 30px}.tsilo p{margin:1px;font-size:15px}.tsanswers{border-bottom: 1px solid #ccc;
+
+padding: 3px 20px;}.tsqgroup{border:5px outset #C4E4F4;margin-bottom:10px}.radio{float: right;
+
+padding-left: 15px;
+
+border-left: 1px solid #ccc;}</style>
+
+<script ez-screx="true">
+
+  function valans(e) {
+
+  if (jQuery("#" + e).is(":checked")) {
+      jQuery("#" + e).attr("checked", false)
+  }
+  }
+  function validateTSForm() {
+    if (jQuery(".tscont :checkbox:checked").length < 1) {
+      alert("You need to check at least one option");
+      return false;
+    } 
+    else {
+      jQuery("#tsform").submit();
+      return true
+    }
+  }
+  </script>
+
+		<div class="tsilo">
+
+   <p>Read each statement. If you agree with the statement, select the checkbox. There are no wrong answers!</p>
+
+   <form action="" method="post" id="form1">
+      <div class="tscont">
+          <div class="tsqgroup">
+            <div class="qfirst">
+                <div class="tsanswers">
+                    <p><b>36)</b> I like to lead <span class="radio"><input type="checkbox" name="q35" value="e"></span></p>  
+                </div>
+                <div class="tsanswers">
+                    <p><b>37)</b>  I like working outdoors<span class="radio"><input type="checkbox" name="q36" value="r"></span></p>  
+                </div>
+                <div class="tsanswers">
+                    <p><b>38)</b> I would like to work in an office <span class="radio"><input type="checkbox" name="q37" value="c"></span></p>  
+                </div>
+                <div class="tsanswers">
+                    <p><b>39)</b> I'm good at math<span class="radio"><input type="checkbox" name="q38" value="i"></span></p>  
+                </div>
+                <div class="tsanswers">
+                    <p><b>40)</b> I like helping people <span class="radio"><input type="checkbox" name="q39" value="s"></span></p>  
+                </div>
+                <div class="tsanswers">
+                    <p><b>41)</b> I like to draw<span class="radio"><input type="checkbox" name="q40" value="a"></span></p>  
+                </div>
+                <div class="tsanswers">
+                    <p><b>42)</b>  I like to give speeches <span class="radio"><input type="checkbox" name="q41" value="e"></span></p>  
+                </div>
+            </div>            
+        </div>         
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</body>
+
+
+<style>
+  body {
+    background-color: beige;
+
+  font-family: Helvetica;
+  }
+  
+  #main {
+  width: 80%;
+  max-width: 950px;
+  border: 1px gray solid;
+  margin: auto;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  }
+  
+  #header {
+  margin-top: 0;
+  border: 2px solid black;
+  padding: 5px;
+  height: 250px;
+  background: beige;
+  background-image: url("static/circumsystem.jpeg");
+  background-size: contain;
+  color: white;
+  }
+
+  label {
+  display: block;
+  }
+
+  input {
+  width: 30px;
+  margin-left: 20px;
+  }
+
+  button {
+  width: 100px;
+  margin-top: 20px;
+  }
+  
+  </style>  
+
+
+
+
+{% endblock %}
