@@ -387,10 +387,9 @@ def recommend_course():
         r1,r2,r3= max_riasec_code(riasec_code) #r1>r2>r3
         print(r1,r2,r3,flush=True)
 
- 
-        
-
-        sortRiasecAndSubject(r1,r2,r3,s1,s2,s3)
+        by_course=defaultdict(list) # nested dict
+        by_college=defaultdict(list)
+        by_course,by_college=sortRiasecAndSubject(r1,r2,r3,s1,s2,s3)
         
         # for key in finaldict:
             
