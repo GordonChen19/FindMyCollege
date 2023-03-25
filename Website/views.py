@@ -373,7 +373,7 @@ def recommend_course():
 
                 by_course[degree].append(curr_dict)
                 by_college[school].append(curr_dict)
-                return by_course,by_college
+                return by_course,by_college,curr_dict
                 # dict1 -> {"Mathematics": [{"school_name": NTU,"Degree":"Mathematics", "matches_riasec": "ric", "total_score":42 }]}
             #print(recommend1,recommend2,flush=True)    
         
@@ -389,7 +389,8 @@ def recommend_course():
 
         by_course=defaultdict(list) # nested dict
         by_college=defaultdict(list)
-        by_course,by_college=sortRiasecAndSubject(r1,r2,r3,s1,s2,s3)
+        curr_dict={}
+        by_course,by_college,curr_dict=sortRiasecAndSubject(r1,r2,r3,s1,s2,s3)
         
         # for key in finaldict:
             
