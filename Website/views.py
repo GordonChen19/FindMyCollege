@@ -425,4 +425,4 @@ def course_information():
     print(degree.salary)
     
         
-    return render_template("recommendations.html", user=current_user)ß
+    return render_template("recommendations.html", user=current_user)
