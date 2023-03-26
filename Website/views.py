@@ -372,23 +372,13 @@ def recommend_course():
                 by_college[school].append(curr_dict) #return a dictionary filtered by schools
                 return by_college
                 # dict1 -> {"Mathematics": [{"school_name": NTU,"Degree":"Mathematics", "matches_riasec": "ric", "total_score":42 }]}
-                
-
             
-        
         riasec_code=RIASEC_Scores.query.filter_by(user_id=current_user.id).first() #riasec_code for particular user_id 
-        subject_interests=Subject_interests.query.filter_by(user_id=current_user.id).first()
-        s1=subject_interests.subject1
-        s2=subject_interests.subject2
-        s3=subject_interests.subject3
-
-        print(s1,s2,s3,flush=True)
         r1,r2,r3= max_riasec_code(riasec_code) #r1>r2>r3
-        print(r1,r2,r3,flush=True)
-
+        subject_interests=Subject_interests.query.filter_by(user_id=current_user.id).first()
+    
         by_college=defaultdict(list)
-        curr_dict={}
-        by_college=sortRiasecAndSubject(r1,r2,r3,s1,s2,s3)
+        by_college=sortRiasecAndSubject(r1,r2,r3,subject_interests.subject1,subject_interests.subject2,subject_interests.subject3)
         
         # for key in finaldict:
             
