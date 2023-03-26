@@ -285,7 +285,6 @@ def recommend_course():
             # dict1["Medicine"][1] -> {"school_name": "NTU", "matches_riasec": 3, "matches_subject":4}
             # dict1["Medicine"][1]["school_name"] -> NTU
             
-            by_course=defaultdict(list) # nested dict
             by_college=defaultdict(list)
             # recommend1=defaultdict(list)
             # recommend2=defaultdict(list)
@@ -373,7 +372,7 @@ def recommend_course():
 
                 #by_course[degree].append(curr_dict)
                 by_college[school].append(curr_dict) #return a dictionary filtered by schools
-                return by_course,by_college,curr_dict
+                return by_college
                 # dict1 -> {"Mathematics": [{"school_name": NTU,"Degree":"Mathematics", "matches_riasec": "ric", "total_score":42 }]}
             #print(recommend1,recommend2,flush=True)    
         
@@ -387,7 +386,6 @@ def recommend_course():
         r1,r2,r3= max_riasec_code(riasec_code) #r1>r2>r3
         print(r1,r2,r3,flush=True)
 
-        by_course=defaultdict(list) # nested dict
         by_college=defaultdict(list)
         curr_dict={}
         by_course,by_college,curr_dict=sortRiasecAndSubject(r1,r2,r3,s1,s2,s3)
