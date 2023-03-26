@@ -23,7 +23,8 @@ def login():
                 df=pd.read_csv('Website/static/Degree.csv') #Load Degree dataset into database
                 for _, row in df.iterrows():
                     degree = Degrees(school=row['School'], degree=row['Degree'],alevel_igp=row['A_Level_IGP'],polytechnic_igp=row['Poly_IGP'],employability=row['Percentage_Of_Employed_Graduates'],salary=row['Mean_Gross_Monthly_Salary'],riasec_code=row['riasec_code'],
-                                     related_subject1=row['related_subject1'],related_subject2=row['related_subject2'],related_subject3=row['related_subject3'],additional_information=row['additional_information'])
+                                     related_subject1=row['related_subject1'],related_subject2=row['related_subject2'],related_subject3=row['related_subject3'],additional_information=row['additional_information'],
+                                     a_level_prerequisite_subjects=row['a_level_prerequisite_subjects'],a_level_prerequisite_subjects=row['a_level_prerequisites'])
                     db.session.add(degree)
                     db.session.commit()
                 print("Done loading")
@@ -73,7 +74,8 @@ def sign_up():
             df=pd.read_csv('Website/static/Degree.csv') #Load Degree dataset into database
             for _, row in df.iterrows():
                 degree = Degrees(school=row['School'], degree=row['Degree'],alevel_igp=row['A_Level_IGP'],polytechnic_igp=row['Poly_IGP'],employability=row['Percentage_Of_Employed_Graduates'],salary=row['Mean_Gross_Monthly_Salary'],riasec_code=row['riasec_code'],
-                                 related_subject1=row['related_subject1'],related_subject2=row['related_subject2'],related_subject3=row['related_subject3'],additional_information=row['additional_information'])
+                                 related_subject1=row['related_subject1'],related_subject2=row['related_subject2'],related_subject3=row['related_subject3'],additional_information=row['additional_information'],
+                                 a_level_prerequisite_subjects=row['a_level_prerequisite_subjects'],a_level_prerequisite_subjects=row['a_level_prerequisites'])
                 db.session.add(degree)
                 db.session.commit()
 

@@ -56,4 +56,6 @@ class Degrees(db.Model):
     related_subject2=db.Column(db.String(50))
     related_subject3=db.Column(db.String(50))
     additional_information=db.Column(db.String(500))
+    a_level_prerequisite_subjects=db.Column(db.String(100))
+    a_level_prerequisites=db.Column(db.String(100))
 

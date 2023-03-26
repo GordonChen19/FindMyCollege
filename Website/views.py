@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify, url_for,redirect
+from flask import Blueprint, render_template, request, flash, jsonify, url_for,redirect,session
 from flask_login import login_required, current_user
 from .models import *
 from . import db
@@ -371,8 +371,8 @@ def recommend_course():
             
                 # curr_dict -> {"school_name": NTU,"Degree":"Mathematics", "matches_riasec": "ric", "total_score":42 }
 
-                by_course[degree].append(curr_dict)
-                by_college[school].append(curr_dict)
+                #by_course[degree].append(curr_dict)
+                by_college[school].append(curr_dict) #return a dictionary filtered by schools
                 return by_course,by_college,curr_dict
                 # dict1 -> {"Mathematics": [{"school_name": NTU,"Degree":"Mathematics", "matches_riasec": "ric", "total_score":42 }]}
             #print(recommend1,recommend2,flush=True)    
@@ -413,7 +413,18 @@ def recommend_course():
         #     print(degree.degree, flush=True)
         
     return render_template("recommendations.html", user=current_user)
+
+
+#session['degree']=degree
+#return redirect(url_for('course_information'))
+@views.route('/CourseInformation',methods=['POST','GET'])
+def course_information():
+    degree=session.get('degree',None)
+    print("printing course information")
+    print(degree.school)
+    print(degree.degree)
+    print(degree.employability)
+    print(degree.salary)
+    
         
-        
-        
-        
+    return render_template("recommendations.html", user=current_user)ß
