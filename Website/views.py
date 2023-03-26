@@ -49,6 +49,7 @@ def delete_note():
 @login_required
 def personality_test1():
     if request.method=='POST':
+        users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
         r_score,i_score,a_score,s_score,e_score,c_score=0,0,0,0,0,0
         total_questions=7
         for i in range(total_questions):
@@ -65,11 +66,19 @@ def personality_test1():
                 e_score+=1
             elif response=='c':
                 c_score+=1
-                
-        riasec_scores=RIASEC_Scores(r_score=r_score,i_score=i_score,a_score=a_score,
-                                    s_score=s_score,e_score=e_score,c_score=c_score,user_id=current_user.id)
-        db.session.add(riasec_scores)
-        db.session.commit()
+        if(users_scores==None):
+            riasec_scores=RIASEC_Scores(r_score=r_score,i_score=i_score,a_score=a_score,
+                                        s_score=s_score,e_score=e_score,c_score=c_score,user_id=current_user.id)
+            db.session.add(riasec_scores)
+            db.session.commit()
+        else:
+            users_scores.r_score=r_score
+            users_scores.i_score=i_score
+            users_scores.a_score=a_score
+            users_scores.s_score=s_score
+            users_scores.e_score=e_score
+            users_scores.c_score=c_score
+            db.session.commit()
         return redirect(url_for('views.personality_test2'))
 
     return render_template("take_test1.html", user=current_user)
@@ -78,10 +87,12 @@ def personality_test1():
 @login_required
 def personality_test2():
     if request.method=='POST':
-        r_score,i_score,a_score,s_score,e_score,c_score=0,0,0,0,0,0
-        total_questions=7
+        question_set=2
         users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
-        for i in range(total_questions):
+        print("Printing users scores")
+        print(users_scores.r_score)
+        print(users_scores.i_score)
+        for i in range((question_set-1)*7,question_set*7):
             response=request.form.get('q'+str(i))
             if response=='r':
                 users_scores.r_score+=1
@@ -109,10 +120,9 @@ def personality_test2():
 @login_required
 def personality_test3():
     if request.method=='POST':
-        r_score,i_score,a_score,s_score,e_score,c_score=0,0,0,0,0,0
-        total_questions=7
+        question_set=3
         users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
-        for i in range(total_questions):
+        for i in range((question_set-1)*7,question_set*7):
             response=request.form.get('q'+str(i))
             if response=='r':
                 users_scores.r_score+=1
@@ -140,10 +150,9 @@ def personality_test3():
 @login_required
 def personality_test4():
     if request.method=='POST':
-        r_score,i_score,a_score,s_score,e_score,c_score=0,0,0,0,0,0
-        total_questions=7
+        question_set=4
         users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
-        for i in range(total_questions):
+        for i in range((question_set-1)*7,question_set*7):
             response=request.form.get('q'+str(i))
             if response=='r':
                 users_scores.r_score+=1
@@ -171,10 +180,9 @@ def personality_test4():
 @login_required
 def personality_test5():
     if request.method=='POST':
-        r_score,i_score,a_score,s_score,e_score,c_score=0,0,0,0,0,0
-        total_questions=7
+        question_set=5
         users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
-        for i in range(total_questions):
+        for i in range((question_set-1)*7,question_set*7):
             response=request.form.get('q'+str(i))
             if response=='r':
                 users_scores.r_score+=1
@@ -202,10 +210,9 @@ def personality_test5():
 @login_required
 def personality_test6():
     if request.method=='POST':
-        r_score,i_score,a_score,s_score,e_score,c_score=0,0,0,0,0,0
-        total_questions=7
+        question_set=6
         users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
-        for i in range(total_questions):
+        for i in range((question_set-1)*7,question_set*7):
             response=request.form.get('q'+str(i))
             if response=='r':
                 users_scores.r_score+=1
@@ -280,22 +287,17 @@ def recommend_course():
             return top_r #Top 3 riasec codes are returned
         
         def sortRiasecAndSubject(r1,r2,r3,s1,s2,s3):
-            # dict1 = {"Medicine":[{"school_name": "NUS", "matches_riasec": 1, "matches_subject":2}, {"school_name": "NTU", "matches_riasec": 3, "matches_subject":4}]}
-            # dict1["Medicine"] -> [{"school_name": "NUS", "matches_riasec": 1, "matches_subject":2}, {"school_name": "NTU", "matches_riasec": 3, "matches_subject":4}]
-            # dict1["Medicine"][1] -> {"school_name": "NTU", "matches_riasec": 3, "matches_subject":4}
-            # dict1["Medicine"][1]["school_name"] -> NTU
-            
             by_college=defaultdict(list)
-            # recommend1=defaultdict(list)
-            # recommend2=defaultdict(list)
-
-            total_score=0
+            
             riasec_user=r1+r2+r3 #Concatenate riasec code
             # data -> [('i', 'Medicine', 'NTU', 'chemistry', 'biology', 'physics'), ('i', 'Medicine', 'NUS', 'chemistry', 'biology', 'physics')]]
+            
             data = Degrees.query.with_entities(Degrees.riasec_code, Degrees.degree, 
                                                Degrees.school, Degrees.related_subject1, 
                                                Degrees.related_subject2, Degrees.related_subject3,
                                                Degrees.alevel_igp,Degrees.polytechnic_igp).all()
+            
+        
 
             H2_RP={'A':20,'B':17.5,'C':15,'D':12.5,'E':10,'S':5,'U':0} #H2 Rank Points
             H1_RP={'A':10,'B':8.75,'C':7.5,'D':6.25,'E':5,'S':2.5,'U':0} #H1 Rank Points
@@ -309,7 +311,7 @@ def recommend_course():
                 rank_point+=H2_RP[user_score[2]]
                 rank_point+=H1_RP[user_score[3]]
                 
-            for i in range(len(data)): # data[0] -> ('i', 'Medicine', 'NTU', 'chemistry', 'biology', 'physics')
+            for i in range(len(data)): # data[0] -> ('i', 'Medicine', 'NTU', 'chemistry', 'biology', 'physics','AAAB','-')
                 riasec_code = data[i][0]
                 degree = data[i][1]
                 school = data[i][2]
@@ -321,14 +323,15 @@ def recommend_course():
                 
                 if user.qualification.curriculum=="ALevel":
                     degree_rank_point=0
-                    degree_rank_point+=H2_RP[user_score[0]]
-                    degree_rank_point+=H2_RP[user_score[1]]
-                    degree_rank_point+=H2_RP[user_score[2]]
-                    degree_rank_point+=H1_RP[user_score[3]]
+                    degree_rank_point+=H2_RP[alevel_IGP[0]]
+                    degree_rank_point+=H2_RP[alevel_IGP[1]]
+                    degree_rank_point+=H2_RP[alevel_IGP[2]]
+                    degree_rank_point+=H1_RP[alevel_IGP[3]]
                     if degree_rank_point>rank_point:
                         continue
-                elif user.qualification.polytechnic_score<polytechnic_IGP:
-                    continue
+                elif user.qualification.curriculum=="Polytechnic":
+                    if user.qualification.polytechnic_score<polytechnic_IGP:
+                        continue
                 
                 curr_dict = {}
                 curr_dict["school_name"] = school
@@ -363,18 +366,15 @@ def recommend_course():
                 
             
                 curr_dict["total_score"] = riasec_points*subject_points 
-                # if total_score==9:
-                #     recommend1[degree].append(curr_dict)
-                # if total_score==6:
-                #     recommend2[degree].append(curr_dict)
             
                 # curr_dict -> {"school_name": NTU,"Degree":"Mathematics", "matches_riasec": "ric", "total_score":42 }
 
-                #by_course[degree].append(curr_dict)
                 by_college[school].append(curr_dict) #return a dictionary filtered by schools
                 return by_college
                 # dict1 -> {"Mathematics": [{"school_name": NTU,"Degree":"Mathematics", "matches_riasec": "ric", "total_score":42 }]}
-            #print(recommend1,recommend2,flush=True)    
+                
+
+            
         
         riasec_code=RIASEC_Scores.query.filter_by(user_id=current_user.id).first() #riasec_code for particular user_id 
         subject_interests=Subject_interests.query.filter_by(user_id=current_user.id).first()
@@ -388,7 +388,7 @@ def recommend_course():
 
         by_college=defaultdict(list)
         curr_dict={}
-        by_course,by_college,curr_dict=sortRiasecAndSubject(r1,r2,r3,s1,s2,s3)
+        by_college=sortRiasecAndSubject(r1,r2,r3,s1,s2,s3)
         
         # for key in finaldict:
             
