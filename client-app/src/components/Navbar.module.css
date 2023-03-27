@@ -1,0 +1,87 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.navbarwrapper{
+    background-color: #00bbd6;
+    height: 13vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logoheader{
+    display: flex;
+    align-items: center;
+    margin-left: 40px;
+    text-decoration: none;
+}
+
+.header{
+    margin-left: 10px;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: black;
+}
+
+.logo{
+    height: 10vh;
+}
+
+.navbarlinks{
+    display: flex;
+    align-items: center;
+}
+
+.testlink{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 17px;
+    margin-right: 40px;
+    color: #237194;
+    transition: 0.25s ease-in-out;
+}
+
+.testlink:hover{
+    color: #faa32b;
+}
+
+.loginsingup{
+    display: flex;
+}
+
+.loginbtn{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 17px;
+    margin-right: 40px;
+    color: #237194;
+    transition: 0.25s ease-in-out;
+}
+
+.loginbtn:hover{
+    color: #faa32b;
+}
+
+.signupbtn{
+    margin-right: 40px;
+    width: 90px;
+    height: 35px;
+    border: none;
+    border-radius: 2px;
+    font-size: 16px;
+    background: #faa32b;
+    cursor: pointer;
+}
+
+.profilebtn{
+    margin-right: 40px;
+    width: 90px;
+    height: 35px;
+    border: none;
+    cursor: pointer
+}
