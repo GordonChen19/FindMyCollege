@@ -1,11 +1,8 @@
-import {useState} from 'react'
 import navbar from './Navbar.module.css';
 import universityhaticon from '../utilities/universityhaticon.png'
 import {Link} from 'react-router-dom';
 
-function Navbar() {
-  const [loginStatus, setLoginStatus] = useState(false)
-
+function Navbar({loginStatus}) {
   return (
     <div className={navbar.navbarwrapper}>      
     <Link className={navbar.logoheader} to='/'>
@@ -17,7 +14,7 @@ function Navbar() {
         {loginStatus ? 
         <Link to='/profile'><button className={navbar.profilebtn}>PROFILE</button></Link> : 
         <div className={navbar.loginsignup}>
-        <Link to='/login' className={navbar.loginbtn} onClick={() => setLoginStatus(true)}>Login</Link>
+        <Link to='/login' className={navbar.loginbtn}>Login</Link>
           <Link to='/signup'><button className={navbar.signupbtn}>SIGN UP</button></Link>
         </div>
         
