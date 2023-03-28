@@ -23,13 +23,17 @@
 .wrapper{
     background: #98e4f0;
     padding: 30px;
-    height: 30vh;
+    height: 40vh;
     width: 35%;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.wrapper h1{
+    margin-bottom: 15px;
 }
 
 .email{
