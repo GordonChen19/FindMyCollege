@@ -7,10 +7,12 @@ function SignUpPage() {
     <div className={signup.background}>
       <img src={university_background} alt=''></img>
       <form className={signup.wrapper}>
+        <h1>Sign Up</h1>
         <input className={signup.email} type="text" placeholder='email'></input>
         <input className={signup.username} type='text' placeholder='username'></input>
         <input className={signup.password} type="password" placeholder='password'></input>
-        <button className={signup.signupbtn} type='button'>Create Your Account</button>
+        <input className={signup.password} type="password" placeholder='confirm password'></input>
+        <button className={signup.signupbtn} type='submit'>Create Your Account</button>
       </form>
     </div>
   )

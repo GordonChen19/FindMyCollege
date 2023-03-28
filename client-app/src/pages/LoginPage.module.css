@@ -32,6 +32,10 @@
     align-items: center;
 }
 
+.wrapper h1{
+    margin-bottom: 15px;
+}
+
 .email{
     margin-bottom: 20px;
     width: 270px;

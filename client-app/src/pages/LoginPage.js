@@ -12,6 +12,7 @@ function LoginPage({setLoginStatus}) {
     <div className={login.background}>
       <img src={university_background} alt=''></img>
       <form className={login.wrapper}>
+        <h1 className={login.text}>Login</h1>
         <input className={login.email} type="text" placeholder='email'></input>
         <input className={login.password} type="password" placeholder='password'></input>
         <div className={login.buttons}>
