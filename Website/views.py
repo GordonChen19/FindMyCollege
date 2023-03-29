@@ -237,7 +237,7 @@ def personality_test6():
 @login_required
 def add_info():
     if request.method == 'POST':
-        users_subject_interests=subject_interests.query.filter_by(user_id=current_user.id).first()
+        users_subject_interests=Subject_interests.query.filter_by(user_id=current_user.id).first()
         subject1=request.form.get('subject1')
         subject2=request.form.get('subject2')
         subject3=request.form.get('subject3')  
@@ -392,6 +392,10 @@ def recommend_course():
         by_college=sortRiasecAndSubject(r1,r2,r3,subject_interests.subject1,subject_interests.subject2,subject_interests.subject3)
         sortCourses(by_college)
         print("sorted")
+        
+        for schools in by_college:
+            for i in range(3):
+                print(by_college[schools][i])
 
 
         return redirect(url_for('views.recommend_course'))
