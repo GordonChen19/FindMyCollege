@@ -4,6 +4,85 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+.navbar{
+    background-color: #00bbd6;
+    height: 12vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-item{
+    color: black;
+    text-transform: capitalize;
+}
+
+.logoheader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    margin-left: 30px;
+}
+
+.logoheader img{
+    height: 10vh;
+    margin-right: 5px;
+}
+
+.logoheader h1{
+    color: black;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.navbar-nav{
+    margin-right: 30px;
+}
+
+.nav-item{
+    margin-left: 30px;
+    font-size: 19px;
+    text-decoration: none;
+    color: #1c5d7a;
+}
+
+#signup button{
+    font-size: 10px;
+    margin-right: 30px;
+    width: 90px;
+    height: 35px;
+    border: none;
+    border-radius: 2px;
+    font-size: 16px;
+    background: #faa32b;
+    cursor: pointer;
+}
+
+.alert-popup{
+    position: absolute;
+    z-index: 10;
+    background-color: rgba(240, 248, 255, 0.473);
+    height: 40px;
+    width: 100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.warning{
+    margin-left: 20px;
+}
+
+.alert-popup button{
+    height: 40px;
+    width: 40px;
+    border: none;
+    background-color: rgba(255, 0, 0, 0.507);
+    cursor: pointer;
+}
+
 .login-main{
     height: 88vh;
     width: 100%;
@@ -14,9 +93,9 @@
 
 .login-form{
     background: #98e4f0;
-    padding: 20px;
-    height: 40vh;
-    width: 50%;
+    padding: 30px;
+    height: 30vh;
+    width: 35%;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -31,14 +110,12 @@
 
 }
 
-.login-form-group{
-    width: 70%;
-    margin-bottom: 15px;
-}
-
-.login-form-group input{
+.login-form-input{
+    margin-bottom: 20px;
+    width: 270px;
+    height: 30px;
+    padding-left: 10px;
     border: none;
-    border-radius: 1px;
 }
 
 .login-btn{
@@ -47,7 +124,6 @@
     border: none;
     background-color: #faa32b;
     cursor: pointer;
-    margin-top: 10px;
 }
 
 .signup-main{
@@ -60,9 +136,9 @@
 
 .signup-form{
     background: #98e4f0;
-    padding: 20px;
-    height: 50vh;
-    width: 50%;
+    padding: 30px;
+    height: 40vh;
+    width: 35%;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -76,14 +152,12 @@
     margin-bottom: 15px;
 }
 
-.signup-form-group{
-    width: 70%;
-    margin-bottom: 15px;
-}
-
-.signup-form-group input{
+.signup-form-control{
+    margin-bottom: 20px;
+    width: 270px;
+    height: 30px;
+    padding-left: 10px;
     border: none;
-    border-radius: 1px;
 }
 
 .signup-btn{
