@@ -305,6 +305,7 @@ def recommend_course():
         
         def sortRiasecAndSubject(r1,r2,r3,s1,s2,s3):
             by_college=defaultdict(list)
+            general_course_list=[]
             
             riasec_user=r1+r2+r3 #Concatenate riasec code
             # data -> [('i', 'Medicine', 'NTU', 'chemistry', 'biology', 'physics'), ('i', 'Medicine', 'NUS', 'chemistry', 'biology', 'physics')]]
@@ -377,25 +378,31 @@ def recommend_course():
 
 
                 by_college[school].append((school,degree,match_str,riasec_points*subject_points)) 
-            return by_college
-        # dict1 -> {"NTU": [["school_name","Degree", "matches_riasec", total_score],["school_name","Degree", "matches_riasec", "total_score"]]}
-        
-        def sortCourses(by_college):
+                general_course_list.append((school,degree,match_str,riasec_points*subject_points))
+            return by_college,general_course_list
+        # dict1 -> {"NTU": [["school_name","Degree", "matches_riasec", total_score],["school_name","Degree", "matches_riasec", "total_score"]]}     
+        def sortCoursesByCollege(by_college):
             for schools in by_college: #iterate through the schools
                 by_college[schools].sort(key=lambda x:x[3],reverse=True)
             return by_college
+        
+        def sortCoursesGenerally(general_course_list):
+            general_course_list.sort(key=lambda x:x[3],reverse=True)
+            return general_course_list
             
         riasec_code=RIASEC_Scores.query.filter_by(user_id=current_user.id).first() #riasec_code for particular user_id 
         r1,r2,r3= max_riasec_code(riasec_code) #r1>r2>r3
         subject_interests=Subject_interests.query.filter_by(user_id=current_user.id).first()
 
-        by_college=sortRiasecAndSubject(r1,r2,r3,subject_interests.subject1,subject_interests.subject2,subject_interests.subject3)
-        sortCourses(by_college)
-        print("sorted")
+        by_college,general_course_list=sortRiasecAndSubject(r1,r2,r3,subject_interests.subject1,subject_interests.subject2,subject_interests.subject3)
+        by_college=sortCoursesByCollege(by_college)
+        general_course_list=sortCoursesGenerally(general_course_list)
         
-        for schools in by_college:
-            for i in range(3):
-                print(by_college[schools][i])
+        print("sorted recommended courses")
+        
+        # for schools in by_college:
+        #     for i in range(3):
+        #         print(by_college[schools][i])
 
 
         return redirect(url_for('views.recommend_course'))
