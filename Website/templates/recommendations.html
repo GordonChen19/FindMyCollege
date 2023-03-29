@@ -1,21 +1,14 @@
 {% extends "base.html" %} {% block title %}recommendations{% endblock %} {% block content
   %}
 
-
-  <form method="POST"
+  <form method="POST">
     <h1>Recommended Degree Courses</h1>
-    <body>
       <div class="text-container">
-        <h1>List of courses:</h1>
-        {% for key, value in data.items() %}
-            <p>{{ key }} : {{ value }}</p>
-        {% endfor %}
+        <h2>List of courses:</h2>
       </div>
-    </body>
     <button type="submit">Submit</button>
   </form>
 
-  
 
   <style>
     .text-container {
@@ -31,16 +24,6 @@
       background-size: cover;
       color:white
     }
-    h3 {
-      margin-top: 50px;
-      margin-bottom: 50px;
-      margin-right: 80px;
-      margin-left: 80px;
-      font-weight: bold;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 40px;
-    }
-  
 
     </style>
   

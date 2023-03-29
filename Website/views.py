@@ -89,9 +89,6 @@ def personality_test2():
     if request.method=='POST':
         question_set=2
         users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
-        print("Printing users scores")
-        print(users_scores.r_score)
-        print(users_scores.i_score)
         for i in range((question_set-1)*7,question_set*7):
             response=request.form.get('q'+str(i))
             if response=='r':
@@ -240,11 +237,17 @@ def personality_test6():
 @login_required
 def add_info():
     if request.method == 'POST':
+        users_subject_interests=subject_interests.query.filter_by(user_id=current_user.id).first()
         subject1=request.form.get('subject1')
         subject2=request.form.get('subject2')
-        subject3=request.form.get('subject3')
-        subject_interests=Subject_interests(subject1=subject1,subject2=subject2,subject3=subject3,user_id=current_user.id)
-        db.session.add(subject_interests)
+        subject3=request.form.get('subject3')  
+        if users_subject_interests==None:
+            subject_interests=Subject_interests(subject1=subject1,subject2=subject2,subject3=subject3,user_id=current_user.id)
+            db.session.add(subject_interests)
+        else:
+            users_subject_interests.subject1=subject1
+            users_subject_interests.subject2=subject2
+            users_subject_interests.subject3=subject3
         db.session.commit()
         return redirect(url_for('views.add_portfolio'))
         
@@ -254,16 +257,29 @@ def add_info():
 @login_required
 def add_portfolio():
     if request.method==  'POST':
+        users_qualification= Qualification.query.filter_by(user_id=current_user.id).first()
         curriculum=request.form.get('curriculum')
         if curriculum=='ALevel':
-            alevel_score=request.form.get('value') #Need to put multiple fields together
-            new_entry=Qualification(curriculum=curriculum,alevel_score=alevel_score,user_id=current_user.id)
+            alevel_score=request.form.get('alevel_score') #Need to put multiple fields together
+            if users_qualification==None:
+                new_entry=Qualification(curriculum=curriculum,alevel_score=alevel_score,user_id=current_user.id)
+                db.session.add(new_entry)
+            else:
+                users_qualification.curriculum=curriculum
+                users_qualification.alevel_score=alevel_score
+                users_qualification.polytechnic_score=None
         elif curriculum=='Polytechnic':
-            polytechnic_score=request.form.get('Polytechnic')
-            new_entry=Qualification(curriculum=curriculum,polytechnic_score=polytechnic_score,user_id=current_user.id)
+            polytechnic_score=request.form.get('polytechnic_score')
+            if users_qualification==None:
+                new_entry=Qualification(curriculum=curriculum,polytechnic_score=polytechnic_score,user_id=current_user.id)
+                db.session.add(new_entry)
+            else:
+                users_qualification.curriculum=curriculum
+                users_qualification.polytechnic_score=polytechnic_score
+                users_qualification.alevel_score=None
         elif curriculum=='IB':
             ib_score=request.form.get('')
-        db.session.add(new_entry)
+        
         db.session.commit()
         return redirect(url_for('views.recommend_course'))
 
@@ -274,6 +290,7 @@ def add_portfolio():
 @login_required
 def recommend_course():
     if request.method=='POST': 
+      
         def max_riasec_code(riasec_code):
             riasec_array=[riasec_code.r_score,riasec_code.i_score,riasec_code.a_score,riasec_code.s_score,riasec_code.e_score,riasec_code.c_score]
             code_array=['r','i','a','s','e','c']
@@ -292,45 +309,42 @@ def recommend_course():
             riasec_user=r1+r2+r3 #Concatenate riasec code
             # data -> [('i', 'Medicine', 'NTU', 'chemistry', 'biology', 'physics'), ('i', 'Medicine', 'NUS', 'chemistry', 'biology', 'physics')]]
             
-            data = Degrees.query.with_entities(Degrees.riasec_code, Degrees.degree, 
-                                               Degrees.school, Degrees.related_subject1, 
-                                               Degrees.related_subject2, Degrees.related_subject3,
-                                               Degrees.alevel_igp,Degrees.polytechnic_igp).all()
-            
-        
+            data = Degrees.query.all()
 
             H2_RP={'A':20,'B':17.5,'C':15,'D':12.5,'E':10,'S':5,'U':0} #H2 Rank Points
             H1_RP={'A':10,'B':8.75,'C':7.5,'D':6.25,'E':5,'S':2.5,'U':0} #H1 Rank Points
             
-            user=User.query.filter_by(user_id=current_user.id).first()
-            if user.qualification.curriculum == "ALevel":
-                user_score=user.qualification.alevel_score
+            user_qualification=Qualification.query.filter_by(id=current_user.id).first()
+                
+            if user_qualification.curriculum == "ALevel":
+                user_score=user_qualification.alevel_score
                 rank_point=0
                 rank_point+=H2_RP[user_score[0]]
                 rank_point+=H2_RP[user_score[1]]
                 rank_point+=H2_RP[user_score[2]]
                 rank_point+=H1_RP[user_score[3]]
                 
-            for i in range(len(data)): # data[0] -> ('i', 'Medicine', 'NTU', 'chemistry', 'biology', 'physics','AAAB','-')
-                riasec_code = data[i][0]
-                degree = data[i][1]
-                school = data[i][2]
-                related_subject1 = data[i][3]
-                related_subject2 = data[i][4]
-                related_subject3 = data[i][5]
-                alevel_IGP=data[i][6]
-                polytechnic_IGP=data[i][7]
+            for course in data: # data[0] -> ('i', 'Medicine', 'NTU', 'chemistry', 'biology', 'physics','AAAB','-')
+                riasec_code = course.riasec_code
+                degree = course.degree
+                school = course.school
+                related_subject1 = course.related_subject1
+                related_subject2 = course.related_subject2
+                related_subject3 = course.related_subject3
+                alevel_IGP=course.alevel_igp
+                polytechnic_IGP=course.polytechnic_igp
                 
-                if user.qualification.curriculum=="ALevel":
+                if user_qualification.curriculum=="ALevel":
                     degree_rank_point=0
-                    degree_rank_point+=H2_RP[alevel_IGP[0]]
-                    degree_rank_point+=H2_RP[alevel_IGP[1]]
-                    degree_rank_point+=H2_RP[alevel_IGP[2]]
-                    degree_rank_point+=H1_RP[alevel_IGP[3]]
-                    if degree_rank_point>rank_point:
-                        continue
-                elif user.qualification.curriculum=="Polytechnic":
-                    if user.qualification.polytechnic_score<polytechnic_IGP:
+                    if alevel_IGP!=None:
+                        degree_rank_point+=H2_RP[alevel_IGP[0]]
+                        degree_rank_point+=H2_RP[alevel_IGP[1]]
+                        degree_rank_point+=H2_RP[alevel_IGP[2]]
+                        degree_rank_point+=H1_RP[alevel_IGP[3]]
+                        if degree_rank_point>rank_point:
+                            continue #skip degree if doesnt meet requirements
+                elif user_qualification.curriculum=="Polytechnic":
+                    if user_qualification.polytechnic_score!=None and user_qualification.polytechnic_score<polytechnic_IGP:
                         continue
                 
                 curr_dict = {}
@@ -351,10 +365,6 @@ def recommend_course():
                 #r1 -> 3
                 #r2 -> 2
                 #r3 -> 1 
-            
-                curr_dict["riasec_matches"]=match_str
-                #matches_riasec=len(match_str) 
-                #curr_dict["matches_riasec"] = matches_riasec
 
                 subject_points=0
                 if s1==related_subject1 or s1==related_subject2 or s1==related_subject3:
@@ -364,41 +374,27 @@ def recommend_course():
                 if s3==related_subject1 or s3==related_subject2 or s3==related_subject3:
                     subject_points+=1
                 
-            
-                curr_dict["total_score"] = riasec_points*subject_points 
-            
-                # curr_dict -> {"school_name": NTU,"Degree":"Mathematics", "matches_riasec": "ric", "total_score":42 }
 
-                by_college[school].append(curr_dict) #return a dictionary filtered by schools
-                return by_college
-                # dict1 -> {"Mathematics": [{"school_name": NTU,"Degree":"Mathematics", "matches_riasec": "ric", "total_score":42 }]}
+
+                by_college[school].append((school,degree,match_str,riasec_points*subject_points)) 
+            return by_college
+        # dict1 -> {"NTU": [["school_name","Degree", "matches_riasec", total_score],["school_name","Degree", "matches_riasec", "total_score"]]}
+        
+        def sortCourses(by_college):
+            for schools in by_college: #iterate through the schools
+                by_college[schools].sort(key=lambda x:x[3],reverse=True)
+            return by_college
             
         riasec_code=RIASEC_Scores.query.filter_by(user_id=current_user.id).first() #riasec_code for particular user_id 
         r1,r2,r3= max_riasec_code(riasec_code) #r1>r2>r3
         subject_interests=Subject_interests.query.filter_by(user_id=current_user.id).first()
-    
-        by_college=defaultdict(list)
+
         by_college=sortRiasecAndSubject(r1,r2,r3,subject_interests.subject1,subject_interests.subject2,subject_interests.subject3)
-        
-        # for key in finaldict:
-            
-        #     def compare(item1, item2):
-        #     if fitness(item1) < fitness(item2):
-        #         return -1
-        #     elif fitness(item1) > fitness(item2):
-        #         return 1
-        #     else:
-        #         return 0
-
-        # Calling
-        # list.sort(key=compare)
+        sortCourses(by_college)
+        print("sorted")
 
 
-        # filter_by_riasec_code=Degrees.query.filter(or_(Degrees.riasec_code.like(f'%{r1}%'), Degrees.riasec_code.like(f'%{r2}%'))).all()
-        # filter_by_riasec_code=Degrees.query.filter((Degrees.riasec_code.like(f'%{r1}%'))).all() # TEST
-        # print(filter_by_riasec_code,flush=True)
-        # for degree in filter_by_riasec_code:
-        #     print(degree.degree, flush=True)
+        return redirect(url_for('views.recommend_course'))
         
     return render_template("recommendations.html", user=current_user)
 
