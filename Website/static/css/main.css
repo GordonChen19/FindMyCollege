@@ -1,0 +1,96 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.login-main{
+    height: 88vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form{
+    background: #98e4f0;
+    padding: 20px;
+    height: 40vh;
+    width: 50%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form h1 {
+    color: black;
+    font-weight: bold;
+    margin-bottom: 15px;
+
+}
+
+.login-form-group{
+    width: 70%;
+    margin-bottom: 15px;
+}
+
+.login-form-group input{
+    border: none;
+    border-radius: 1px;
+}
+
+.login-btn{
+    width: 100px;
+    height: 40px;
+    border: none;
+    background-color: #faa32b;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.signup-main{
+    height: 88vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-form{
+    background: #98e4f0;
+    padding: 20px;
+    height: 50vh;
+    width: 50%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-form h1{
+    color: black;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.signup-form-group{
+    width: 70%;
+    margin-bottom: 15px;
+}
+
+.signup-form-group input{
+    border: none;
+    border-radius: 1px;
+}
+
+.signup-btn{
+    width: 200px;
+    height: 40px;
+    border: none;
+    background-color: #faa32b;
+    cursor: pointer;
+    margin-top: 10px;
+}
