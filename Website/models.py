@@ -59,3 +59,14 @@ class Degrees(db.Model):
     a_level_prerequisite_subjects=db.Column(db.String(100))
     a_level_prerequisites=db.Column(db.String(100))
 
+class Holland_Codes(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    r=db.Column(db.String(320))
+    i=db.Column(db.String(320))
+    a=db.Column(db.String(320))
+    s=db.Column(db.String(320))
+    e=db.Column(db.String(320))
+    c=db.Column(db.String(320))
+
+    
+

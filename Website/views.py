@@ -392,6 +392,14 @@ def recommend_course():
             
         riasec_code=RIASEC_Scores.query.filter_by(user_id=current_user.id).first() #riasec_code for particular user_id 
         r1,r2,r3= max_riasec_code(riasec_code) #r1>r2>r3
+        
+        descriptions=Holland_Codes.query.filter_by(id=1).first()
+        print(getattr(descriptions,r1))
+        print(getattr(descriptions,r2))
+        print(getattr(descriptions,r3))
+        
+        
+        
         subject_interests=Subject_interests.query.filter_by(user_id=current_user.id).first()
 
         by_college,general_course_list=sortRiasecAndSubject(r1,r2,r3,subject_interests.subject1,subject_interests.subject2,subject_interests.subject3)
