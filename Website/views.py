@@ -259,14 +259,14 @@ def add_portfolio():
             ib_score=request.form.get('')
         
         db.session.commit()
-        return redirect(url_for('views.recommend_course'))
+        return redirect(url_for('views.view_results'))
 
     return render_template("academic_portfolio.html", user=current_user)   
             
 
-@views.route('/Recommendations',methods=['POST','GET'])
+@views.route('/view_results',methods=['POST','GET'])
 @login_required
-def recommend_course():
+def view_results():
     if request.method=='POST': 
       
         def max_riasec_code(riasec_code):
@@ -376,36 +376,36 @@ def recommend_course():
         print(getattr(descriptions,r2))
         print(getattr(descriptions,r3))
         
-        
-        
+
         subject_interests=Subject_interests.query.filter_by(user_id=current_user.id).first()
 
         by_college,general_course_list=sortRiasecAndSubject(r1,r2,r3,subject_interests.subject1,subject_interests.subject2,subject_interests.subject3)
         by_college=sortCoursesByCollege(by_college)
         general_course_list=sortCoursesGenerally(general_course_list)
         
+        
         print("sorted recommended courses")
         
-        # for schools in by_college:
-        #     for i in range(3):
-        #         print(by_college[schools][i])
-
-
-        return redirect(url_for('views.recommend_course'))
+        course_reco=users_courses.query.filter_by(user_id=current_user.id).first()
+        if course_reco==None: 
+            course_reco=users_courses(by_school_data=by_college,
+                                    general_data=general_course_list,
+                                    user_id=current_user.id)
+            db.session.add(course_reco)
+        else:
+            course_reco.by_school_data=by_college
+            course_reco.general_data=general_course_list
+        db.session.commit()
         
-    return render_template("recommendations.html", user=current_user)
-
-
-#session['degree']=degree
-#return redirect(url_for('course_information'))
-@views.route('/CourseInformation',methods=['POST','GET'])
-def course_information():
-    degree=session.get('degree',None)
-    print("printing course information")
-    print(degree.school)
-    print(degree.degree)
-    print(degree.employability)
-    print(degree.salary)
-    
         
-    return render_template("recommendations.html", user=current_user)
+        for schools in by_college:
+             for i in range(3):
+                 print(by_college[schools][i])
+
+
+
+        
+    return render_template("view_results.html", user=current_user)
+
+
+
