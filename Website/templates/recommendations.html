@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block title %}recommendations{% endblock %} {% block content
+  %}
+
+  <form method="POST">
+    <h1>Recommended Degree Courses</h1>
+      <div class="text-container">
+        <h2>List of courses:</h2>
+      </div>
+    <button type="submit">Submit</button>
+  </form>
+
+
+  <style>
+    .text-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+    body {
+      background-image: url("static/NTU2.jpeg");
+      background-repeat: no-repeat;
+      background-attachment: fixed; 
+      background-size: cover;
+      color:white
+    }
+
+    </style>
+  
+  {% endblock %}
