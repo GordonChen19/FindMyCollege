@@ -1,7 +1,9 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} 
     {% block content%}
         {% if user.is_authenticated %}
-        
+        <div class="home-background-l">
+
+        </div>
         {% else %}
         <div>
             <img class="home-background" src="{{url_for("static",filename="university_background.jpg")}}">
