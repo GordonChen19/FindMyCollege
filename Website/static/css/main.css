@@ -168,3 +168,54 @@
     cursor: pointer;
     margin-top: 10px;
 }
+
+.home-background{
+    height: 47vh;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: -1;
+}
+
+.home-wrapper{
+    background-color: #f1f1f2;
+    position: absolute;
+    z-index: -1;
+}
+
+.uni-student{
+    height: 55vh;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+}
+
+.title{
+    color:#f1f1f2;
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    font-size: 45px;
+    font-weight: 200;
+}
+
+.home-info{
+    left: 5%;
+    position: absolute;
+    bottom: 16%;
+    line-height: 1.6;
+}
+
+.home-info h3 {
+    font-size: 25px;
+    font-weight: 600;
+    color: #237194;
+}
+
+.home-info p{
+    font-weight: 100;
+    margin-top: 20px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
+    line-height: 0.7;
+}
