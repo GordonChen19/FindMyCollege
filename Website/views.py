@@ -385,11 +385,24 @@ def recommend_course():
         by_college=sortCoursesByCollege(by_college)
         general_course_list=sortCoursesGenerally(general_course_list)
         
+        
         print("sorted recommended courses")
         
-        # for schools in by_college:
-        #     for i in range(3):
-        #         print(by_college[schools][i])
+        course_reco=users_courses.query.filter_by(user_id=current_user.id).first()
+        if course_reco==None: 
+            course_reco=users_courses(by_school_data=by_college,
+                                    general_data=general_course_list,
+                                    user_id=current_user.id)
+            db.session.add(course_reco)
+        else:
+            course_reco.by_school_data=by_college
+            course_reco.general_data=general_course_list
+        db.session.commit()
+        
+        
+        for schools in by_college:
+             for i in range(3):
+                 print(by_college[schools][i])
 
 
         return redirect(url_for('views.recommend_course'))
