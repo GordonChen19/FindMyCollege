@@ -169,6 +169,79 @@
     margin-top: 10px;
 }
 
+.home-background-l{
+    height: 88vh;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: -1;
+    background-image: linear-gradient(to right, #71def2, #79dff1, #81e1f1, #88e2f0, #8fe3f0, #8cdff1, #89dbf1, #87d7f1, #7fccf1, #7cc1f0, #7fb5ed, #86a8e7);
+}
+
+.home-div-l{
+    display: flex;
+    flex-direction: column;
+    height: 87vh;
+    align-items: center;
+}
+
+.home-div-l h1{
+    font-size: 45px;
+    margin-top: 7%;
+    margin-bottom: 19px;
+}
+
+.home-div-l h2{
+    color:#1c5d7a;
+}
+
+.home-boxes{
+    display: flex;
+    margin-top: 30px;
+}
+
+.home-box{
+    border: 4px solid #faa32b;
+    border-radius: 12px;
+    height: 280px;
+    width: 200px;
+    margin: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon-space{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 130px;
+}
+
+.home-icon{
+    height: 140px;
+}
+
+#book-icon{
+    height: 110px;
+}
+
+#subject-icon{
+    height: 85px;
+}
+
+.info-space{
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.home-box h3{
+    font-size: 30px;
+}
+
 .home-background{
     height: 47vh;
     width: 100%;
@@ -218,10 +291,4 @@
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 18px;
     line-height: 0.7;
-}
-
-.home-background-l{
-    height: 88vh;
-    width: 100%;
-    background-image: linear-gradient(45deg,blue,rgb(0, 238, 255))
 }
