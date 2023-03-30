@@ -1,4 +1,23 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-    %}
-    <h1>homepage</h1>
+{% extends "base.html" %} {% block title %}Home{% endblock %} 
+    {% block content%}
+        {% if user.is_authenticated %}
+        
+        {% else %}
+        <div>
+            <img class="home-background" src="{{url_for("static",filename="university_background.jpg")}}">
+            <div class="home-wrapper"></div>
+            <img class="uni-student" src="{{url_for("static",filename="university_student.jpg")}}">
+            <h1 class="title">UNSURE WHERE TO GO NEXT</br>IN YOUR ACADEMIC JOURNEY?</h1>
+            <div class="home-info"}>
+                <h3>
+                  LET US FIND YOU THE UNIVERSITY OF YOUR <span>DREAMS</span>
+                </h3>
+                <p>
+                  FindMyCollege takes into account your academic portfolio,<br></br>
+                  location preferences and RIASEC personality type<br></br>
+                  to determine the best university course for you!
+                </p>
+              </div>
+        </div>
+        {% endif %}
     {% endblock %}
