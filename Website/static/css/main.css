@@ -325,7 +325,7 @@
 }
 
 .test-header img{
-    height: 33vh;
+    width: 600px;
     border: 1px solid white;
 }
 
@@ -346,9 +346,6 @@
     justify-content: space-between;
 }
 
-/* Hide the browser's default checkbox */
-
-
 .radio{
     float: right;
     padding-left: 15px;
@@ -357,4 +354,21 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.buttonspace{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding-top: 20px;
+}
+
+.submitbutton{
+    height: 35px;
+    width: 100px;
+    background-color: #faa32b;
+    border: none;
+    cursor: pointer;
+
 }
