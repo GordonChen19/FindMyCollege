@@ -1,64 +1,143 @@
-{% extends "base.html" %} {% block title %}subject-interests{% endblock %} {% block content
-    %}
-    <form method="POST">
-      <h3 align="center">TELL US ABOUT YOURSELF</h3>
-      <div class="form-group">
-        <label for="subject1">Subject Interest 1</label>
-        <input
-          type="subjectInterest"
-          class="form-control"
-          id="subject1"
-          name="subject1"
-          placeholder="Enter subject"
-        />
-      </div>
+{% extends "base.html" %} {% block title %}subject-interests{% endblock %} {%
+block content %}
 
-      <div class="form-group">
-        <label for="subject2">Subject Interest 2</label>
-        <input
-          type="subjectInterest"
-          class="form-control"
-          id="subject2"
-          name="subject2"
-          placeholder="Enter subject"
-        />
-      </div>
+<head>
+  <link
+    href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
+    rel="stylesheet"
+  />
+</head>
 
-      <div class="form-group">
-        <label for="subject3">Subject Interest 3</label>
-        <input
-          type="subjectInterest"
-          class="form-control"
-          id="subject3"
-          name="subject3"
-          placeholder="Enter subject"
-        />
-      </div>
+<body>
+  <section class="profile">
+    <h1>Academic Profile</h1>
+  </section>
 
-      <br />
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+  <div class="select-menu">
+    <div class="select-btn">
+      <span class="sBtn-text">Subject Interest</span>
+      <i class="bx bx-chevron-down"></i>
+    </div>
 
-    <style>
-      body {
-        background-image: url("static/NTU2.jpeg");
-        background-repeat: no-repeat;
-        background-attachment: fixed; 
-        background-size: cover;
-        color:white
-      }
-      h3 {
-        margin-top: 50px;
-        margin-bottom: 50px;
-        margin-right: 80px;
-        margin-left: 80px;
-        font-weight: bold;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 40px;
-      }
-    
+    <ul class="options">
+      <li class="option">
+        <span class="option-text">Math</span>
+      </li>
+      <li class="option">
+        <span class="option-text">Science</span>
+      </li>
+      <li class="option">
+        <span class="option-text">Languages</span>
+      </li>
+      <li class="option">
+        <span class="option-text">Humanities</span>
+      </li>
+    </ul>
+  </div>
+</body>
 
-      </style>
-    
-    {% endblock %}
-    
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  body {
+    background-image: linear-gradient(
+        rgba(52, 53, 53, 0.6),
+        rgba(52, 53, 53, 0.6)
+      ),
+      url("static/NTU2.jpeg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  .profile {
+    width: 80%;
+    margin: auto;
+    padding-top: 100px;
+    text-align: center;
+    color: #fff;
+  }
+
+  .select-menu {
+    width: 380px;
+    margin: 140px auto;
+  }
+  .select-menu .select-btn {
+    display: flex;
+    height: 55px;
+    background: #fff;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 8px;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  .select-btn i {
+    font-size: 25px;
+    transition: 0.3s;
+  }
+  .select-menu.active .select-btn i {
+    transform: rotate(-180deg);
+  }
+  .select-menu .options {
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    display: none;
+  }
+  .select-menu.active .options {
+    display: block;
+  }
+  .options .option {
+    display: flex;
+    height: 55px;
+    cursor: pointer;
+    padding: 0 16px;
+    border-radius: 8px;
+    align-items: center;
+    background: #fff;
+  }
+  .options .option:hover {
+    background: #f2f2f2;
+  }
+  .option i {
+    font-size: 25px;
+    margin-right: 12px;
+  }
+  .option .option-text {
+    font-size: 18px;
+    color: #333;
+  }
+</style>
+
+<script>
+  const optionMenu = document.querySelector(".select-menu"),
+    selectBtn = optionMenu.querySelector(".select-btn"),
+    options = optionMenu.querySelectorAll(".option"),
+    sBtn_text = optionMenu.querySelector(".sBtn-text");
+
+  selectBtn.addEventListener("click", () =>
+    optionMenu.classList.toggle("active")
+  );
+
+  options.forEach((option) => {
+    option.addEventListener("click", () => {
+      let selectedOption = option.querySelector(".option-text").innerText;
+      sBtn_text.innerText = selectedOption;
+
+      optionMenu.classList.remove("active");
+    });
+  });
+</script>
+
+{% endblock %}
