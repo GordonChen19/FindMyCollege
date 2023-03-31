@@ -67,7 +67,7 @@ def personality_test1():
     if request.method=='POST':
         users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
         r_score,i_score,a_score,s_score,e_score,c_score=0,0,0,0,0,0
-        total_questions=34
+        total_questions=35
         for i in range(total_questions):
             response=request.form.get('q'+str(i))
             if response=='r':
