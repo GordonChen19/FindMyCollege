@@ -13,27 +13,111 @@ block content %}
     <h1>Academic Profile</h1>
   </section>
 
-  <div class="select-menu">
-    <div class="select-btn">
-      <span class="sBtn-text">Subject Interest</span>
-      <i class="bx bx-chevron-down"></i>
-    </div>
+  <div class="row">
+    <div class="profile-col">
+      <h2>Subject Interests</h3>
+      <p>Rank your top 3 subject interests</p>
+      <!--3 dropdown boxes for subject interests-->
+      <h3>1st Choice:</h3>
+     
+      <div class="select-menu", id="dropdown1">
+        <div class="select-btn">
+          <span class="sBtn-text">Subject Interest</span>
+          <i class="bx bx-chevron-down"></i>
+        </div>
+    
+        <ul class="options">
+          <li class="option">
+            <span class="option-text">Math</span>
+          </li>
+          <li class="option">
+            <span class="option-text">Science</span>
+          </li>
+          <li class="option">
+            <span class="option-text">Languages</span>
+          </li>
+          <li class="option">
+            <span class="option-text">Humanities</span>
+          </li>
+        </ul>
+      </div>
 
-    <ul class="options">
-      <li class="option">
-        <span class="option-text">Math</span>
-      </li>
-      <li class="option">
-        <span class="option-text">Science</span>
-      </li>
-      <li class="option">
-        <span class="option-text">Languages</span>
-      </li>
-      <li class="option">
-        <span class="option-text">Humanities</span>
-      </li>
-    </ul>
+      <h3>2nd Choice:</h3>
+      
+      <div class="select-menu", id="dropdown2">
+        <div class="select-btn">
+          <span class="sBtn-text">Subject Interest</span>
+          <i class="bx bx-chevron-down"></i>
+        </div>
+    
+        <ul class="options">
+          <li class="option">
+            <span class="option-text">Math</span>
+          </li>
+          <li class="option">
+            <span class="option-text">Science</span>
+          </li>
+          <li class="option">
+            <span class="option-text">Languages</span>
+          </li>
+          <li class="option">
+            <span class="option-text">Humanities</span>
+          </li>
+        </ul>
+      </div>
+
+      <h3>3rd Choice:</h3>
+      
+      <div class="select-menu",id="dropdown3">
+        <div class="select-btn">
+          <span class="sBtn-text">Subject Interest</span>
+          <i class="bx bx-chevron-down"></i>
+        </div>
+    
+        <ul class="options">
+          <li class="option">
+            <span class="option-text">Math</span>
+          </li>
+          <li class="option">
+            <span class="option-text">Science</span>
+          </li>
+          <li class="option">
+            <span class="option-text">Languages</span>
+          </li>
+          <li class="option">
+            <span class="option-text">Humanities</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="profile-col">
+      <h2>Highest Qualification</h3>
+      <p>Select your academic qualification</p>
+      </br>
+      <div class="select-menu",id="dropdown4">
+        <div class="select-btn">
+          <span class="sBtn-text">Academic Qualification</span>
+          <i class="bx bx-chevron-down"></i>
+        </div>
+    
+        <ul class="options">
+          <li class="option">
+            <span class="option-text">GCE 'A' Level</span>
+          </li>
+          <li class="option">
+            <span class="option-text">Polytechnic Diploma</span>
+          </li>
+          <li class="option">
+            <span class="option-text">International Baccalaureate</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
   </div>
+
+  
 </body>
 
 <style>
@@ -54,6 +138,12 @@ block content %}
     background-size: cover;
   }
 
+  .row{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
   .profile {
     width: 80%;
     margin: auto;
@@ -62,9 +152,34 @@ block content %}
     color: #fff;
   }
 
+  .profile-col{
+    flex-basis: 33%;
+    border-radius: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 30%;
+    text-align: center;
+    background: #d2e6ee;
+    padding: 25px;
+    cursor: pointer;
+    display: box;
+    
+  }
+
+  .profile-col p{
+    padding:0px;
+  }
+
+  .profile-col h3{
+    margin-top: 20px;
+    text-align: center;
+  }
+
   .select-menu {
     width: 380px;
     margin: 140px auto;
+    margin-top: 7px;
+    margin-bottom: 7px;
   }
   .select-menu .select-btn {
     display: flex;
@@ -121,8 +236,9 @@ block content %}
 </style>
 
 <script>
-  const optionMenu = document.querySelector(".select-menu"),
-    selectBtn = optionMenu.querySelector(".select-btn"),
+ const optionMenus = document.querySelectorAll(".select-menu");
+optionMenus.forEach((optionMenu) => {
+  const selectBtn = optionMenu.querySelector(".select-btn"),
     options = optionMenu.querySelectorAll(".option"),
     sBtn_text = optionMenu.querySelector(".sBtn-text");
 
@@ -138,6 +254,10 @@ block content %}
       optionMenu.classList.remove("active");
     });
   });
+});
+
 </script>
+
+
 
 {% endblock %}
