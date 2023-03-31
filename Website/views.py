@@ -56,8 +56,7 @@ personality_test_qns=[
 
 @views.route('/', methods=['GET', 'POST'])
 def home():
-    course_reco=users_courses.query.filter_by(user_id=current_user.id).first()
-    return render_template("home.html", user=current_user, course_reco=course_reco)
+    return render_template("home.html", user=current_user)
 
 
 
