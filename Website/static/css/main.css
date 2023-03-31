@@ -293,3 +293,82 @@
     font-size: 18px;
     line-height: 0.7;
 }
+
+.test-back{
+    height: 87vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.test-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.test-wrapper form{
+    height: 30vh;
+    overflow: auto;
+}
+
+.test-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.test-header img{
+    width: 600px;
+    border: 1px solid white;
+}
+
+.test-header p{
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color:#1c5d7a;
+    font-size: 20px;
+}
+
+.tsanswers{
+    font-size: 20px;
+    border-bottom: 1px solid #ebe9e9;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.radio{
+    float: right;
+    padding-left: 15px;
+    border-left: 1px solid #ccc;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.buttonspace{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding-top: 20px;
+}
+
+.submitbutton{
+    height: 35px;
+    width: 100px;
+    background-color: #faa32b;
+    border: none;
+    cursor: pointer;
+
+}

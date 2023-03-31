@@ -20,10 +20,12 @@
       </a>
       <div class="navbar-nav">
         {% if user.is_authenticated %}
+        {% if course_reco!=None %}
+        <a class="nav-item" id="viewresult" href="/view_results">VIEW RESULTS</a>
+        {% endif %}
         <a class="nav-item" id="Take Test" href="/TakeTest1">TAKE TEST</a>
         <a class="nav-item" id="logout" href="/logout">LOGOUT</a>
         {% else %}
-        <a class="nav-item" id="home" href="/">HOME</a>
         <a class="nav-item" id="Take Test" href="/login">TAKE TEST</a>
         <a class="nav-item" id="login" href="/login">LOGIN</a>
         <a class="nav-item" id="signup" href="/sign-up"><button>SIGN UP</button></a>
