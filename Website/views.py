@@ -50,9 +50,16 @@ personality_test_qns=[
     {"q": "I am a practical person", "v":"r"},
     {"q": "I like working with numebrs or charts", "v":"i"},
     {"q": "I like to get into discussions about issues", "v":"s"},
-    {"q": "I am good at keeping records of my work", "v":"c"}
+    {"q": "I am good at keeping records of my work", "v":"c"},
+    {"q": "I like working outdoors","v":"r"},
+    {"q": "I like to lead","v":"e"},
+    {"q": "I would like to work in an office","v":"c"},
+    {"q": "I'm good at math","v":"i"},
+    {"q": "I like helping people","v":"s"},
+    {"q": "I like to draw","v":"a"},
+    {"q": "I like to give speeches","v":"e"}
     ]
-
+#42 questions in total
 
 @views.route('/', methods=['GET', 'POST'])
 def home():
@@ -66,7 +73,7 @@ def personality_test1():
     if request.method=='POST':
         users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
         r_score,i_score,a_score,s_score,e_score,c_score=0,0,0,0,0,0
-        total_questions=35
+        total_questions=42
         for i in range(total_questions):
             response=request.form.get('q'+str(i))
             if response=='r':
@@ -81,172 +88,20 @@ def personality_test1():
                 e_score+=1
             elif response=='c':
                 c_score+=1
-        if(users_scores==None):
-            riasec_scores=RIASEC_Scores(r_score=r_score,i_score=i_score,a_score=a_score,
-                                        s_score=s_score,e_score=e_score,c_score=c_score,user_id=current_user.id)
-            db.session.add(riasec_scores)
-            db.session.commit()
-        else:
-            users_scores.r_score=r_score
-            users_scores.i_score=i_score
-            users_scores.a_score=a_score
-            users_scores.s_score=s_score
-            users_scores.e_score=e_score
-            users_scores.c_score=c_score
-            db.session.commit()
+                
+        riasec_scores=RIASEC_Scores(r_score=r_score,i_score=i_score,a_score=a_score,
+                                        s_score=s_score,e_score=e_score,c_score=c_score,
+                                        completed=False,user_id=current_user.id)
+        #adds a new instance regardless if user has taken the quiz or not
+        
+        db.session.add(riasec_scores)
+        db.session.commit()
+        
+
         return redirect(url_for('views.add_info'))
 
     return render_template("take_test1.html", user=current_user, pt_qns=personality_test_qns)
 
-# @views.route('/TakeTest2', methods=['POST', 'GET'])
-# @login_required
-# def personality_test2():
-#     if request.method=='POST':
-#         question_set=2
-#         users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
-#         for i in range((question_set-1)*7,question_set*7):
-#             response=request.form.get('q'+str(i))
-#             if response=='r':
-#                 users_scores.r_score+=1
-#             elif response=='i':
-#                 users_scores.i_score+=1
-#             elif response=='a':
-#                 users_scores.a_score+=1
-#             elif response=='s':
-#                 users_scores.s_score+=1
-#             elif response=='e':
-#                 users_scores.e_score+=1
-#             elif response=='c':
-#                 users_scores.c_score+=1
-        
-#         db.session.commit()
-#         # riasec_scores=RIASEC_Scores(r_score=r_score,i_score=i_score,a_score=a_score,
-#         #                             s_score=s_score,e_score=e_score,c_score=c_score,user_id=current_user.id)
-#         # db.session.add(riasec_scores)
-#         # db.session.commit()
-#         return redirect(url_for('views.personality_test3'))
-
-#     return render_template("take_test2.html", user=current_user)
-
-# @views.route('/TakeTest3', methods=['POST', 'GET'])
-# @login_required
-# def personality_test3():
-#     if request.method=='POST':
-#         question_set=3
-#         users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
-#         for i in range((question_set-1)*7,question_set*7):
-#             response=request.form.get('q'+str(i))
-#             if response=='r':
-#                 users_scores.r_score+=1
-#             elif response=='i':
-#                 users_scores.i_score+=1
-#             elif response=='a':
-#                 users_scores.a_score+=1
-#             elif response=='s':
-#                 users_scores.s_score+=1
-#             elif response=='e':
-#                 users_scores.e_score+=1
-#             elif response=='c':
-#                 users_scores.c_score+=1
-        
-#         db.session.commit()
-#         # riasec_scores=RIASEC_Scores(r_score=r_score,i_score=i_score,a_score=a_score,
-#         #                             s_score=s_score,e_score=e_score,c_score=c_score,user_id=current_user.id)
-#         # db.session.add(riasec_scores)
-#         # db.session.commit()
-#         return redirect(url_for('views.personality_test4'))
-
-#     return render_template("take_test3.html", user=current_user)
-
-# @views.route('/TakeTest4', methods=['POST', 'GET'])
-# @login_required
-# def personality_test4():
-#     if request.method=='POST':
-#         question_set=4
-#         users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
-#         for i in range((question_set-1)*7,question_set*7):
-#             response=request.form.get('q'+str(i))
-#             if response=='r':
-#                 users_scores.r_score+=1
-#             elif response=='i':
-#                 users_scores.i_score+=1
-#             elif response=='a':
-#                 users_scores.a_score+=1
-#             elif response=='s':
-#                 users_scores.s_score+=1
-#             elif response=='e':
-#                 users_scores.e_score+=1
-#             elif response=='c':
-#                 users_scores.c_score+=1
-        
-#         db.session.commit()
-#         # riasec_scores=RIASEC_Scores(r_score=r_score,i_score=i_score,a_score=a_score,
-#         #                             s_score=s_score,e_score=e_score,c_score=c_score,user_id=current_user.id)
-#         # db.session.add(riasec_scores)
-#         # db.session.commit()
-#         return redirect(url_for('views.personality_test5'))
-
-#     return render_template("take_test4.html", user=current_user)
-
-# @views.route('/TakeTest5', methods=['POST', 'GET'])
-# @login_required
-# def personality_test5():
-#     if request.method=='POST':
-#         question_set=5
-#         users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
-#         for i in range((question_set-1)*7,question_set*7):
-#             response=request.form.get('q'+str(i))
-#             if response=='r':
-#                 users_scores.r_score+=1
-#             elif response=='i':
-#                 users_scores.i_score+=1
-#             elif response=='a':
-#                 users_scores.a_score+=1
-#             elif response=='s':
-#                 users_scores.s_score+=1
-#             elif response=='e':
-#                 users_scores.e_score+=1
-#             elif response=='c':
-#                 users_scores.c_score+=1
-        
-#         db.session.commit()
-#         # riasec_scores=RIASEC_Scores(r_score=r_score,i_score=i_score,a_score=a_score,
-#         #                             s_score=s_score,e_score=e_score,c_score=c_score,user_id=current_user.id)
-#         # db.session.add(riasec_scores)
-#         # db.session.commit()
-#         return redirect(url_for('views.personality_test6'))
-
-#     return render_template("take_test5.html", user=current_user)
-
-# @views.route('/TakeTest6', methods=['POST', 'GET'])
-# @login_required
-# def personality_test6():
-#     if request.method=='POST':
-#         question_set=6
-#         users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
-#         for i in range((question_set-1)*7,question_set*7):
-#             response=request.form.get('q'+str(i))
-#             if response=='r':
-#                 users_scores.r_score+=1
-#             elif response=='i':
-#                 users_scores.i_score+=1
-#             elif response=='a':
-#                 users_scores.a_score+=1
-#             elif response=='s':
-#                 users_scores.s_score+=1
-#             elif response=='e':
-#                 users_scores.e_score+=1
-#             elif response=='c':
-#                 users_scores.c_score+=1
-        
-#         db.session.commit()
-#         # riasec_scores=RIASEC_Scores(r_score=r_score,i_score=i_score,a_score=a_score,
-#         #                             s_score=s_score,e_score=e_score,c_score=c_score,user_id=current_user.id)
-#         # db.session.add(riasec_scores)
-#         # db.session.commit()
-#         return redirect(url_for('views.add_info'))
-
-#     return render_template("take_test6.html", user=current_user)
 
 @views.route('/user-info',methods=['POST','GET'])
 @login_required
@@ -296,16 +151,6 @@ def add_portfolio():
             ib_score=request.form.get('')
         
         db.session.commit()
-        return redirect(url_for('views.view_results'))
-
-    return render_template("academic_portfolio.html", user=current_user)   
-            
-
-@views.route('/view_results',methods=['POST','GET'])
-@login_required
-def view_results():
-    if request.method=='POST': 
-      
         def max_riasec_code(riasec_code):
             riasec_array=[riasec_code.r_score,riasec_code.i_score,riasec_code.a_score,riasec_code.s_score,riasec_code.e_score,riasec_code.c_score]
             code_array=['r','i','a','s','e','c']
@@ -421,8 +266,6 @@ def view_results():
         general_course_list=sortCoursesGenerally(general_course_list)
         
         
-        print("sorted recommended courses")
-        
         course_reco=users_courses.query.filter_by(user_id=current_user.id).first()
         if course_reco==None: 
             course_reco=users_courses(by_school_data=by_college,
@@ -433,16 +276,27 @@ def view_results():
             course_reco.by_school_data=by_college
             course_reco.general_data=general_course_list
         db.session.commit()
-        
-        
-        for schools in by_college:
-             for i in range(3):
-                 print(by_college[schools][i])
+    
+        return redirect(url_for('views.view_results'))
+    
 
+    return render_template("academic_portfolio.html", user=current_user)   
+            
 
-
-        
-    return render_template("view_results.html", user=current_user)
+@views.route('/view_results',methods=['POST','GET'])
+@login_required
+def view_results():
+    
+    course_reco=users_courses.query.filter_by(user_id=current_user.id).all() #should only return 1
+    
+    for schools in course_reco.by_school_data:
+        for i in range(3):
+            print(course_reco.by_school_data[schools][i])
+    
+    
+    return render_template("view_results.html", user=current_user,
+                           by_school=course_reco.by_school_data,
+                           general_data=course_reco.general_data)
 
 
 

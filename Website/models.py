@@ -19,6 +19,7 @@ class RIASEC_Scores(db.Model):
     s_score=db.Column(db.Integer)
     e_score=db.Column(db.Integer)
     c_score=db.Column(db.Integer)
+    completed=db.Column(db.Boolean) #To check if user has completed the test before logging out
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class User(db.Model, UserMixin):
@@ -38,13 +39,16 @@ class Qualification(db.Model):
     alevel_score=db.Column(db.String(50))
     ib_score=db.Column(db.Integer)
     polytechnic_score=db.Column(db.Float)
+    completed=db.Column(db.Boolean)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
     
 class Subject_interests(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     subject1=db.Column(db.String(50))
     subject2=db.Column(db.String(50))
     subject3=db.Column(db.String(50))
+    completed=db.Column(db.Boolean)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class Degrees(db.Model):

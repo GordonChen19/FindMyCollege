@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User,Degrees,Holland_Codes
+from .models import User,Degrees,Holland_Codes,RIASEC_Scores,Qualification,Subject_interests
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -33,6 +33,10 @@ def login():
                     codes = Holland_Codes(r=row['r'], i=row['i'],a=row['a'],s=row['s'],e=row['e'],c=row['c'])
                     db.session.add(codes)
                     db.session.commit()
+                    
+                RIASEC_Scores.query.filter_by(completed=False).delete()
+                Qualification.query.filter_by(completed=False).delete()
+                Subject_interests.query.filter_by(completed=False).delete()
                     
                 print("Done loading")
                 return redirect(url_for('views.home'))
@@ -91,7 +95,11 @@ def sign_up():
                     codes = Holland_Codes(r=row['r'], i=row['i'],a=row['a'],s=row['s'],e=row['e'],c=row['c'])
                     db.session.add(codes)
                     db.session.commit()
-
+            
+            RIASEC_Scores.query.filter_by(completed=False).delete()
+            Qualification.query.filter_by(completed=False).delete()
+            Subject_interests.query.filter_by(completed=False).delete()
+            
             return redirect(url_for('views.home'))
 
     return render_template("sign_up.html", user=current_user)
