@@ -573,6 +573,8 @@
 .course-byschool{
     width: 80%;
     height: 220px;
+    display: flex;
+    flex-direction: column;
     overflow-y: scroll;
     text-align: left;
 }
@@ -581,14 +583,16 @@
     display: none;
 }
 
-.course-byschool p{
+.course-byschool a{
     font-size: 18px;
     font-weight: lighter;
     cursor: pointer;
     transition: ease-in-out 0.35s;
-    margin: 8px 0px;
+    margin: 7px 0px;
+    text-decoration: none;
+    color: rgb(37, 37, 37);
 }
 
-.course-byschool p:hover{
+.course-byschool a:hover{
     color:#237194;
 }

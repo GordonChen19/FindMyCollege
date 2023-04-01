@@ -257,7 +257,6 @@ def add_portfolio():
 @views.route('/view_results',methods=['POST','GET'])
 @login_required
 def view_results():
-    
     course_reco=users_courses.query.filter_by(user_id=current_user.id).first() #should only return 1
     
     # if course_reco == None:
@@ -274,13 +273,12 @@ def view_results():
 
 #general_data=course_reco.general_data
 
-
-@views.route('/course_specifics')
+@views.route('/course_specifics/<course_id>')
 @login_required
 def course_page(course_id):
     course=Degrees.query.filter_by(id=course_id).first()
     return render_template('course_page.html',degree=course.degree,
-                           school=course.schoool,
+                           school=course.school,
                            Alevel_igp=course.alevel_igp,
                            polytechnic_igp=course.polytechnic_igp,
                            employability=course.employability,
