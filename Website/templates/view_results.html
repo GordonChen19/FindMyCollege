@@ -9,13 +9,12 @@
             <h2>{{ school }}</h2>
             <div class="course-byschool">
             {% for degree in degrees %}
-              <p>{{ degree[1] }}</p>
+              <a href="/course_specifics/1">{{degree[1] }}</a>
             {% endfor %}
             </div>
           </div>
           {% endfor %}
         </div>
-             
       </div>  
     </div>
   </body>
