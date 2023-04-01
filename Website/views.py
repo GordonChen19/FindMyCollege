@@ -251,7 +251,6 @@ def add_portfolio():
     
         return redirect(url_for('views.view_results'))
     
-    print("Hello")
     return render_template("academic_portfolio.html", user=current_user)   
             
 
@@ -276,6 +275,23 @@ def view_results():
 #general_data=course_reco.general_data
 
 
+@views.route('/course_specifics',methods=['POST','GET'])
+@login_required
+def course_page(course_id):
+    course=Degrees.query.filter_by(id=course_id).first()
+    return render_template('course_page.html',degree=course.degree,
+                           school=course.schoool,
+                           Alevel_igp=course.alevel_igp,
+                           polytechnic_igp=course.polytechnic_igp,
+                           employability=course.employability,
+                           salary=course.salary,
+                           riasec_code=course.riasec_code,
+                           related_subject1=course.related_subject1,
+                           related_subject2=course.related_subject2,
+                           related_subject3=course.related_subject3,
+                           additional_information=course.additional_information,
+                           a_level_prerequisites=course.a_level_prerequisites)
+    
 
 @views.route('/graphtest',methods=['GET','POST'])
 def graphtest():

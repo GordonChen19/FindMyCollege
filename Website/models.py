@@ -52,8 +52,9 @@ class Subject_interests(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class Degrees(db.Model):
-    school=db.Column(db.String(150),primary_key=True)
-    degree=db.Column(db.String(150),primary_key=True)
+    id=db.Column(db.Integer,primary_key=True)
+    school=db.Column(db.String(150))
+    degree=db.Column(db.String(150))
     alevel_igp=db.Column(db.String(150))
     polytechnic_igp=db.Column(db.Float)
     employability=db.Column(db.Float)
