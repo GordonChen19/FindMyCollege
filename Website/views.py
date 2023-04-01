@@ -126,7 +126,7 @@ def add_info():
 @views.route('/academic-portfolio',methods=['POST','GET'])
 @login_required
 def add_portfolio():
-    if request.method==  'POST':
+    if request.method=='POST':
         users_qualification= Qualification.query.filter_by(user_id=current_user.id).first()
         curriculum=request.form.get('curriculum')
         if curriculum=='ALevel':

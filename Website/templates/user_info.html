@@ -1,237 +1,89 @@
 {% extends "base.html" %} {% block title %}subject-interests{% endblock %} {%
 block content %}
 
-<head>
-  <link
-    href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
-    rel="stylesheet"
-  />
-</head>
-
 <body>
-  <section class="profile">
-    <h1>Academic Profile</h1>
-  </section>
-
-  <div class="row">
-    <div class="profile-col">
-      <h2>Subject Interests</h3>
-      <p>Rank your top 3 subject interests</p>
-      <!--3 dropdown boxes for subject interests-->
-      <h3>1st Choice:</h3>
-     
-      <div class="select-menu", id="dropdown1">
-        <div class="select-btn">
-          <span class="sBtn-text">Subject Interest</span>
-          <i class="bx bx-chevron-down"></i>
+  <div class="subject-interest">
+    <form class="subject-interest-form" method="POST">
+      <h1>SUBJECT INTERESTS</h1>
+      <h2>Rank your top 3 subject interests</h2>
+      <p>Don't pick the same subject more than once!</p>
+      <div class="subject-dropdown">
+        <div class="dropdown-box">
+          <label>Subject 1</label>
+          <select name="subject1">
+            <option value="" disabled selected>Pick a Subject</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="physics">Physics</option>
+            <option value="biology">Biology</option>
+            <option value="mathematics">Mathematics</option>
+            <option value="computing">Computing</option>
+            <option value="project work">Project Work</option>
+            <option value="general paper">English</option>
+            <option value="economics">Economics</option>
+            <option value="physical education">Physical Education</option>
+            <option value="art">Art</option>
+            <option value="literature">Literature</option>
+            <option value="business">Business</option>
+            <option value="history">History</option>
+            <option value="geography">Geography</option>
+            <option value="accounting">Accounting</option>
+          </select>
         </div>
-    
-        <ul class="options">
-          <li class="option">
-            <span class="option-text">Math</span>
-          </li>
-          <li class="option">
-            <span class="option-text">Science</span>
-          </li>
-          <li class="option">
-            <span class="option-text">Languages</span>
-          </li>
-          <li class="option">
-            <span class="option-text">Humanities</span>
-          </li>
-        </ul>
-      </div>
-
-      <h3>2nd Choice:</h3>
-      
-      <div class="select-menu", id="dropdown2">
-        <div class="select-btn">
-          <span class="sBtn-text">Subject Interest</span>
-          <i class="bx bx-chevron-down"></i>
+        <div class="dropdown-box">
+          <label>Subject 2</label>
+          <select name="subject2">
+            <option value="" disabled selected>Pick a Subject</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="physics">Physics</option>
+            <option value="biology">Biology</option>
+            <option value="mathematics">Mathematics</option>
+            <option value="computing">Computing</option>
+            <option value="project work">Project Work</option>
+            <option value="general paper">English</option>
+            <option value="economics">Economics</option>
+            <option value="physical education">Physical Education</option>
+            <option value="art">Art</option>
+            <option value="literature">Literature</option>
+            <option value="business">Business</option>
+            <option value="history">History</option>
+            <option value="geography">Geography</option>
+            <option value="accounting">Accounting</option>
+          </select>
         </div>
-    
-        <ul class="options">
-          <li class="option">
-            <span class="option-text">Math</span>
-          </li>
-          <li class="option">
-            <span class="option-text">Science</span>
-          </li>
-          <li class="option">
-            <span class="option-text">Languages</span>
-          </li>
-          <li class="option">
-            <span class="option-text">Humanities</span>
-          </li>
-        </ul>
-      </div>
-
-      <h3>3rd Choice:</h3>
-      
-      <div class="select-menu",id="dropdown3">
-        <div class="select-btn">
-          <span class="sBtn-text">Subject Interest</span>
-          <i class="bx bx-chevron-down"></i>
+        <div class="dropdown-box">
+          <label>Subject 3</label>
+          <select name="subject3">
+            <option value="" disabled selected>Pick a Subject</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="physics">Physics</option>
+            <option value="biology">Biology</option>
+            <option value="mathematics">Mathematics</option>
+            <option value="computing">Computing</option>
+            <option value="project work">Project Work</option>
+            <option value="general paper">English</option>
+            <option value="economics">Economics</option>
+            <option value="physical education">Physical Education</option>
+            <option value="art">Art</option>
+            <option value="literature">Literature</option>
+            <option value="business">Business</option>
+            <option value="history">History</option>
+            <option value="geography">Geography</option>
+            <option value="accounting">Accounting</option>
+          </select>
         </div>
-    
-        <ul class="options">
-          <li class="option">
-            <span class="option-text">Math</span>
-          </li>
-          <li class="option">
-            <span class="option-text">Science</span>
-          </li>
-          <li class="option">
-            <span class="option-text">Languages</span>
-          </li>
-          <li class="option">
-            <span class="option-text">Humanities</span>
-          </li>
-        </ul>
       </div>
-
-    </div>
-    <div class="profile-col">
-      <h2>Highest Qualification</h3>
-      <p>Select your academic qualification</p>
-      </br>
-      <div class="select-menu",id="dropdown4">
-        <div class="select-btn">
-          <span class="sBtn-text">Academic Qualification</span>
-          <i class="bx bx-chevron-down"></i>
-        </div>
-    
-        <ul class="options">
-          <li class="option">
-            <span class="option-text">GCE 'A' Level</span>
-          </li>
-          <li class="option">
-            <span class="option-text">Polytechnic Diploma</span>
-          </li>
-          <li class="option">
-            <span class="option-text">International Baccalaureate</span>
-          </li>
-        </ul>
-      </div>
-
-    </div>
+      <button type="submit">SUBMIT</button>
+    </form>
   </div>
-
-  
 </body>
 
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-  }
-  body {
-    background-image: linear-gradient(
-        rgba(52, 53, 53, 0.6),
-        rgba(52, 53, 53, 0.6)
-      ),
-      url("static/NTU2.jpeg");
+  body{
+    background-image: url("static/university_background.jpg");
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: fixed; 
     background-size: cover;
-  }
-
-  .row{
-    margin-top: 5%;
-    display: flex;
-    justify-content: space-between;
-}
-
-  .profile {
-    width: 80%;
-    margin: auto;
-    padding-top: 100px;
-    text-align: center;
-    color: #fff;
-  }
-
-  .profile-col{
-    flex-basis: 33%;
-    border-radius: 10px;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 30%;
-    text-align: center;
-    background: #d2e6ee;
-    padding: 25px;
-    cursor: pointer;
-    display: box;
-    
-  }
-
-  .profile-col p{
-    padding:0px;
-  }
-
-  .profile-col h3{
-    margin-top: 20px;
-    text-align: center;
-  }
-
-  .select-menu {
-    width: 380px;
-    margin: 140px auto;
-    margin-top: 7px;
-    margin-bottom: 7px;
-  }
-  .select-menu .select-btn {
-    display: flex;
-    height: 55px;
-    background: #fff;
-    padding: 20px;
-    font-size: 18px;
-    font-weight: 400;
-    border-radius: 8px;
-    align-items: center;
-    cursor: pointer;
-    justify-content: space-between;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-  .select-btn i {
-    font-size: 25px;
-    transition: 0.3s;
-  }
-  .select-menu.active .select-btn i {
-    transform: rotate(-180deg);
-  }
-  .select-menu .options {
-    position: relative;
-    padding: 20px;
-    margin-top: 10px;
-    border-radius: 8px;
-    background: #fff;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-    display: none;
-  }
-  .select-menu.active .options {
-    display: block;
-  }
-  .options .option {
-    display: flex;
-    height: 55px;
-    cursor: pointer;
-    padding: 0 16px;
-    border-radius: 8px;
-    align-items: center;
-    background: #fff;
-  }
-  .options .option:hover {
-    background: #f2f2f2;
-  }
-  .option i {
-    font-size: 25px;
-    margin-right: 12px;
-  }
-  .option .option-text {
-    font-size: 18px;
-    color: #333;
+    color:black;
   }
 </style>
 
