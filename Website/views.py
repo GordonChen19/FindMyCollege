@@ -160,7 +160,8 @@ def add_portfolio():
         db.session.commit()
         
         #Update results
-    
+        users_courses.query.filter_by(user_id=current_user.id).delete()
+        db.session.commit()
         
         def max_riasec_code(riasec_code):
             riasec_array=[riasec_code.r_score,riasec_code.i_score,riasec_code.a_score,riasec_code.s_score,riasec_code.e_score,riasec_code.c_score]
@@ -299,11 +300,12 @@ def add_portfolio():
 @login_required
 def view_results():
     
-    course_reco=users_courses.query.filter_by(user_id=current_user.id).all() #should only return 1
+    course_reco=users_courses.query.filter_by(user_id=current_user.id).first() #should only return 1
     
-    for schools in course_reco.by_school_data:
-        for i in range(3):
-            print(course_reco.by_school_data[schools][i])
+    # if course_reco == None:
+    # for schools in course_reco.by_school_data:
+    #     for i in range(3):
+    #         print(course_reco.by_school_data[schools][i])
     
     
     return render_template("view_results.html", user=current_user,
