@@ -15,52 +15,6 @@ c=conn.cursor()
 
 views = Blueprint('views', __name__)
 
-personality_test_qns=[
-    {"q": "I like to work on cars", "v": "r"},
-    {"q": "I like to do puzzles", "v": "i"},
-    {"q": "I am good at working independently", "v": "a"},
-    {"q": "I like to work in teams", "v": "s"},
-    {"q": "I am an ambitious person, I set goals for myself", "v": "e"},
-    {"q": "I like to organize things (files/desks/offices)", "v": "c"},
-    {"q": "I like to build things", "v": "r"},
-    {"q": "I like to have clear instructions to follow", "v":"c"},
-    {"q": "I like to read about art and music", "v":"a"},
-    {"q": "I like to try to influence or persuade people", "v":"e"},
-    {"q": "I like to do experiments", "v":"i"},
-    {"q": "I like to teach or train people", "v":"s"},
-    {"q": "I like trying to help people solve their problems", "v":"s"},
-    {"q": "I like to take care of animals", "v":"r"},
-    {"q": "I wouldn't mind working 8 hours per day in an office", "v":"c"},
-    {"q": "I like selling things", "v":"e"},
-    {"q": "I enjoy creative writing", "v":"a"},
-    {"q": "I enjoy science", "v":"i"},
-    {"q": "I am quick to take on new responsibilities", "v":"e"},
-    {"q": "I am interested in healing people", "v":"s"},
-    {"q": "I enjoy trying to figure out how things work", "v":"i"},
-    {"q": "I like putting things together or assembling things", "v":"r"},
-    {"q": "I am a creative person", "v":"a"},
-    {"q": "I pay attention to details", "v":"c"},
-    {"q": "I like to do filing or typing", "v":"c"},
-    {"q": "I like to analyse things (problems/situations)", "v":"i"},
-    {"q": "I like to play instruments or sing", "v":"a"},
-    {"q": "I enjoy learning about other cultures", "v":"s"},
-    {"q": "I would like to start my own business", "v":"e"},
-    {"q": "I like to cook", "v":"r"},
-    {"q": "I like acting in plays", "v":"a"},
-    {"q": "I am a practical person", "v":"r"},
-    {"q": "I like working with numebrs or charts", "v":"i"},
-    {"q": "I like to get into discussions about issues", "v":"s"},
-    {"q": "I am good at keeping records of my work", "v":"c"},
-    {"q": "I like working outdoors","v":"r"},
-    {"q": "I like to lead","v":"e"},
-    {"q": "I would like to work in an office","v":"c"},
-    {"q": "I'm good at math","v":"i"},
-    {"q": "I like helping people","v":"s"},
-    {"q": "I like to draw","v":"a"},
-    {"q": "I like to give speeches","v":"e"}
-    ]
-#42 questions in total
-
 @views.route('/', methods=['GET', 'POST'])
 def home():
     return render_template("home.html", user=current_user)
@@ -100,7 +54,7 @@ def personality_test1():
 
         return redirect(url_for('views.add_info'))
 
-    return render_template("take_test1.html", user=current_user, pt_qns=personality_test_qns)
+    return render_template("take_test1.html", user=current_user)
 
 
 @views.route('/user-info',methods=['POST','GET'])

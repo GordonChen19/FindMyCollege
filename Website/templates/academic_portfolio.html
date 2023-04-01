@@ -1,52 +1,54 @@
 {% extends "base.html" %} {% block title %}academic-portfolio{% endblock %} {% block content
   %}
-  <form method="POST">
-    <h3 align="center">ACADEMIC PROFILE</h3>
+  <body>
+    <script>
+      function showForm(){
+        var cat = document.getElementById("curriculum");
+        if(cat.value == "ALevel"){
+            document.getElementById("alevel_score_input").hidden = false;
+            document.getElementById("polytechnic_gpa_input").hidden = true;
+        }
+        else{
+            document.getElementById("alevel_score_input").hidden = true;
+            document.getElementById("polytechnic_gpa_input").hidden = false;
+        }
+      }
+    </script>
 
-
-    <div class="form-group">
-      <label for="curriculum">Curriculum</label>
-
-      <select name="curriculum" id="curriculum">
-        <option value="ALevel">A Levels</option>
-        <option value="Polytechnic">Polytechnic</options>
-        <option value="IB">International Baccalaureatte</options>
-
-          <label for="alevel_score">'A' Level score</label>
-          <input
-        type="Score"
-        class="form-control"
-        id="alevel_score"
-        name="alevel_score"
-        placeholder="Enter score"/>
-
-       </select>
+    <div class="academic-portfolio-wrapper">
+      <form method="POST">
+        <h1>ACADEMIC PORTFOLIO</h1>
+        <div class="form-group">
+          <label for="curriculum">Qualifications</label>
+          <select name="curriculum" id="curriculum" onchange="showForm()">
+            <option value="ALevel" onclick="showForm()">A Levels</option>
+            <option value="Polytechnic" onclick="showForm()">Polytechnic</options>
+          </select>
+          <div id="alevel_score_input">
+            <label for="alevel_score">'A' Level Rank Points</label>
+            <input type="Score" class="form-control" id="alevel_score" name="alevel_score" placeholder="Enter RP"/>
+          </div>
+          <div id="polytechnic_gpa_input" hidden>
+            <label for="alevel_score">Polytechnic GPA</label>
+            <input type="Score" class="form-control" id="polytechnic_gpa" name="alevel_score" placeholder="Enter GPA"/>
+        </div>
+          </div>
+        <button type="submit" class="acad-submit">Submit</button>
+      </form>
     </div>
-
-    <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  </body>
+  
+  
 
   <style>
     body {
-      background-image: url("static/NTU2.jpeg");
+      background-image: url("static/university_background.jpg");
       background-repeat: no-repeat;
       background-attachment: fixed; 
       background-size: cover;
       color:white
     }
-    h3 {
-      margin-top: 50px;
-      margin-bottom: 50px;
-      margin-right: 80px;
-      margin-left: 80px;
-      font-weight: bold;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 40px;
-    }
-  
-
-    </style>
+  </style>
   
   {% endblock %}
   
