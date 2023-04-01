@@ -1,21 +1,23 @@
 {% extends "base.html" %} {% block title %}Your Recommended Courses{% endblock %} {% block content %}
-  <body>    
-    <h1>Recommended Courses</h1>
-    {% for school, degrees in by_school.items() %}
-      <h2>{{ school }}</h2>
-      <table class="course_byschool">
-        <tr>
-          <td>COURSE</td>
-          <td>RIASEC CODE</td>
-        </tr>
-        {% for degree in degrees %}
-          <tr>
-            <td>{{ degree[1] }}</td>
-            <td>{{ degree[2] }}</td>
-          </tr>
-        {% endfor %}
-        </table>
-    {% endfor %}
+  <body>  
+    <div class="wrapper">
+      <div class="reco-wrapper">
+        <h1>Your Recommended Courses</h1>
+        <div id="course-space">
+          {% for school, degrees in by_school.items() %}  
+          <div class="by-school">
+            <h2>{{ school }}</h2>
+            <div class="course-byschool">
+            {% for degree in degrees %}
+              <p>{{ degree[1] }}</p>
+            {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+             
+      </div>  
+    </div>
   </body>
   
   
@@ -25,11 +27,10 @@
       background-repeat: no-repeat;
       background-attachment: fixed; 
       background-size: cover;
-      color:white
+      color:black;
     }
   </style>
-    
-    {% endblock %}
+  {% endblock %}
 
 
 
