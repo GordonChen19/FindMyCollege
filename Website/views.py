@@ -140,7 +140,7 @@ def add_portfolio():
         
         def sortRiasecAndSubject(r1,r2,r3,s1,s2,s3):
             by_college=defaultdict(list)
-            general_course_list=[]
+            general_course_list=defaultdict(list)
             
             riasec_user=r1+r2+r3 #Concatenate riasec code
             # data -> [('i', 'Medicine', 'NTU', 'chemistry', 'biology', 'physics'), ('i', 'Medicine', 'NUS', 'chemistry', 'biology', 'physics')]]
@@ -171,6 +171,7 @@ def add_portfolio():
                 alevel_IGP=course.alevel_igp
                 polytechnic_IGP=course.polytechnic_igp
                 
+                # general_course_list[school].append((school,degree,match_str,riasec_points*subject_points,course_id))
                 if user_qualification.curriculum=="ALevel":
                     degree_rank_point=0
                     if alevel_IGP!=None:
@@ -214,7 +215,6 @@ def add_portfolio():
 
 
                 by_college[school].append((school,degree,match_str,riasec_points*subject_points,course_id)) 
-                general_course_list.append((school,degree,match_str,riasec_points*subject_points,course_id))
             return by_college,general_course_list
         # dict1 -> {"NTU": [["school_name","Degree", "matches_riasec", total_score,course_id],["school_name","Degree", "matches_riasec", "total_score",course_id]]}     
         def sortCoursesByCollege(by_college):
@@ -234,7 +234,7 @@ def add_portfolio():
 
         by_college,general_course_list=sortRiasecAndSubject(r1,r2,r3,subject_interests.subject1,subject_interests.subject2,subject_interests.subject3)
         by_college=sortCoursesByCollege(by_college)
-        general_course_list=sortCoursesGenerally(general_course_list)
+        # general_course_list=sortCoursesGenerally(general_course_list)
         
         
         course_reco=users_courses.query.filter_by(user_id=current_user.id).first()
