@@ -1,61 +1,33 @@
-{% extends "base.html" %} {% block title %}Your Recommended Courses{% endblock %} {% block content
-    %}
-  
-    <form method="POST">
-      <h1>Recommended Degree Courses</h1>
-        <div class="text-container">
-          <h2>List of courses:</h2>
-        </div>
-      
-    </form>
-
-      <html>
-      <head>
-          <title>Example</title>
-      </head>
-      <body>
-          <h1>Schools and Degrees</h1>
-          {% for school, degrees in by_school.items() %}
-              <h2>{{ school }}</h2>
-              <table>
-                  <thead>
-                      <tr>
-                          <th>School Name</th>
-                          <th>Degree</th>
-                          <th>Matches Riasec</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      {% for degree in degrees %}
-                          <tr>
-                              <td>{{ degree[0] }}</td>
-                              <td>{{ degree[1] }}</td>
-                              <td>{{ degree[2] }}</td>
-                          </tr>
-                      {% endfor %}
-                  </tbody>
-              </table>
-          {% endfor %}
-      </body>
-      </html>
+{% extends "base.html" %} {% block title %}Your Recommended Courses{% endblock %} {% block content %}
+  <body>    
+    <h1>Recommended Courses</h1>
+    {% for school, degrees in by_school.items() %}
+      <h2>{{ school }}</h2>
+      <table class="course_byschool">
+        <tr>
+          <td>COURSE</td>
+          <td>RIASEC CODE</td>
+        </tr>
+        {% for degree in degrees %}
+          <tr>
+            <td>{{ degree[1] }}</td>
+            <td>{{ degree[2] }}</td>
+          </tr>
+        {% endfor %}
+        </table>
+    {% endfor %}
+  </body>
   
   
-    <style>
-      .text-container {
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-      }
-      body {
-        background-image: url("static/NTU2.jpeg");
-        background-repeat: no-repeat;
-        background-attachment: fixed; 
-        background-size: cover;
-        color:white
-      }
-  
-      </style>
+  <style>
+    body {
+      background-image: url("static/university_background.jpg");
+      background-repeat: no-repeat;
+      background-attachment: fixed; 
+      background-size: cover;
+      color:white
+    }
+  </style>
     
     {% endblock %}
 
