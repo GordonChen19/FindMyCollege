@@ -1,4 +1,4 @@
-﻿School,Degree,A_Level_IGP,Poly_IGP,Percentage_Of_Employed_Graduates,Mean_Gross_Monthly_Salary,riasec_code,related_subject1,related_subject2,related_subject3,additional_information,a_level_prerequisites,
+﻿School,Degree,A_Level_IGP,Poly_IGP,Percentage_Of_Employed_Graduates,Mean_Gross_Monthly_Salary,riasec_code,related_subject1,related_subject2,related_subject3,additional_information,a_level_prerequisite_subjects,a_level_prerequisites
 NTU,Medicine,AAAA,,100,5404,i,chemistry,biology,physics,selection test/interview needed,"chemistry,biology,physics",h2 chemistry and h2 biology or h2 physics
 NTU,Renaissance Engineering,AAAA,,,,r,mathematics,art,physics,,"mathematics,physics,chemistry,biology",h2 mathematics and h2 physics or h2 chemistry or h2 biology
 NTU,Aerospace Engineering,AACB,3.55,94.4,4321,ric,mathematics,chemistry,physics,,"mathematics,physics,chemistry,biology,computing",h2 mathematics and h2 chemistry or h2 biology or h2 computing
