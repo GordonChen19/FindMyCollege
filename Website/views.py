@@ -15,7 +15,7 @@ from urllib.parse import urlencode
 import urllib3
 import urllib.request
 import json
-import matplotlib.pyplt as plt
+import matplotlib.pyplot as plt
 
 conn=sql.connect('database.db')
 c=conn.cursor()
