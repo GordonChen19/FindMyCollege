@@ -1,14 +1,25 @@
-{% extends "base.html" %} {% block title %}{{degree}}{% endblock %} {% block content%}
-    <body>
-        {{ degree }}
-    </body>
+{% extends "base.html" %} {% block title %}{{degree}}{% endblock %} {% block
+    content %}
+    <div class="course-bg">
+        <div class="course-wrapper">
+            <h1>{{degree}} by {{school}}</h1>
+            <div class="course-info">
+                <p>A Level IGP: {{Alevel_igp}}</p>
+                <p>Polytechnic GPA: {{polytechnic_igp}}</p>
+                <p>RIASEC Code: {{riasec_code}}</p>
+                <p id="sub">Related Subjects: {{related_subject1}}, {{related_subject2}}, {{related_subject3}}</p>
+            </div>
+        </div>
+    </div>
+    
+    
     <style>
-        body {
-            background-image: url("static/university_background.jpg");
-            background-repeat: no-repeat;
-            background-attachment: fixed; 
-            background-size: cover;
-            color:black;
-        }
-    </style>
-{% endblock %}
+      body {
+        background-image: url("static/university_student.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: cover;
+        color:rgb(0, 0, 0);
+      }
+      </style>
+    {% endblock %}
