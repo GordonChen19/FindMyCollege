@@ -27,11 +27,13 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
+    completed=db.Column(db.Boolean)
     notes = db.relationship('Note')
     qualification=db.relationship('Qualification')
     subject_interests=db.relationship('Subject_interests')
     riasec_scores=db.relationship('RIASEC_Scores')
     users_courses=db.relationship('users_courses')
+    
 
 class Qualification(db.Model):
     id=db.Column(db.Integer,primary_key=True)

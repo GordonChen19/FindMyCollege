@@ -20,7 +20,7 @@
       </a>
       <div class="navbar-nav">
         {% if user.is_authenticated %}
-        {% if course_reco!=None %}
+        {% if user.completed==True %}
         <a class="nav-item" id="viewresult" href="/view_results">VIEW RESULTS</a>
         {% endif %}
         <a class="nav-item" id="Take Test" href="/TakeTest1">TAKE TEST</a>

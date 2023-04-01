@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block title %}{{degree}}{% endblock %} {% block
-    content %}
+content %}
 
     <head>
         <meta charset="utf-8">
@@ -11,7 +11,7 @@
         body { margin: 0; padding: 0; }
         #map { position: absolute; top: 0; bottom: 0; left:0; right:0; margin:auto ; width: 20%; height:40vh; border-radius: 10px;}
         </style>
-      </head>
+    </head>
         <body>
         <div id="map"></div>
         <script>
@@ -57,12 +57,13 @@
                 </tr>
                 <tr>
                     <td class="c-info">A Level Prerequisites</td>
-                    <td class="c-data">{{a_level_prerequisits}}</td>
+                    <td class="c-data">{{a_level_prerequisites}}</td>
                 </tr>
             </table>
-            <div>
+        </div>
 
-            </div>
+     </div>
+
             <h3 class="section-title">ADDITIONAL INFORMATION</h3>
             <p>{{additional_information}}</p>
         </div>
@@ -71,11 +72,11 @@
     
     <style>
       body {
-        background-image: url("static/university_student.jpg");
+        background-image: url("static/{{background_file}}") !important;
         background-repeat: no-repeat;
         background-attachment: fixed; 
         background-size: cover;
-        color:rgb(0, 0, 0);
+        color:black;
       }
       </style>
     {% endblock %}

@@ -124,6 +124,7 @@ def add_portfolio():
         
         #Update results
         users_courses.query.filter_by(user_id=current_user.id).delete()
+        current_user.completed=True
         db.session.commit()
         
         def max_riasec_code(riasec_code):
@@ -279,6 +280,8 @@ def view_results():
 def course_page(course_id):
     course=Degrees.query.filter_by(id=course_id).first()
     coordinates=school_coordinates.query.filter_by(school_name=course.school).first()
+    background_string=course.school+'_background.jpeg'
+    logo_string=course.school+'_logo.png'
     return render_template('course_page.html',user=current_user, degree=course.degree,
                            school=course.school,
                            Alevel_igp=course.alevel_igp,
@@ -292,7 +295,9 @@ def course_page(course_id):
                            additional_information=course.additional_information,
                            a_level_prerequisites=course.a_level_prerequisites,
                            longitude=coordinates.longitude,
-                           latitude=coordinates.latitude)
+                           latitude=coordinates.latitude,
+                           background_file=background_string,
+                           logo_file=logo_string)
     
 
 @views.route('/graphtest',methods=['GET','POST'])
