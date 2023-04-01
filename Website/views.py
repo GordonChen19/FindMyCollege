@@ -161,6 +161,7 @@ def add_portfolio():
                 rank_point+=H1_RP[user_score[3]]
                 
             for course in data: # data[0] -> ('i', 'Medicine', 'NTU', 'chemistry', 'biology', 'physics','AAAB','-')
+                course_id=course.id
                 riasec_code = course.riasec_code
                 degree = course.degree
                 school = course.school
@@ -212,10 +213,10 @@ def add_portfolio():
                 
 
 
-                by_college[school].append((school,degree,match_str,riasec_points*subject_points)) 
-                general_course_list.append((school,degree,match_str,riasec_points*subject_points))
+                by_college[school].append((school,degree,match_str,riasec_points*subject_points,course_id)) 
+                general_course_list.append((school,degree,match_str,riasec_points*subject_points,course_id))
             return by_college,general_course_list
-        # dict1 -> {"NTU": [["school_name","Degree", "matches_riasec", total_score],["school_name","Degree", "matches_riasec", "total_score"]]}     
+        # dict1 -> {"NTU": [["school_name","Degree", "matches_riasec", total_score,course_id],["school_name","Degree", "matches_riasec", "total_score",course_id]]}     
         def sortCoursesByCollege(by_college):
             for schools in by_college: #iterate through the schools
                 by_college[schools].sort(key=lambda x:x[3],reverse=True)
