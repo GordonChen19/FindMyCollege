@@ -228,11 +228,6 @@ def add_portfolio():
         riasec_code=RIASEC_Scores.query.filter_by(user_id=current_user.id).first() #riasec_code for particular user_id 
         r1,r2,r3= max_riasec_code(riasec_code) #r1>r2>r3
         
-        descriptions=Holland_Codes.query.filter_by(id=1).first()
-        print(getattr(descriptions,r1))
-        print(getattr(descriptions,r2))
-        print(getattr(descriptions,r3))
-        
 
         subject_interests=Subject_interests.query.filter_by(user_id=current_user.id).first()
 
@@ -245,11 +240,12 @@ def add_portfolio():
         if course_reco==None: 
             course_reco=users_courses(by_school_data=by_college,
                                     general_data=general_course_list,
-                                    user_id=current_user.id)
+                                    user_id=current_user.id,top_3_codes=r1+r2+r3)
             db.session.add(course_reco)
         else:
             course_reco.by_school_data=by_college
             course_reco.general_data=general_course_list
+            course_reco.top_3_codes=r1+r2+r3
         db.session.commit()
         
     
@@ -269,10 +265,13 @@ def view_results():
     # for schools in course_reco.by_school_data:
     #     for i in range(3):
     #         print(course_reco.by_school_data[schools][i])
-    
+    descriptions=Holland_Codes.query.filter_by(id=1).first()
     
     return render_template("view_results.html", user=current_user,
-                           by_school=course_reco.by_school_data)
+                           by_school=course_reco.by_school_data,
+                           r1=getattr(descriptions,course_reco.top_3_codes[0]),
+                           r2=getattr(descriptions,course_reco.top_3_codes[1]),
+                           r3=getattr(descriptions,course_reco.top_3_codes[2]))
 
 #general_data=course_reco.general_data
 

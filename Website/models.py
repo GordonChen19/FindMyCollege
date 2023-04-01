@@ -82,4 +82,5 @@ class users_courses(db.Model):
     user_id=db.Column(db.Integer,db.ForeignKey('user.id'))
     by_school_data=db.Column(JSON)
     general_data=db.Column(JSON)
+    top_3_codes=db.Column(db.String(10))
 
