@@ -2,14 +2,14 @@
   <body>  
     <div class="wrapper">
       <div class="reco-wrapper">
-        <h1>Your Recommended Courses</h1>
+        <h1>Your Top Recommended Courses</h1>
         <div id="course-space">
           {% for school, degrees in by_school.items() %}  
           <div class="by-school">
             <h2>{{ school }}</h2>
             <div class="course-byschool">
             {% for degree in degrees %}
-              <a href="/course_specifics/1">{{degree[1] }}</a>
+              <a href="course_specifics/{{degree[4]}}">{{degree[4]}} {{degree[1] }}</a>
             {% endfor %}
             </div>
           </div>
@@ -18,7 +18,6 @@
       </div>  
     </div>
   </body>
-  
   
   <style>
     body {
