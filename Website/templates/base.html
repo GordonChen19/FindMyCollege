@@ -22,9 +22,13 @@
         {% if user.is_authenticated %}
         {% if user.completed==True %}
         <a class="nav-item" id="viewresult" href="/view_results">VIEW RESULTS</a>
+        <a class="nav-item" id="Take Test" href="/TakeTest1">RETAKE TEST</a>
+        <a class="nav-item" id="logout" href="/logout">LOGOUT</a>
         {% endif %}
+        {% if user.completed==False %}
         <a class="nav-item" id="Take Test" href="/TakeTest1">TAKE TEST</a>
         <a class="nav-item" id="logout" href="/logout">LOGOUT</a>
+        {% endif %}
         {% else %}
         <a class="nav-item" id="Take Test" href="/login">TAKE TEST</a>
         <a class="nav-item" id="login" href="/login">LOGIN</a>
