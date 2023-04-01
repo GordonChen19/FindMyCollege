@@ -520,3 +520,75 @@
     cursor: pointer;
     margin-top: 10px;
 }
+
+.wrapper{
+    height: 120vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reco-wrapper{
+    background-color: #e6fbffb9;
+    height: 100vh;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.reco-wrapper h1{
+    margin-bottom: 10px;
+}
+
+#course-space{
+    height: 90vh;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.by-school{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(245, 245, 245, 0.585);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 20px;
+}
+
+.by-school h2{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color:#1c5d7a;
+}
+
+.course-byschool{
+    width: 80%;
+    height: 220px;
+    overflow-y: scroll;
+    text-align: left;
+}
+
+.course-byschool::-webkit-scrollbar {
+    display: none;
+}
+
+.course-byschool p{
+    font-size: 18px;
+    font-weight: lighter;
+    cursor: pointer;
+    transition: ease-in-out 0.35s;
+    margin: 8px 0px;
+}
+
+.course-byschool p:hover{
+    color:#237194;
+}
