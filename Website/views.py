@@ -278,6 +278,7 @@ def view_results():
 @login_required
 def course_page(course_id):
     course=Degrees.query.filter_by(id=course_id).first()
+    coordinates=school_coordinates.query.filter_by(school_name=course.school).first()
     return render_template('course_page.html',user=current_user, degree=course.degree,
                            school=course.school,
                            Alevel_igp=course.alevel_igp,
@@ -289,7 +290,9 @@ def course_page(course_id):
                            related_subject2=course.related_subject2,
                            related_subject3=course.related_subject3,
                            additional_information=course.additional_information,
-                           a_level_prerequisites=course.a_level_prerequisites)
+                           a_level_prerequisites=course.a_level_prerequisites,
+                           longitude=coordinates.longitude,
+                           latitude=coordinates.latitude)
     
 
 @views.route('/graphtest',methods=['GET','POST'])

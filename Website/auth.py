@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User,Degrees,Holland_Codes,RIASEC_Scores,Qualification,Subject_interests
+from .models import User,Degrees,Holland_Codes,RIASEC_Scores,Qualification,Subject_interests,school_coordinates
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -21,8 +21,10 @@ def login():
                 login_user(user, remember=True)
                 Degrees.query.delete()
                 Holland_Codes.query.delete()
+                school_coordinates.query.delete()
                 df=pd.read_csv('Website/static/Degree.csv') #Load Degree dataset into database
                 hc=pd.read_csv('Website/static/RIASEC Codes.csv')
+                sc=pd.read_csv('Website/static/school_locations.csv')
                 for _, row in df.iterrows():
                     degree = Degrees(school=row['School'], degree=row['Degree'],alevel_igp=row['A_Level_IGP'],polytechnic_igp=row['Poly_IGP'],employability=row['Percentage_Of_Employed_Graduates'],salary=row['Mean_Gross_Monthly_Salary'],riasec_code=row['riasec_code'],
                                      related_subject1=row['related_subject1'],related_subject2=row['related_subject2'],related_subject3=row['related_subject3'],additional_information=row['additional_information'],
@@ -33,7 +35,10 @@ def login():
                     codes = Holland_Codes(r=row['r'], i=row['i'],a=row['a'],s=row['s'],e=row['e'],c=row['c'])
                     db.session.add(codes)
                     db.session.commit()
-                    
+                for _, row in sc.iterrows():
+                    school=school_coordinates(school_name=row['school_name'],longitude=row['longitude'],latitude=row['latitude'])
+                    db.session.add(school)
+                    db.session.commit()
                 RIASEC_Scores.query.filter_by(completed=False).delete()
                 Qualification.query.filter_by(completed=False).delete()
                 Subject_interests.query.filter_by(completed=False).delete()
@@ -85,6 +90,7 @@ def sign_up():
             Holland_Codes.query.delete()
             df=pd.read_csv('Website/static/Degree.csv') #Load Degree dataset into database
             hc=pd.read_csv('Website/static/RIASEC Codes.csv')
+            sc=pd.read_csv('Website/static/school_locations.csv')
             for _, row in df.iterrows():
                 degree = Degrees(school=row['School'], degree=row['Degree'],alevel_igp=row['A_Level_IGP'],polytechnic_igp=row['Poly_IGP'],employability=row['Percentage_Of_Employed_Graduates'],salary=row['Mean_Gross_Monthly_Salary'],riasec_code=row['riasec_code'],
                                  related_subject1=row['related_subject1'],related_subject2=row['related_subject2'],related_subject3=row['related_subject3'],additional_information=row['additional_information'],
@@ -94,6 +100,10 @@ def sign_up():
             for _, row in hc.iterrows():
                     codes = Holland_Codes(r=row['r'], i=row['i'],a=row['a'],s=row['s'],e=row['e'],c=row['c'])
                     db.session.add(codes)
+                    db.session.commit()
+            for _, row in sc.iterrows():
+                    school=school_coordinates(school_name=row['school_name'],longitude=row['longitude'],latitude=row['latitude'])
+                    db.session.add(school)
                     db.session.commit()
             
             RIASEC_Scores.query.filter_by(completed=False).delete()
