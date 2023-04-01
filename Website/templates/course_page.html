@@ -1,5 +1,32 @@
 {% extends "base.html" %} {% block title %}{{degree}}{% endblock %} {% block
     content %}
+
+
+    <head>
+      <meta charset="utf-8">
+      <title>Display a map on a webpage</title>
+      <meta name="viewport" content="initial-scale=0.5,maximum-scale=1,user-scalable=no">
+      <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+      <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+      <style>
+      body { margin: 0; padding: 0; }
+      #map { position: absolute; top: 0; bottom: 0; width: 30%; }
+      </style>
+      </head>
+      <body>
+      <div id="map"></div>
+      <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZ2M3OTUyOCIsImEiOiJjbGZ5MjMzcXQwcndmM3NvMDcxd2FqaWdpIn0.Cf0hw8soGxCrE1iGBj07NA';
+      const map = new mapboxgl.Map({
+      container: 'map', // container ID
+      // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+      style: 'mapbox://styles/mapbox/outdoors-v12', // style URL
+      center: [-74.5, 40], // starting position [lng, lat]
+      zoom: 9 // starting zoom
+      });
+      </script>
+
+
     <div class="course-bg">
         <div class="course-wrapper">
             <h1>{{degree}} at {{school}}</h1>
