@@ -111,13 +111,10 @@ def add_info():
         subject1=request.form.get('subject1')
         subject2=request.form.get('subject2')
         subject3=request.form.get('subject3')  
-        if users_subject_interests==None:
-            subject_interests=Subject_interests(subject1=subject1,subject2=subject2,subject3=subject3,user_id=current_user.id)
-            db.session.add(subject_interests)
-        else:
-            users_subject_interests.subject1=subject1
-            users_subject_interests.subject2=subject2
-            users_subject_interests.subject3=subject3
+        
+        subject_interests=Subject_interests(subject1=subject1,subject2=subject2,subject3=subject3,
+                                            completed=False,user_id=current_user.id)
+        db.session.add(subject_interests)
         db.session.commit()
         return redirect(url_for('views.add_portfolio'))
         
@@ -130,27 +127,42 @@ def add_portfolio():
         users_qualification= Qualification.query.filter_by(user_id=current_user.id).first()
         curriculum=request.form.get('curriculum')
         if curriculum=='ALevel':
-            alevel_score=request.form.get('alevel_score') #Need to put multiple fields together
-            if users_qualification==None:
-                new_entry=Qualification(curriculum=curriculum,alevel_score=alevel_score,user_id=current_user.id)
-                db.session.add(new_entry)
-            else:
-                users_qualification.curriculum=curriculum
-                users_qualification.alevel_score=alevel_score
-                users_qualification.polytechnic_score=None
+            firstH2=request.form.get('1stH2') #Need to put multiple fields together
+            secondH2=request.form.get('2ndH2')
+            thirdH2=request.form.get('3rdH2')
+            H1=request.form.get('H1')
+        
+            alevel_score=firstH2+secondH2+thirdH2+H1
+            new_entry=Qualification(curriculum=curriculum,alevel_score=alevel_score,
+                                    completed=False,user_id=current_user.id)
+            db.session.add(new_entry)
+            
         elif curriculum=='Polytechnic':
             polytechnic_score=request.form.get('polytechnic_score')
-            if users_qualification==None:
-                new_entry=Qualification(curriculum=curriculum,polytechnic_score=polytechnic_score,user_id=current_user.id)
-                db.session.add(new_entry)
-            else:
-                users_qualification.curriculum=curriculum
-                users_qualification.polytechnic_score=polytechnic_score
-                users_qualification.alevel_score=None
-        elif curriculum=='IB':
-            ib_score=request.form.get('')
+            new_entry=Qualification(curriculum=curriculum,polytechnic_score=polytechnic_score,
+                                        completed=False,user_id=current_user.id)
+            db.session.add(new_entry)
+            
+        # elif curriculum=='IB':
+        #     ib_score=request.form.get('')
         
         db.session.commit()
+        Subject_interests.query.filter_by(user_id=current_user.id, completed=True).delete()
+        Qualification.query.filter_by(user_id=current_user.id,completed=True).delete()
+        RIASEC_Scores.query.filter_by(user_id=current_user.id,completed=True).delete()
+        #delete previous records to store new user input
+        subject=Subject_interests.query.filter_by(user_id=current_user.id,completed=False).first() 
+        qualification=Qualification.query.filter_by(user_id=current_user.id,completed=False).first() 
+        riasec_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id,completed=False).first() 
+        subject.completed=True
+        qualification.completed=True
+        riasec_scores.completed=True    
+        db.session.commit()
+        
+        #Update results
+        users_courses.query.filter_by(user_id=current_user.id).delete()
+        db.session.commit()
+        
         def max_riasec_code(riasec_code):
             riasec_array=[riasec_code.r_score,riasec_code.i_score,riasec_code.a_score,riasec_code.s_score,riasec_code.e_score,riasec_code.c_score]
             code_array=['r','i','a','s','e','c']
@@ -276,10 +288,11 @@ def add_portfolio():
             course_reco.by_school_data=by_college
             course_reco.general_data=general_course_list
         db.session.commit()
+        
     
         return redirect(url_for('views.view_results'))
     
-
+    print("Hello")
     return render_template("academic_portfolio.html", user=current_user)   
             
 
@@ -287,16 +300,16 @@ def add_portfolio():
 @login_required
 def view_results():
     
-    course_reco=users_courses.query.filter_by(user_id=current_user.id).all() #should only return 1
+    course_reco=users_courses.query.filter_by(user_id=current_user.id).first() #should only return 1
     
-    for schools in course_reco.by_school_data:
-        for i in range(3):
-            print(course_reco.by_school_data[schools][i])
+    # if course_reco == None:
+    # for schools in course_reco.by_school_data:
+    #     for i in range(3):
+    #         print(course_reco.by_school_data[schools][i])
     
     
     return render_template("view_results.html", user=current_user,
-                           by_school=course_reco.by_school_data,
-                           general_data=course_reco.general_data)
+                           by_school=course_reco.by_school_data)
 
-
+#general_data=course_reco.general_data
 
