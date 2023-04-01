@@ -29,13 +29,35 @@
 
     <div class="course-bg">
         <div class="course-wrapper">
-            <h1>{{degree}} at {{school}}</h1>
-            <div class="course-info">
-                <p>A Level IGP: {{Alevel_igp}}</p>
-                <p>Polytechnic GPA: {{polytechnic_igp}}</p>
-                <p>RIASEC Code: {{riasec_code}}</p>
-                <p id="sub">Related Subjects: {{related_subject1}}, {{related_subject2}}, {{related_subject3}}</p>
+            <h1>{{degree}}</h1>
+            <table cellspacing="0" class="course-info">
+                <h3 class="section-title">COURSE INFORMATION</h3>
+                <tr>
+                    <td class="c-info">A Level IGP</td>
+                    <td class="c-data">{{Alevel_igp}}</td>
+                </tr>
+                <tr>
+                    <td class="c-info">Polytechnic GPA</td>
+                    <td class="c-data">{{polytechnic_igp}}</td>
+                </tr>
+                <tr>
+                    <td class="c-info">RIASEC Code</td>
+                    <td class="c-data" id="riasec">{{riasec_code}}</td>
+                </tr>
+                <tr>
+                    <td class="c-info">Related Subjects</td>
+                    <td class="c-data" id="sub">{{related_subject1}}, {{related_subject2}}, {{related_subject3}}</td>
+                </tr>
+                <tr>
+                    <td class="c-info">A Level Prerequisites</td>
+                    <td class="c-data">{{a_level_prerequisits}}</td>
+                </tr>
+            </table>
+            <div>
+
             </div>
+            <h3 class="section-title">ADDITIONAL INFORMATION</h3>
+            <p>{{additional_information}}</p>
         </div>
     </div>
     

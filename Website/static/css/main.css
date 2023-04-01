@@ -610,20 +610,49 @@
 }
 
 .course-wrapper{
-    background-color: #4991b3;
+    background-color: #72b5d3;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 60vh;
     width: 60%;
     border-radius: 10px;
-    padding: 20px;
+    padding: 40px;
 }
 
 .course-wrapper h1{
     margin-bottom: 20px;
 }
 
+.section-title{
+    color:#1c5d7a;
+    margin: 20px;
+    font-size: 23px;
+}
+
+.course-info{
+    width: 70%;
+    margin: 20px;
+}
+
+.course-info tr td{
+    border: 1px solid rgb(255, 255, 255);
+    padding: 10px;
+}
+
+.c-info{
+    background-color: #87d7f1;
+    width: 150px;
+    padding: 10px;
+}
+
+.c-data{
+    background-color: rgba(254, 254, 255, 0.441);
+}
+
 #sub{
     text-transform: capitalize;
+}
+
+#riasec{
+    text-transform: uppercase;
 }
