@@ -452,7 +452,7 @@
 .academic-portfolio-wrapper form{
     background-color: #e6fbffb9;
     height: 45vh;
-    width: 40%;
+    width: 50%;
     border-radius: 10px;
     padding: 30px;
     display: flex;
@@ -463,7 +463,14 @@
 .academic-portfolio-wrapper form h1{
     color: black;
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
+}
+
+#gpa_wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .form-group{
@@ -471,20 +478,22 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow-y: auto;
 }
 
 .form-group label{
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     color:#1c5d7a;
+    font-size: 20px;
 }
 
 .form-group select{
     height: 30px;
-    width: 100px;
+    width: 120px;
     border: 1px solid rgb(179, 178, 178);
     border-radius: 5px;
-    margin-bottom: 15px;
+    margin: 10px 10px;
 }
 
 .form-control{
@@ -495,16 +504,12 @@
     width: 100px;
 }
 
-#alevel_score_input{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
 .form-control{
     padding-left: 10px;
+}
+
+#random{
+    color:#1c5d7a;
 }
 
 .acad-submit{
@@ -513,4 +518,5 @@
     background-color: #faa32b;
     border: none;
     cursor: pointer;
+    margin-top: 10px;
 }
