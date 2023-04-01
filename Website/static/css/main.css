@@ -607,10 +607,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #adadad;
 }
 
 .course-wrapper{
-    background-color: #72b5d3;
+    background-color: #eaf6fc;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -635,7 +636,7 @@
 }
 
 .course-info tr td{
-    border: 1px solid rgb(255, 255, 255);
+    border: 2px solid #1c5d7a;
     padding: 10px;
 }
 
