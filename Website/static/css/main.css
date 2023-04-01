@@ -370,5 +370,147 @@
     background-color: #faa32b;
     border: none;
     cursor: pointer;
+}
 
+.subject-interest{
+    height: 88vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subject-interest-form{
+    background-color: #e6fbffb9;
+    height: 45vh;
+    width: 40%;
+    border-radius: 10px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+}
+
+.subject-interest-form h1{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.subject-interest-form h2{
+    color: #1c5d7a;
+    margin-bottom: 8px;
+}
+
+.subject-interest-form p{
+    color: #1c5d7a;
+    margin-bottom: 20px;
+}
+
+.subject-interest-form button{
+    height: 35px;
+    width: 100px;
+    background-color: #faa32b;
+    border: none;
+    cursor: pointer;
+}
+
+.subject-dropdown{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.dropdown-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.dropdown-box label{
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.dropdown-box select{
+    height: 30px;
+    border: 1px solid rgb(179, 178, 178);
+    border-radius: 5px;
+}
+
+.academic-portfolio-wrapper{
+    height: 88vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.academic-portfolio-wrapper form{
+    background-color: #e6fbffb9;
+    height: 45vh;
+    width: 40%;
+    border-radius: 10px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.academic-portfolio-wrapper form h1{
+    color: black;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-group label{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color:#1c5d7a;
+}
+
+.form-group select{
+    height: 30px;
+    width: 100px;
+    border: 1px solid rgb(179, 178, 178);
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.form-control{
+    height: 30px;
+    border: 1px solid rgb(179, 178, 178);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 100px;
+}
+
+#alevel_score_input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-control{
+    padding-left: 10px;
+}
+
+.acad-submit{
+    height: 35px;
+    width: 100px;
+    background-color: #faa32b;
+    border: none;
+    cursor: pointer;
 }
