@@ -6,8 +6,38 @@
         <div class="text-container">
           <h2>List of courses:</h2>
         </div>
-      <button type="submit">Submit</button>
+      
     </form>
+
+      <html>
+      <head>
+          <title>Example</title>
+      </head>
+      <body>
+          <h1>Schools and Degrees</h1>
+          {% for school, degrees in by_school.items() %}
+              <h2>{{ school }}</h2>
+              <table>
+                  <thead>
+                      <tr>
+                          <th>School Name</th>
+                          <th>Degree</th>
+                          <th>Matches Riasec</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for degree in degrees %}
+                          <tr>
+                              <td>{{ degree[0] }}</td>
+                              <td>{{ degree[1] }}</td>
+                              <td>{{ degree[2] }}</td>
+                          </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          {% endfor %}
+      </body>
+      </html>
   
   
     <style>

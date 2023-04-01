@@ -276,10 +276,11 @@ def add_portfolio():
             course_reco.by_school_data=by_college
             course_reco.general_data=general_course_list
         db.session.commit()
+        
     
         return redirect(url_for('views.view_results'))
     
-
+    print("Hello")
     return render_template("academic_portfolio.html", user=current_user)   
             
 
@@ -295,8 +296,7 @@ def view_results():
     
     
     return render_template("view_results.html", user=current_user,
-                           by_school=course_reco.by_school_data,
-                           general_data=course_reco.general_data)
+                           by_school=course_reco.by_school_data)
 
-
+#general_data=course_reco.general_data
 
