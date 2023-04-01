@@ -278,7 +278,7 @@ def view_results():
 @login_required
 def course_page(course_id):
     course=Degrees.query.filter_by(id=course_id).first()
-    return render_template('course_page.html',degree=course.degree,
+    return render_template('course_page.html',user=current_user, degree=course.degree,
                            school=course.school,
                            Alevel_igp=course.alevel_igp,
                            polytechnic_igp=course.polytechnic_igp,
