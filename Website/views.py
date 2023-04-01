@@ -15,7 +15,7 @@ from urllib.parse import urlencode
 import urllib3
 import urllib.request
 import json
-import matplotlib.pyplt as plt
+import matplotlib.pyplot as plt
 
 conn=sql.connect('database.db')
 c=conn.cursor()
@@ -32,7 +32,7 @@ def home():
 @login_required
 def personality_test1():
     if request.method=='POST':
-        users_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id).first()
+        RIASEC_Scores.query.filter_by(user_id=current_user.id,completed=False).delete()
         r_score,i_score,a_score,s_score,e_score,c_score=0,0,0,0,0,0
         total_questions=42
         for i in range(total_questions):
@@ -68,7 +68,7 @@ def personality_test1():
 @login_required
 def add_info():
     if request.method == 'POST':
-        users_subject_interests=Subject_interests.query.filter_by(user_id=current_user.id).first()
+        Subject_interests.query.filter_by(user_id=current_user.id,completed=False).delete()
         subject1=request.form.get('subject1')
         subject2=request.form.get('subject2')
         subject3=request.form.get('subject3')  
@@ -85,40 +85,42 @@ def add_info():
 @login_required
 def add_portfolio():
     if request.method=='POST':
-        users_qualification= Qualification.query.filter_by(user_id=current_user.id).first()
+        Qualification.query.filter_by(user_id=current_user.id).delete()
         curriculum=request.form.get('curriculum')
         if curriculum=='ALevel':
-            firstH2=request.form.get('1stH2') #Need to put multiple fields together
+            firstH2=request.form.get('1stH2')
             secondH2=request.form.get('2ndH2')
             thirdH2=request.form.get('3rdH2')
             H1=request.form.get('H1')
         
             alevel_score=firstH2+secondH2+thirdH2+H1
             new_entry=Qualification(curriculum=curriculum,alevel_score=alevel_score,
-                                    completed=False,user_id=current_user.id)
+                                    completed=True,user_id=current_user.id)
             db.session.add(new_entry)
             
         elif curriculum=='Polytechnic':
             polytechnic_score=request.form.get('polytechnic_score')
             new_entry=Qualification(curriculum=curriculum,polytechnic_score=polytechnic_score,
-                                        completed=False,user_id=current_user.id)
+                                        completed=True,user_id=current_user.id)
             db.session.add(new_entry)
             
         # elif curriculum=='IB':
         #     ib_score=request.form.get('')
         
-        db.session.commit()
-        Subject_interests.query.filter_by(user_id=current_user.id, completed=True).delete()
-        Qualification.query.filter_by(user_id=current_user.id,completed=True).delete()
-        RIASEC_Scores.query.filter_by(user_id=current_user.id,completed=True).delete()
-        #delete previous records to store new user input
-        subject=Subject_interests.query.filter_by(user_id=current_user.id,completed=False).first() 
-        qualification=Qualification.query.filter_by(user_id=current_user.id,completed=False).first() 
+        db.session.commit() 
+        
+        
+        subject=Subject_interests.query.filter_by(user_id=current_user.id,completed=False).first()  
         riasec_scores=RIASEC_Scores.query.filter_by(user_id=current_user.id,completed=False).first() 
-        subject.completed=True
-        qualification.completed=True
-        riasec_scores.completed=True    
-        db.session.commit()
+        if(subject!=None and riasec_scores!=None):
+            Subject_interests.query.filter_by(user_id=current_user.id,completed=True).delete()
+            RIASEC_Scores.query.filter_by(user_id=current_user.id,completed=True).delete()
+            subject.completed=True
+            riasec_scores.completed=True    
+            db.session.commit()
+        #delete previous records to store new user input
+        
+        
         
         #Update results
         users_courses.query.filter_by(user_id=current_user.id).delete()
