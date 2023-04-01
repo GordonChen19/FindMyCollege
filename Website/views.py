@@ -10,6 +10,13 @@ import time
 from itertools import chain
 from collections import defaultdict
 
+#graphing
+from urllib.parse import urlencode
+import urllib3
+import urllib.request
+import json
+import matplotlib.pyplt as plt
+
 conn=sql.connect('database.db')
 c=conn.cursor()
 
@@ -313,3 +320,89 @@ def view_results():
 
 #general_data=course_reco.general_data
 
+
+
+@views.route('/graphtest',methods=['GET','POST'])
+def graphtest():
+    # Load all the data from the api in a single call
+    http = urllib3.PoolManager()
+    requestAllString = f"https://data.gov.sg/api/action/datastore_search?resource_id=3a60220a-80ae-4a63-afde-413f05328914&limit=5000"
+    res = http.request('GET', requestAllString)
+    all_records_1 = json.loads(res.data.decode('utf-8'))['result']['records'] 
+    all_schools = sorted(list(set([r["university"] for r in all_records_1])))
+    all_years = sorted(list(set([int(r["year"]) for r in all_records_1])))
+    all_degrees = sorted(list(set([r["degree"] for r in all_records_1])))
+    all_records = [r for r in all_records_1 if r['gross_monthly_mean'] != "na"] # remove the na records
+
+    print(f"Loaded all_schools{len(all_schools)} all_year:{len(all_years)} all_degree{len(all_degrees)}", flush=True)
+
+    def filterResult(records, year=0, degree=None, school=None):
+        filterRecords = list(records)
+        if(year !=0):
+            filterRecords = [record for record in filterRecords if int(record['year']) == int(year)]
+        if(degree is not None and len(degree) > 0):
+            filterRecords = [record for record in filterRecords if degree in record['degree']]
+        if(school is not None and len(school) > 0):
+            filterRecords = [record for record in filterRecords if record['university'] == school]
+        return filterRecords
+
+    def getAvgGMMAcrossRecord(records):
+        if(len(records) == 0):
+            return 0
+        listOfGMM = [int(record['gross_monthly_mean']) for record in records]
+        return sum(listOfGMM)/len(listOfGMM)
+
+    def getAvgGMM(res, year=0, degree=None, school=None):
+        filterRecords = filterResult(res, year=year, degree=degree, school=school)
+        return getAvgGMMAcrossRecord(filterRecords)
+    
+    
+    year, degree, school = '', '', ''
+    if request.method == 'POST':
+        # Parse in form input
+        school = request.form.get('school')
+        if len(request.form.get('year')) == 0 or request.form.get('year') is None:
+            year = 0
+        else:
+            year = int(request.form.get('year'))
+        degree = request.form.get('degree')
+        xaxis = request.form.get('x-axis').lower()
+
+        print(f"Form input {school} {year} {degree}")
+
+        result = {}
+        # User provides 2 inputs
+        if len(school) > 0 and year > 0:
+            result = {deg: getAvgGMM(all_records, year=year, school=school, degree=deg) for deg in all_degrees}
+        elif len(school) and len(degree) > 0:
+            result = {yr: getAvgGMM(all_records, year=yr, school=school, degree=degree) for yr in all_years}
+        elif len(degree) > 0 and year > 0:
+            result = {sch: getAvgGMM(all_records, year=year, school=sch, degree=degree) for sch in all_schools}   
+
+        # User provides 1 input, so we need to specify xaxis too
+        elif len(school) > 0:
+            if(xaxis == "degree"):
+                result = {deg: getAvgGMM(all_records, year=0, school=school, degree=deg) for deg in all_degrees}
+            if(xaxis == "year"):
+                result = {yr: getAvgGMM(all_records, year=yr, school=school, degree=None) for yr in all_years}
+        elif len(degree) > 0:
+            if(xaxis == "school"):
+                result = {sch: getAvgGMM(all_records, year=0, school=sch, degree=degree) for sch in all_schools} 
+            if(xaxis == "year"):
+                result = {yr: getAvgGMM(all_records, year=yr, school=school, degree=None) for yr in all_years}
+        elif year > 0:
+            if(xaxis == "school"):
+                result = {sch: getAvgGMM(all_records, year=0, school=sch, degree=degree) for sch in all_schools} 
+            if(xaxis == "degree"):
+                result = {deg: getAvgGMM(all_records, year=0, school=school, degree=deg) for deg in all_degrees}
+
+        # User provides all 3 inputs, default xaxis to degree    
+        elif len(school) > 0 and year > 0 and len(degree) > 0:
+            result = {degree: getAvgGMM(all_records, year=year, school=school, degree=degree)}
+
+        print("Finish Request", flush=True)
+        print(result, flush=True)
+        return result
+
+
+    return render_template("graphtest.html", user=current_user)

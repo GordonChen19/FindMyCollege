@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}graphtest{% endblock %} {% block content
+    %}
+  
+    <form method="POST">
+      <div class="form-group">
+        <label for="school">Select School:</label>
+        <select id="school" name="school">
+          <option></option>
+          <option>Nanyang Technological University</option>
+          <option>National University of Singapore</option>
+          <option>Singapore Management University</option>
+          <option>Singapore University of Technology and Design</option>
+          <option>Singapore University of Social Sciences</option>
+          <option>Singapore Institute of Technology</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="year">Select Year:</label>
+        <input type="text" id="year" name="year"></input>
+      </div>
+  
+      <div class="form-group">
+        <label for="degree">Enter Degree:</label>
+        <input type="text" id="degree" name="degree"></input>
+      </div>
+  
+      <div class="form-group">
+        <label for="x-axis">x-axis</label>
+        <select id="x-axis" name="x-axis">
+          <option></option>
+          <option>School</option>
+          <option>Degree</option>
+          <option>Year</option>
+        </select>
+      </div>
+  
+      <input type="submit" value="Submit">
+    </form>
+  
+
+  
+    {% endblock %}
