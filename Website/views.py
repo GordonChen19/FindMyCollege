@@ -275,7 +275,7 @@ def view_results():
 #general_data=course_reco.general_data
 
 
-@views.route('/course_specifics',methods=['POST','GET'])
+@views.route('/course_specifics')
 @login_required
 def course_page(course_id):
     course=Degrees.query.filter_by(id=course_id).first()
