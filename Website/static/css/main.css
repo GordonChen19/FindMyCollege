@@ -522,7 +522,7 @@
 }
 
 .wrapper{
-    height: 180vh;
+    height: 200vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -531,7 +531,7 @@
 
 .reco-wrapper{
     background-color: #e6fbffb9;
-    height: 160vh;
+    height: 180vh;
     width: 80%;
     padding: 20px;
     text-align: center;
@@ -584,7 +584,7 @@
 }
 
 .reco-wrapper h1{
-    margin: 10px;
+    margin: 25px;
 }
 
 #course-space{
