@@ -357,19 +357,19 @@ def course_page(course_id):
     
     
     #Graph 2: time vs GMM (gross monthly mean) across all courses for a specific uni
-    dic2=find_dictionary(sch,attribute)
-    list_data2=np.array(list(dic2.items()))
+    # dic2=find_dictionary(sch,attribute)
+    # list_data2=np.array(list(dic2.items()))
     
-    print("printing graph2")
-    print(dic2)
+    # print("printing graph2")
+    # print(dic2)
     
-    if any(value == 0 for value in dic2.values()):
-        list_data2=None
-    else:
-        list_data2=[]
-        list_data2.append(['Year', 'GMM'])
-        for key,value in dic2.items():
-            list_data2.append([str(key),int(value)])
+    # if any(value == 0 for value in dic2.values()):
+    #     list_data2=None
+    # else:
+    #     list_data2=[]
+    #     list_data2.append(['Year', 'GMM'])
+    #     for key,value in dic2.items():
+    #         list_data2.append([str(key),int(value)])
     
     #Graph 3: time vs employment rate for a specific course at a specific 
     attribute='employment_rate_overall'
@@ -394,7 +394,7 @@ def course_page(course_id):
     background_string=course.school+'_background.jpeg'
     logo_string=course.school+'_logo.png'
     return render_template('course_page.html',user=current_user, degree=course.degree,
-                           school=course.school,
+                           school=acronym[course.school],
                            Alevel_igp=course.alevel_igp,
                            polytechnic_igp=course.polytechnic_igp,
                            employability=course.employability,
@@ -410,6 +410,5 @@ def course_page(course_id):
                            background_file=background_string,
                            logo_file=logo_string,
                            graph1=list_data1,
-                           graph2=list_data2,
                            graph3=list_data3)
     
