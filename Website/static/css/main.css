@@ -600,7 +600,7 @@
 .course-bg{
     height: 88vh;
     width: 100%;
-    background-image: url("static/university_background.jpg");
+    background-image: url("/static/ntu_background.jpeg");
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-size: cover;
@@ -611,7 +611,7 @@
 }
 
 .course-wrapper{
-    background-color: #eaf6fc;
+    background-color: #eaf6fcb4;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -636,18 +636,18 @@
 }
 
 .course-info tr td{
-    border: 2px solid #1c5d7a;
+    border: 2px solid #8dafbf00;
     padding: 10px;
 }
 
 .c-info{
-    background-color: #87d7f1;
+    background-color: #87d6f100;
     width: 150px;
     padding: 10px;
 }
 
 .c-data{
-    background-color: rgba(254, 254, 255, 0.441);
+    background-color: rgba(254, 254, 255, 0);
 }
 
 #sub{

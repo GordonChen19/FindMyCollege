@@ -339,7 +339,9 @@ def course_page(course_id):
     #Graph 1: Time vs GMM (gross monthly mean) for a specific course at a specific uni
     attribute='gross_monthly_mean'
     dic1=find_dictionary(sch,attribute,deg)
-   
+    
+    print("printing graph1")
+    print(dic1)
     
     if all(value == 0 for value in dic1.values()):
         list_data1=None
@@ -357,6 +359,17 @@ def course_page(course_id):
     dic2=find_dictionary(sch,attribute)
     list_data2=np.array(list(dic2.items()))
     
+    print("printing graph2")
+    print(dic2)
+    
+    if all(value == 0 for value in dic2.values()):
+        list_data2=None
+    else:
+        list_data2=[]
+        list_data2.append(['Year', 'GMM'])
+        for key,value in dic2.items():
+            list_data2.append([str(key),int(value)])
+    
     #Graph 3: time vs employment rate for a specific course at a specific 
     attribute='employment_rate_overall'
     dic3=find_dictionary(sch,attribute,deg)
@@ -373,7 +386,7 @@ def course_page(course_id):
     
 
 
-    print("printing graph1",list_data1)
+    # print("printing graph1",list_data1)
 
     
     coordinates=school_coordinates.query.filter_by(school_name=course.school).first()
