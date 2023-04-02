@@ -343,7 +343,7 @@ def course_page(course_id):
     print("printing graph1")
     print(dic1)
     
-    if all(value == 0 for value in dic1.values()):
+    if any(value == 0 for value in dic1.values()):
         list_data1=None
     else:
         list_data1=[]
@@ -362,7 +362,7 @@ def course_page(course_id):
     print("printing graph2")
     print(dic2)
     
-    if all(value == 0 for value in dic2.values()):
+    if any(value == 0 for value in dic2.values()):
         list_data2=None
     else:
         list_data2=[]
@@ -374,7 +374,7 @@ def course_page(course_id):
     attribute='employment_rate_overall'
     dic3=find_dictionary(sch,attribute,deg)
     list_data3=np.array(list(dic3.items()))
-    if all(value == 0 for value in dic3.values()):
+    if any(value == 0 for value in dic3.values()):
         list_data3=None
     else:
         list_data3=[]
