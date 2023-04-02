@@ -567,7 +567,7 @@
 }
 
 .riasec-info table tr td{
-    border: 2px solid #1c5d7a;
+    border: 2px solid #1c5c7a00;
     padding: 15px 20px;
     margin: 10px;
 }
@@ -576,7 +576,7 @@
     text-transform: uppercase;
     width: 30%;
     font-size: 24px;
-    background-color: #92c3d3;
+    background-color: #daac62;
 }
 
 .riasec-desc{
