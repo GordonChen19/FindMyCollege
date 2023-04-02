@@ -522,7 +522,7 @@
 }
 
 .wrapper{
-    height: 120vh;
+    height: 180vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -531,7 +531,7 @@
 
 .reco-wrapper{
     background-color: #e6fbffb9;
-    height: 100vh;
+    height: 160vh;
     width: 80%;
     padding: 20px;
     text-align: center;
@@ -540,10 +540,51 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow-y: scroll;
+}
+
+.reco-wrapper::-webkit-scrollbar{
+    display: none;
+}
+
+.riasec-info{
+    width: 90%;
+    height: 50vh;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.riasec-info::-webkit-scrollbar{
+    display: scroll;
+}
+
+.riasec-info table{
+    padding: 10px;
+    width: 85%;
+}
+
+.riasec-info table tr td{
+    border: 2px solid #1c5d7a;
+    padding: 15px 20px;
+    margin: 10px;
+}
+
+.riasec-initial{
+    text-transform: uppercase;
+    width: 30%;
+    font-size: 24px;
+    background-color: #92c3d3;
+}
+
+.riasec-desc{
+    font-size: 18px;
 }
 
 .reco-wrapper h1{
-    margin-bottom: 10px;
+    margin: 10px;
 }
 
 #course-space{
@@ -600,24 +641,25 @@
 .course-bg{
     height: 88vh;
     width: 100%;
-    background-image: url("/static/ntu_background.jpeg");
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
-    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #bac3dc;
 }
 
 .course-wrapper{
-    background-color: #eaf6fcb4;
+    background-color: #d5e8f3f4;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 60%;
+    height: 70vh;
+    overflow-y: scroll;
     border-radius: 10px;
     padding: 40px;
+}
+
+.course-wrapper::-webkit-scrollbar{
+    display: none;
 }
 
 .course-wrapper h1{
@@ -632,12 +674,13 @@
 
 .course-info{
     width: 70%;
-    margin: 20px;
+    margin: 10px;
 }
 
 .course-info tr td{
     border: 2px solid #8dafbf00;
     padding: 10px;
+    font-size: 18px;
 }
 
 .c-info{

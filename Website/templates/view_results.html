@@ -4,6 +4,23 @@
     
     <div class="wrapper">
       <div class="reco-wrapper">
+        <h1>Your RIASEC Code</h1>
+        <div class="riasec-info">
+          <table cellspacing="0">
+            <tr>
+              <td class="riasec-initial">{{top3[0]}}</td>
+              <td class="riasec-desc">{{r1}}</td>
+            </tr>
+            <tr>
+              <td class="riasec-initial">{{top3[1]}}</td>
+              <td class="riasec-desc">{{r2}}</td>
+            </tr>
+            <tr>
+              <td class="riasec-initial">{{top3[2]}}</td>
+              <td class="riasec-desc">{{r3}}</td>
+            </tr>
+          </table>
+        </div>
         <h1>Your Top Recommended Courses</h1>
         <div id="course-space">
           {% for school, degrees in by_school.items() %}  

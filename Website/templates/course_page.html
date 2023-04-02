@@ -28,11 +28,6 @@
 </script>
 
 
-
-<div id="chart2" style="width: 900px; height: 400px"></div>
-
-
-
 <div class="course-bg">
   <div class="course-wrapper">
     <h1>{{degree}}</h1>
@@ -62,17 +57,12 @@
         <td class="c-info">A Level Prerequisites</td>
         <td class="c-data">{{a_level_prerequisites}}</td>
       </tr>
-      <tr>
-        <td class="c-info">Additional Requirements</td>
-        <td class="c-data">{{additional_information }}</p>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <div id="chart1" style="width: 900px; height: 400px"></div>
-        </td>
-      </tr>
-      
     </table> 
+    <h3 class="section-title">ADDITIONAL INFORMATION</h3>
+    <p>{{additional_information}}</p>
+    <h3 class="section-title">SALARY</h3>
+    <div id="chart1" style="width: 600px; height: 600px"></div>
+    <div id="chart2" style="width: 600px; height: 600px"></div>
   </div>
   
 </div>

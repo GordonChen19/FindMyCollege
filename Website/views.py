@@ -272,7 +272,8 @@ def view_results():
                            by_school=course_reco.by_school_data,
                            r1=getattr(descriptions,course_reco.top_3_codes[0]),
                            r2=getattr(descriptions,course_reco.top_3_codes[1]),
-                           r3=getattr(descriptions,course_reco.top_3_codes[2]))
+                           r3=getattr(descriptions,course_reco.top_3_codes[2]),
+                           top3=course_reco.top_3_codes[0:3])
 
 #general_data=course_reco.general_data
 
