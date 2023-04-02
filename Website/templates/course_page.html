@@ -9,7 +9,7 @@
   function drawCharts() {    
     var data = google.visualization.arrayToDataTable({{graph1|tojson}}); 
     var options = {
-      title: 'gross monthly mean',
+      title: 'gross monthly mean (SGD)',
       curveType: 'function',
       legend: 'none'
     };
@@ -62,7 +62,7 @@
         <td class="c-data">{{additional_information}}</td>
       </tr>
     </table> 
-    <h3 class="section-title">Employability</h3>
+    <h3 class="section-title">Employability Outcomes</h3>
     <div id="chart1" style="width: 600px; height: 600px"></div>
     <div id="chart2" style="width: 600px; height: 600px"></div>
   </div>
