@@ -354,9 +354,10 @@ def course_page(course_id):
     
     coordinates=school_coordinates.query.filter_by(school_name=course.school).first()
     background_string=course.school+'_background.jpeg'
-    logo_string=course.school+'_logo.png'
+    logo_string="/static/"+course.school+'_logo.png'
     return render_template('course_page.html',user=current_user, degree=course.degree,
                            school=acronym[course.school],
+                           acronym=course.school,
                            Alevel_igp=course.alevel_igp,
                            polytechnic_igp=course.polytechnic_igp,
                            employability=course.employability,

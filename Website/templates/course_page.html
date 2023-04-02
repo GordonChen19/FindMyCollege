@@ -21,6 +21,7 @@
 
 <div class="course-bg">
   <div class="course-wrapper">
+  <img src={{logo_file}} a class="logo">
     <h1>{{degree}}</h1>
     <table cellspacing="0" class="course-info">
       <h3 class="section-title">COURSE INFORMATION</h3>
@@ -60,9 +61,14 @@
         <td class="c-info">Graduate Mean Starting Income (SGD)</td>
         <td class="c-data">{{sal}}</td>
       </tr>
+      <tr>
+        <td class="c-info"> {{acronym}} graduate student's starting salary </td>
+        <td class="c-data" rowspan="2">
+          <div id="chart" style="width: 600px; height: 500px"></div>
+        </td>
+      </tr>
     </table> 
-    <h3 class="section-title">Employability Outcomes</h3>
-    <div id="chart" style="width: 600px; height: 900px"></div>
+    
   </div>
   
 </div>
