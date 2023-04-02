@@ -332,62 +332,24 @@ def course_page(course_id):
              'SUTD':'Singapore University of Technology and Design','SIT':'Singapore Institute of Technology','SUSS':'Singapore University of Social Sciences'}
     course=Degrees.query.filter_by(id=course_id).first()
     sch=acronym[course.school]
-    deg=course.degree
-    print("printing school ")
+
     print(sch)
-    print("printing degree ")
-    print(deg)
-    #Graph 1: Time vs GMM (gross monthly mean) for a specific course at a specific uni
+
+    
     attribute='gross_monthly_mean'
-    dic1=find_dictionary(sch,attribute,deg)
+    dic=find_dictionary(sch,attribute)
     
-    print("printing graph1")
-    print(dic1)
+    print(dic)
     
-    if any(value == 0 for value in dic1.values()):
-        list_data1=None
+    if all(value == 0 for value in dic.values()):
+        list_data=None
     else:
-        list_data1=[]
-        list_data1.append(['Year', 'GMM'])
-        for key,value in dic1.items():
-            list_data1.append([str(key),int(value)])
-        
-    # for i in range(len(list_data1)):
-    #     list_data1[i][0]=str(list_data1[i][0])
-    
-    
-    #Graph 2: time vs GMM (gross monthly mean) across all courses for a specific uni
-    # dic2=find_dictionary(sch,attribute)
-    # list_data2=np.array(list(dic2.items()))
-    
-    # print("printing graph2")
-    # print(dic2)
-    
-    # if any(value == 0 for value in dic2.values()):
-    #     list_data2=None
-    # else:
-    #     list_data2=[]
-    #     list_data2.append(['Year', 'GMM'])
-    #     for key,value in dic2.items():
-    #         list_data2.append([str(key),int(value)])
-    
-    #Graph 3: time vs employment rate for a specific course at a specific 
-    attribute='employment_rate_overall'
-    dic3=find_dictionary(sch,attribute,deg)
-    list_data3=np.array(list(dic3.items()))
-    if any(value == 0 for value in dic3.values()):
-        list_data3=None
-    else:
-        list_data3=[]
-        for key,value in dic3.items():
-            list_data3.append([str(key),int(value)])
-    
-    # for i in range(len(list_data3)):
-    #     list_data3[i][0]=str(list_data3[i][0])
+        list_data=[]
+        list_data.append(['Year', 'GMM'])
+        for key,value in dic.items():
+            list_data.append([str(key),int(value)])
     
 
-
-    # print("printing graph1",list_data1)
 
     
     coordinates=school_coordinates.query.filter_by(school_name=course.school).first()
@@ -409,6 +371,7 @@ def course_page(course_id):
                            latitude=coordinates.latitude,
                            background_file=background_string,
                            logo_file=logo_string,
-                           graph1=list_data1,
-                           graph3=list_data3)
+                           employment_rate=course.employability,
+                           sal=course.salary,
+                           graph=list_data)
     

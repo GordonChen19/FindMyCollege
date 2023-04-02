@@ -7,23 +7,14 @@
   google.charts.setOnLoadCallback(drawCharts);
 
   function drawCharts() {    
-    var data = google.visualization.arrayToDataTable({{graph1|tojson}}); 
+    var data = google.visualization.arrayToDataTable({{graph|tojson}}); 
     var options = {
       title: 'gross monthly mean (SGD)',
-      curveType: 'function',
+      curveType: 'none',
       legend: 'none'
     };
-    var chart = new google.visualization.LineChart(document.getElementById('chart1'));
+    var chart = new google.visualization.LineChart(document.getElementById('chart'));
     chart.draw(data, options);
-
-    var data2 = google.visualization.arrayToDataTable({{graph3|tojson}}); 
-    var options2 = {
-      title: 'employability rate %',
-      curveType: 'function',
-      legend: 'none'
-    };
-    var chart2 = new google.visualization.LineChart(document.getElementById('chart2'));
-    chart2.draw(data2, options2);    
   }
 </script>
 
@@ -61,10 +52,17 @@
         <td class="c-info">Additional Requirements</td>
         <td class="c-data">{{additional_information}}</td>
       </tr>
+      <tr>
+        <td class="c-info">Course Employment Rate</td>
+        <td class="c-data">{{employment_rate}}</td>
+      </tr>
+      <tr>
+        <td class="c-info">Graduate Mean Starting Income (SGD)</td>
+        <td class="c-data">{{sal}}</td>
+      </tr>
     </table> 
     <h3 class="section-title">Employability Outcomes</h3>
-    <div id="chart1" style="width: 600px; height: 600px"></div>
-    <div id="chart2" style="width: 600px; height: 600px"></div>
+    <div id="chart" style="width: 600px; height: 900px"></div>
   </div>
   
 </div>
