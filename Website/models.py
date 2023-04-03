@@ -87,7 +87,3 @@ class users_courses(db.Model):
     general_data=db.Column(JSON)
     top_3_codes=db.Column(db.String(10))
 
-class school_coordinates(db.Model):
-    school_name=db.Column(db.String(100),primary_key=True)
-    longitude=db.Column(db.Float)
-    latitude=db.Column(db.Float)

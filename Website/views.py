@@ -197,22 +197,12 @@ def add_portfolio():
                     if letter in riasec_code: #if there exists a match between user and course riasec code
                         riasec_points+=3-i
                         match_str+=letter #r1>r2>r3
-            
-                #r1,r2,r3 -> 7 
-                #r1,r2 -> 5
-                #r1,r3 -> 4
-                #r2,r3 -> 3
-                #r1 -> 3
-                #r2 -> 2
-                #r3 -> 1 
 
                 subject_points=0
-                if s1==related_subject1 or s1==related_subject2 or s1==related_subject3:
-                   subject_points+=3
-                if s2==related_subject1 or s2==related_subject2 or s2==related_subject3:
-                    subject_points+=2
-                if s3==related_subject1 or s3==related_subject2 or s3==related_subject3:
-                    subject_points+=1
+                related_subjects = [related_subject1, related_subject2, related_subject3]
+                for subject in [s1, s2, s3]:
+                    if subject in related_subjects:
+                        subject_points += (4 - related_subjects.index(subject))
                 
 
 
@@ -351,8 +341,7 @@ def course_page(course_id):
     
 
 
-    
-    coordinates=school_coordinates.query.filter_by(school_name=course.school).first()
+  
     background_string=course.school+'_background.jpeg'
     logo_string="/static/"+course.school+'_logo.png'
     return render_template('course_page.html',user=current_user, degree=course.degree,
@@ -368,8 +357,6 @@ def course_page(course_id):
                            related_subject3=course.related_subject3,
                            additional_information=course.additional_information,
                            a_level_prerequisites=course.a_level_prerequisites,
-                           longitude=coordinates.longitude,
-                           latitude=coordinates.latitude,
                            background_file=background_string,
                            logo_file=logo_string,
                            employment_rate=course.employability,
