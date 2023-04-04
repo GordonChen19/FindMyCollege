@@ -187,9 +187,9 @@ def add_portfolio():
                     if user_qualification.polytechnic_score!=None and user_qualification.polytechnic_score<polytechnic_IGP:
                         continue
                 
-                curr_dict = {}
-                curr_dict["school_name"] = school
-                curr_dict["degree"]=degree
+                # curr_dict = {}
+                # curr_dict["school_name"] = school
+                # curr_dict["degree"]=degree
                 match_str=""
 
                 riasec_points=0
@@ -250,12 +250,14 @@ def add_portfolio():
 @views.route('/view_results',methods=['POST','GET'])
 @login_required
 def view_results():
+    if request.method=='POST':
+        return redirect(url_for('views.all_courses_page'))
     course_reco=users_courses.query.filter_by(user_id=current_user.id).first() #should only return 1
-    
-    # if course_reco == None:
-    # for schools in course_reco.by_school_data:
-    #     for i in range(3):
-    #         print(course_reco.by_school_data[schools][i])
+        
+        # if course_reco == None:
+        # for schools in course_reco.by_school_data:
+        #     for i in range(3):
+        #         print(course_reco.by_school_data[schools][i])
     descriptions=Holland_Codes.query.filter_by(id=1).first()
     
     return render_template("view_results.html", user=current_user,
@@ -362,4 +364,28 @@ def course_page(course_id):
                            employment_rate=course.employability,
                            sal=course.salary,
                            graph=list_data)
+    
+    
+@views.route('/all_courses',methods=['POST','GET'])
+@login_required
+def all_courses_page():
+
+    data=Degrees.query.all() #get all courses available at every unvieristy 
+    course_list=defaultdict(list)
+    for course in data:
+        course_id=course.id
+        course_degree=course.degree
+        course_school=course.school
+        course_list[course_school].append((course_school,course_degree,course_id))
+    
+    course_reco=users_courses.query.filter_by(user_id=current_user.id).first()
+    descriptions=Holland_Codes.query.filter_by(id=1).first()
+        
+    return render_template("view_all_courses.html",user=current_user,
+                           all_courses=course_list,
+                           r1=getattr(descriptions,course_reco.top_3_codes[0]),
+                           r2=getattr(descriptions,course_reco.top_3_codes[1]),
+                           r3=getattr(descriptions,course_reco.top_3_codes[2]),
+                           top3=course_reco.top_3_codes[0:3])
+    
     

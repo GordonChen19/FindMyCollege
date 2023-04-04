@@ -521,6 +521,15 @@
     margin-top: 10px;
 }
 
+.result-button{
+    height: 40px;
+    width: 150px;
+    background-color: #faa32b;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
 .wrapper{
     height: 200vh;
     width: 100%;
