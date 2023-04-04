@@ -142,7 +142,6 @@ def add_portfolio():
         
         def sortRiasecAndSubject(r1,r2,r3,s1,s2,s3):
             by_college=defaultdict(list)
-            general_course_list=defaultdict(list)
             
             riasec_user=r1+r2+r3 #Concatenate riasec code
             # data -> [('i', 'Medicine', 'NTU', 'chemistry', 'biology', 'physics'), ('i', 'Medicine', 'NUS', 'chemistry', 'biology', 'physics')]]
@@ -152,7 +151,8 @@ def add_portfolio():
             H2_RP={'A':20,'B':17.5,'C':15,'D':12.5,'E':10,'S':5,'U':0} #H2 Rank Points
             H1_RP={'A':10,'B':8.75,'C':7.5,'D':6.25,'E':5,'S':2.5,'U':0} #H1 Rank Points
             
-            user_qualification=Qualification.query.filter_by(id=current_user.id).first()
+            user_qualification=Qualification.query.filter_by(user_id=current_user.id).first()
+            print(user_qualification)
                 
             if user_qualification.curriculum == "ALevel":
                 user_score=user_qualification.alevel_score
@@ -173,7 +173,6 @@ def add_portfolio():
                 alevel_IGP=course.alevel_igp
                 polytechnic_IGP=course.polytechnic_igp
                 
-                # general_course_list[school].append((school,degree,match_str,riasec_points*subject_points,course_id))
                 if user_qualification.curriculum=="ALevel":
                     degree_rank_point=0
                     if alevel_IGP!=None:
@@ -207,16 +206,13 @@ def add_portfolio():
 
 
                 by_college[school].append((school,degree,match_str,riasec_points*subject_points,course_id)) 
-            return by_college,general_course_list
+            return by_college
         # dict1 -> {"NTU": [["school_name","Degree", "matches_riasec", total_score,course_id],["school_name","Degree", "matches_riasec", "total_score",course_id]]}     
         def sortCoursesByCollege(by_college):
             for schools in by_college: #iterate through the schools
                 by_college[schools].sort(key=lambda x:x[3],reverse=True)
             return by_college
         
-        def sortCoursesGenerally(general_course_list):
-            general_course_list.sort(key=lambda x:x[3],reverse=True)
-            return general_course_list
             
         riasec_code=RIASEC_Scores.query.filter_by(user_id=current_user.id).first() #riasec_code for particular user_id 
         r1,r2,r3= max_riasec_code(riasec_code) #r1>r2>r3
@@ -224,20 +220,16 @@ def add_portfolio():
 
         subject_interests=Subject_interests.query.filter_by(user_id=current_user.id).first()
 
-        by_college,general_course_list=sortRiasecAndSubject(r1,r2,r3,subject_interests.subject1,subject_interests.subject2,subject_interests.subject3)
+        by_college=sortRiasecAndSubject(r1,r2,r3,subject_interests.subject1,subject_interests.subject2,subject_interests.subject3)
         by_college=sortCoursesByCollege(by_college)
-        # general_course_list=sortCoursesGenerally(general_course_list)
-        
         
         course_reco=users_courses.query.filter_by(user_id=current_user.id).first()
         if course_reco==None: 
             course_reco=users_courses(by_school_data=by_college,
-                                    general_data=general_course_list,
                                     user_id=current_user.id,top_3_codes=r1+r2+r3)
             db.session.add(course_reco)
         else:
             course_reco.by_school_data=by_college
-            course_reco.general_data=general_course_list
             course_reco.top_3_codes=r1+r2+r3
         db.session.commit()
         
@@ -267,7 +259,7 @@ def view_results():
                            r3=getattr(descriptions,course_reco.top_3_codes[2]),
                            top3=course_reco.top_3_codes[0:3])
 
-#general_data=course_reco.general_data
+#general_data=course_reco.x_data
 
 @views.route('/course_specifics/<course_id>')
 @login_required
