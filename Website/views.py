@@ -411,8 +411,7 @@ def all_courses_page():
         course_school=course.school
         course_list[course_school].append((course_school,course_degree,course_id))
     
-    course_reco=users_courses.query.filter_by(user_id=current_user.id).first()
-    descriptions=Holland_Codes.query.filter_by(id=1).first()
+    
     
     data=Degrees.query.all() #get all courses available at every unvieristy 
     all_degrees_search=[]
@@ -424,11 +423,7 @@ def all_courses_page():
         
     return render_template("view_all_courses.html",user=current_user,
                            all_courses=course_list,
-                           all_degrees_search=all_degrees_search,
-                           r1=getattr(descriptions,course_reco.top_3_codes[0]),
-                           r2=getattr(descriptions,course_reco.top_3_codes[1]),
-                           r3=getattr(descriptions,course_reco.top_3_codes[2]),
-                           top3=course_reco.top_3_codes[0:3])
+                           all_degrees_search=all_degrees_search)
     
     
     
