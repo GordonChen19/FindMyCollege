@@ -459,16 +459,36 @@ def prospects():
 
     all_degrees_search=[]
     course_info=[]
+    cut_offs=[]
+    H2_RP={'A':20,'B':17.5,'C':15,'D':12.5,'E':10,'S':5,'U':0} #H2 Rank Points
+    H1_RP={'A':10,'B':8.75,'C':7.5,'D':6.25,'E':5,'S':2.5,'U':0} #H1 Rank Points
+    
+                
+                    
     for course in data:
-        # course_id=course.id
+        
         course_degree=course.degree
         course_school=course.school
         course_rate=course.employability
         course_salary=course.salary
+        
+        alevel_IGP=course.alevel_igp
+        polytechnic_IGP=course.polytechnic_igp
+        degree_rank_point=0
+        print(alevel_IGP)
+        if alevel_IGP!=None:
+            degree_rank_point+=H2_RP[alevel_IGP[0]]
+            degree_rank_point+=H2_RP[alevel_IGP[1]]
+            degree_rank_point+=H2_RP[alevel_IGP[2]]
+            degree_rank_point+=H1_RP[alevel_IGP[3]]
+        
+        print("printed degree rank points")
         all_degrees_search.append(str(course_degree)+" ("+str(course_school)+")")
         course_info.append([course_rate,course_salary])
+        cut_offs.append([degree_rank_point,polytechnic_IGP])
         
         
     return render_template("prospects_search.html",user=current_user,
                            all_degrees_search=all_degrees_search,
-                           course_info=course_info)
+                           course_info=course_info,
+                           cut_offs=cut_offs)

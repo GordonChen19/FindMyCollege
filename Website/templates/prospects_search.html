@@ -167,6 +167,7 @@
     submitButton.addEventListener('click', function() {
         var course_info = {{ course_info | tojson }};
         var all_degrees_search = {{ all_degrees_search | tojson }};
+        var cut_offs = {{ cut_offs | tojson }};
 
         if (selectedIndexes.length === 0) {
             alert("Please select at least one course to compare.");
@@ -180,10 +181,16 @@
         selectedRates = [];
         selectedSalary = [];
         selectedCourses = [];
+        Alevel=[]
+        poly=[]
         backgroundColor1 =[];
         backgroundColor2 =[];
+        backgroundColor3 =[];
+        backgroundColor4 =[];
         borderColor1=[];
         borderColor2=[];
+        borderColor3=[];
+        borderColor4=[];
 
         for (let i = 0; i < selectedIndexes.length; i++) {
             const index = selectedIndexes[i];
@@ -193,9 +200,14 @@
             selectedCourses.push(all_degrees_search[index]);
             backgroundColor1.push('rgba(255, 99, 132, 0.8)');
             backgroundColor2.push('rgba(255, 159, 64, 0.8)');
+            backgroundColor3.push('rgba(54, 162, 235, 0.9)');
+            backgroundColor4.push('rgba(75, 192, 192, 0.9)');
             borderColor1.push('rgba(255, 99, 132, 1)');
             borderColor2.push('rgba(255, 159, 64, 1)');
-            
+            borderColor3.push('rgba(54, 162, 235, 1)');
+            borderColor4.push('rgba(75, 192, 192, 1)');
+            Alevel.push(cut_offs[index][0]);
+            poly.push(cut_offs[index][1]);
         }
         
         
@@ -223,7 +235,23 @@
                             borderColor: borderColor2,
                             borderWidth: 1,
                             yAxisID: 'y-axis-2'
-                        }
+                        },
+                        {
+                            label: "Alevel Cutoff Grades",
+                            data: Alevel,
+                            backgroundColor: backgroundColor3,
+                            borderColor: borderColor3,
+                            borderWidth: 1,
+                            yAxisID: 'y-axis-3'
+                        },
+                        {
+                            label: "Polytechnic Cutoff Grades",
+                            data: poly,
+                            backgroundColor: backgroundColor4,
+                            borderColor: borderColor4,
+                            borderWidth: 1,
+                            yAxisID: 'y-axis-4'
+                        },
                     ]
                 },
                 options: {
@@ -253,6 +281,32 @@
                         scaleLabel: {
                             display: true,
                             labelString: 'Graduate Starting Salary'
+                          },
+                          
+                    },
+                    {
+                        id: 'y-axis-3', // assign an ID to the second y-axis
+                        type: 'linear',
+                        position: 'right',
+                        ticks: {
+                            suggestedMin: 1000
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'A Level Cut Off'
+                          },
+                          
+                    },
+                    {
+                        id: 'y-axis-4', // assign an ID to the second y-axis
+                        type: 'linear',
+                        position: 'right',
+                        ticks: {
+                            suggestedMin: 1000
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Polytechnic Cut Offs'
                           },
                           
                     }
