@@ -243,7 +243,21 @@ def add_portfolio():
 @login_required
 def view_results():
     if request.method=='POST':
-        return redirect(url_for('views.all_courses_page'))
+        if request.form.get('viewAll'):
+            return redirect(url_for('views.all_courses_page'))
+        elif request.form.get('q'):
+            searchInput = request.form.get('q')
+            degree, school = searchInput.split("(")
+            school = school[:-1]
+            degree = degree[:-1]
+            
+            course_id = Degrees.query.filter_by(school=school,degree=degree).first()
+            print(school+degree+str(course_id))
+            if course_id is None:
+                return redirect(url_for('views.view_results'))
+            else:
+                return redirect(url_for('views.course_page', course_id=course_id.id))
+        
     course_reco=users_courses.query.filter_by(user_id=current_user.id).first() #should only return 1
         
         # if course_reco == None:
@@ -252,8 +266,19 @@ def view_results():
         #         print(course_reco.by_school_data[schools][i])
     descriptions=Holland_Codes.query.filter_by(id=1).first()
     
+    data=Degrees.query.all() #get all courses available at every unvieristy 
+    all_degrees_search=[]
+    for course in data:
+        # course_id=course.id
+        course_degree=course.degree
+        course_school=course.school
+        all_degrees_search.append(str(course_degree)+" ("+str(course_school)+")")
+        
+    
+    
     return render_template("view_results.html", user=current_user,
                            by_school=course_reco.by_school_data,
+                           all_degrees_search=all_degrees_search,
                            r1=getattr(descriptions,course_reco.top_3_codes[0]),
                            r2=getattr(descriptions,course_reco.top_3_codes[1]),
                            r3=getattr(descriptions,course_reco.top_3_codes[2]),
@@ -361,6 +386,22 @@ def course_page(course_id):
 @views.route('/all_courses',methods=['POST','GET'])
 @login_required
 def all_courses_page():
+    
+    if request.method=='POST':
+        if request.form.get('viewAll'):
+            return redirect(url_for('views.view_results'))
+        elif request.form.get('q'):
+            searchInput = request.form.get('q')
+            degree, school = searchInput.split("(")
+            school = school[:-1]
+            degree = degree[:-1]
+            
+            course_id = Degrees.query.filter_by(school=school,degree=degree).first()
+            print(school+degree+str(course_id))
+            if course_id is None:
+                return redirect(url_for('views.view_results'))
+            else:
+                return redirect(url_for('views.course_page', course_id=course_id.id))
 
     data=Degrees.query.all() #get all courses available at every unvieristy 
     course_list=defaultdict(list)
@@ -372,12 +413,61 @@ def all_courses_page():
     
     course_reco=users_courses.query.filter_by(user_id=current_user.id).first()
     descriptions=Holland_Codes.query.filter_by(id=1).first()
+    
+    data=Degrees.query.all() #get all courses available at every unvieristy 
+    all_degrees_search=[]
+    for course in data:
+        # course_id=course.id
+        course_degree=course.degree
+        course_school=course.school
+        all_degrees_search.append(str(course_degree)+" ("+str(course_school)+")")
         
     return render_template("view_all_courses.html",user=current_user,
                            all_courses=course_list,
+                           all_degrees_search=all_degrees_search,
                            r1=getattr(descriptions,course_reco.top_3_codes[0]),
                            r2=getattr(descriptions,course_reco.top_3_codes[1]),
                            r3=getattr(descriptions,course_reco.top_3_codes[2]),
                            top3=course_reco.top_3_codes[0:3])
     
     
+    
+@views.route('/prospects_search',methods=['POST','GET'])
+@login_required
+def prospects():
+    
+    if request.method=='POST':
+        selected_courses = request.form.getlist('course')
+        # Use the selected courses in your code here
+        print("printing")
+        print(selected_courses)
+        
+        searchInput = request.form.get('q')
+        degree, school = searchInput.split("(")
+        school = school[:-1]
+        degree = degree[:-1]
+        
+        course_id = Degrees.query.filter_by(school=school,degree=degree).first()
+        rate=course_id.employability
+        print(school+degree+str(course_id))
+        if course_id is None:
+            return redirect(url_for('views.view_results'))
+        else:
+            return redirect(url_for('views.course_page', course_id=course_id.id))
+
+    data=Degrees.query.all() #get all courses available at every unvieristy 
+
+    all_degrees_search=[]
+    course_info=[]
+    for course in data:
+        # course_id=course.id
+        course_degree=course.degree
+        course_school=course.school
+        course_rate=course.employability
+        course_salary=course.salary
+        all_degrees_search.append(str(course_degree)+" ("+str(course_school)+")")
+        course_info.append([course_rate,course_salary])
+        
+    return render_template("prospects_search.html",user=current_user,
+                           all_degrees_search=all_degrees_search,
+                           course_info=course_info)

@@ -539,7 +539,7 @@
 }
 
 .reco-wrapper{
-    background-color: #e6fbffb9;
+    background-color: #e6fbff9c;
     height: 180vh;
     width: 80%;
     padding: 20px;
@@ -714,3 +714,246 @@
   height: 50px;
   margin-right: 10px;
 }
+
+
+
+
+
+.search-bar-container{
+    width: 100%; 
+    min-height: 15vh;
+
+    background-image :linear-gradient(rgba(0,8,51,0,9),rgba(0,8,51,0.9)),url(/static/searchIcon.png);
+    background-position: center;
+    background-size:cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar{
+    width: 100%;
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.212);
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 3px;
+    backdrop-filter: blur(4px) saturate(180%);
+    position: relative;
+}
+
+.search-bar input{
+    background: transparent;
+    flex:1;
+    border:0;
+    outline:none;
+    padding:24px 20px;
+    font-size:20px;
+    color:rgb(217, 171, 97);
+}
+
+::placeholder{
+    color:#daac62;
+}
+
+.search-bar button img{
+    width:25px;
+}
+
+.search-bar button{
+    border:0;
+    border-radius:50%;
+    width:60px;
+    height: 60px;
+    background: #daac62;
+    cursor:pointer;
+
+}
+
+
+.resultBox {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    background-color: #ffffff4c;
+
+    border-radius: 5px;
+    max-height: 500px;    
+  }
+
+
+  
+  .searchInput.active + .resultBox {
+    padding: 10px 8px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .resultBox li {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 2;
+}
+
+.search-bar button:hover {
+    background-color: #c08a39;
+}
+
+.suggestion {
+    padding: 10px;
+    background-color: #f7f7f79c;
+    border-bottom: 1px;
+
+    cursor: pointer;
+  }
+  
+  .suggestion:hover {
+    background-color: #e0e0e0a2;
+  }
+
+ /* Google Fonts - Poppins */
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+ *{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Poppins', sans-serif;
+ }
+
+
+ .select-btn{
+     display: flex;
+     width: 40%;
+     height: 50px;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0 16px;
+     border-radius: 8px;
+     cursor: pointer;
+     background-color: #fff;
+     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+ }
+ .select-btn .btn-text{
+     font-size: 17px;
+     font-weight: 400;
+     color: #333;
+ }
+ .select-btn .arrow-dwn{
+     display: flex;
+     height: 21px;
+     width: 21px;
+     color: #fff;
+     font-size: 14px;
+     border-radius: 50%;
+     background: #6e93f7;
+     align-items: center;
+     justify-content: center;
+     transition: 0.3s;
+ }
+ .select-btn.open .arrow-dwn{
+     transform: rotate(-180deg);
+ }
+ .list-items{
+     position: relative;
+     margin-top: 15px;
+     border-radius: 8px;
+     padding: 16px;
+     background-color: #fff;
+     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+     display: none;
+     max-height: 200px;
+    overflow-y: auto;
+      
+ }
+
+
+ .select-btn.open ~ .list-items{
+     display: block;
+ }
+ .list-items .item{
+     display: flex;
+     align-items: center;
+     list-style: none;
+     height: 50px;
+     cursor: pointer;
+     transition: 0.3s;
+     padding: 0 15px;
+     border-radius: 8px;
+ }
+ .list-items .item:hover{
+     background-color: #e7edfe;
+ }
+ .item .item-text{
+     font-size: 16px;
+     font-weight: 400;
+     color: #333;
+ }
+ .item .checkbox{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     height: 16px;
+     width: 16px;
+     border-radius: 4px;
+     margin-right: 12px;
+     border: 1.5px solid #c0c0c0;
+     transition: all 0.3s ease-in-out;
+ }
+ .item.checked .checkbox{
+     background-color: #4070f4;
+     border-color: #4070f4;
+ }
+ .checkbox .check-icon{
+     color: #fff;
+     font-size: 11px;
+     transform: scale(0);
+     transition: all 0.2s ease-in-out;
+ }
+ .item.checked .check-icon{
+     transform: scale(1);
+ }
+  
+ .prospects-container{
+    width: 100%; 
+    min-height: 15vh;
+    position:relative;
+    margin-top: 80px; /* or any other value that gives enough space */
+    padding-top: 20px; /* optional */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.prospectssubmitbutton{
+    height: 35px;
+    width: 100px;
+    margin-top: 30px; /* or any other value that gives enough space */
+    
+    background-color: #faa32b;
+    border: none;
+    cursor: pointer;
+}
+
+.graph-container {
+    background-color: #e6fbff9c;
+    height: 80vh;
+    width: 80%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: hidden;
+}
+
