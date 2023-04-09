@@ -468,6 +468,7 @@ def prospects():
         all_degrees_search.append(str(course_degree)+" ("+str(course_school)+")")
         course_info.append([course_rate,course_salary])
         
+        
     return render_template("prospects_search.html",user=current_user,
                            all_degrees_search=all_degrees_search,
                            course_info=course_info)

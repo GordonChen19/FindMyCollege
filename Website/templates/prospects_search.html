@@ -77,8 +77,8 @@
           const maxSelections = 5;
         let numSelections = 0;
         let selectedIndexes=[];
-        items.forEach(item => {
-        item.addEventListener("click", () => {
+        items.forEach((item,index) => {
+        item.addEventListener("click", function() {
             if (item.classList.contains("checked")) {
             // Remove the "checked" class and decrease the counter
             item.classList.remove("checked");
@@ -90,6 +90,7 @@
                 item.classList.add("checked");
                 numSelections++;
                 selectedIndexes.push(index);
+
             }
             }
 
@@ -99,107 +100,174 @@
             btnText.innerText = `${numSelections} Selected`;
             } else {
             btnText.innerText = "Select Courses to Compare";
-            }
-            const selectedItems=document.querySelectorAll('.item.checked');
-            const numSelected=selectedItems.length;
-            const labels = [];
-            const data = [];
-
-            selectedItems.forEach(item => {
-            labels.push(item.querySelector('.item-text').textContent);
-            data.push(Math.floor(Math.random() * 100));
-            });
+            }      
 
         });
         });
+
+
+
+    
+
+    
+    
         </script>
+
+
+
+
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
-            // initialize chart
-            let myChart = new Chart(
-                document.getElementById('myChart'),
-                {
-                    type: 'bar',
-                    data: {
-                        labels: ['Course 1', 'Course 2', 'Course 3', 'Course 4', 'Course 5'],
-                        datasets: [
-                            {
-                                label:"Graduate Employment Rate",
-                                data: [75, 80, 90, 70, 85],
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.9)',
-                                    'rgba(54, 162, 235, 0.9)',
-                                    'rgba(255, 206, 86, 0.9)',
-                                    'rgba(75, 192, 192, 0.9)',
-                                    'rgba(153, 102, 255, 0.9)'
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)'
-                                ],
-                                borderWidth: 1
-                            }
-                        ]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
+                // initialize chart
+                let myChart = new Chart(
+        document.getElementById('myChart'),
+        {
+            type: 'bar',
+            data: {
+                labels: ['Course 1', 'Course 2', 'Course 3', 'Course 4', 'Course 5'],
+                datasets: [
+                    {
+                        label: 'Select at least one course',
+                        data: [75, 80, 90, 70, 85],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.9)',
+                            'rgba(54, 162, 235, 0.9)',
+                            'rgba(255, 206, 86, 0.9)',
+                            'rgba(75, 192, 192, 0.9)',
+                            'rgba(153, 102, 255, 0.9)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
                     }
                 }
-            );
-        
-            const submitButton = document.querySelector('.prospectssubmitbutton');
-        
-            submitButton.addEventListener('click', function() {
-                // destroy existing chart
-                myChart.destroy();
-        
-                // create new chart
-                myChart = new Chart(
-                    document.getElementById('myChart'),
-                    {
-                        type: 'bar',
-                        data: {
-                            labels: ['Course 1', 'Course 2', 'Course 3', 'Course 4', 'Course 5'],
-                            datasets: [
-                                {
-                                    label:"Graduate Employment Rate",
-                                    data: [80, 70, 85, 90, 75],
-                                    backgroundColor: [
-                                        'rgba(255, 99, 132, 0.8)',
-                                        'rgba(54, 162, 235, 0.8)',
-                                        'rgba(255, 206, 86, 0.8)',
-                                        'rgba(75, 192, 192, 0.8)',
-                                        'rgba(153, 102, 255, 0.8)'
-                                    ],
-                                    borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)'
-                                    ],
-                                    borderWidth: 1
-                                }
-                            ]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    }
-                );
-            });
+            }
+        }
+    );
 
+
+
+    const submitButton = document.querySelector('.prospectssubmitbutton');
+
+
+    
+
+    submitButton.addEventListener('click', function() {
+        var course_info = {{ course_info | tojson }};
+        var all_degrees_search = {{ all_degrees_search | tojson }};
+
+        if (selectedIndexes.length === 0) {
+            alert("Please select at least one course to compare.");
+            return;
+        }
+
+        // destroy existing chart
+        myChart.destroy();
+
+
+        selectedRates = [];
+        selectedSalary = [];
+        selectedCourses = [];
+        backgroundColor1 =[];
+        backgroundColor2 =[];
+        borderColor1=[];
+        borderColor2=[];
+
+        for (let i = 0; i < selectedIndexes.length; i++) {
+            const index = selectedIndexes[i];
+    
+            selectedRates.push(course_info[index][0]);
+            selectedSalary.push(course_info[index][1]);
+            selectedCourses.push(all_degrees_search[index]);
+            backgroundColor1.push('rgba(255, 99, 132, 0.8)');
+            backgroundColor2.push('rgba(255, 159, 64, 0.8)');
+            borderColor1.push('rgba(255, 99, 132, 1)');
+            borderColor2.push('rgba(255, 159, 64, 1)');
+            
+        }
+        
+        
+            
+        // create new chart
+        myChart = new Chart(
+            document.getElementById('myChart'),
+            {
+                type: 'bar',
+                data: {
+                    labels: selectedCourses,
+                    datasets: [
+                        {
+                            label: "Graduate Employment Rate",
+                            data: selectedRates,
+                            backgroundColor: backgroundColor1,
+                            borderColor: borderColor1,
+                            borderWidth: 1,
+                            yAxisID:'y-axis-1'
+                        },
+                        {
+                            label: "Starting Salary",
+                            data: selectedSalary,
+                            backgroundColor: backgroundColor2,
+                            borderColor: borderColor2,
+                            borderWidth: 1,
+                            yAxisID: 'y-axis-2'
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [
+                    {
+                        id: 'y-axis-1', // assign an ID to the first y-axis
+                        type: 'linear',
+                        position: 'left',
+                        ticks: {
+                            suggestedMin: 50
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Graduate Employment Rate'
+                          }
+                          
+                        
+                    },
+                    {
+                        id: 'y-axis-2', // assign an ID to the second y-axis
+                        type: 'linear',
+                        position: 'right',
+                        ticks: {
+                            suggestedMin: 1000
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Graduate Starting Salary'
+                          },
+                          
+                    }
+                ]
+                    }
+                }
+            }
+        );
+    });
+        
+
+
+
+
+    
            
               
               
