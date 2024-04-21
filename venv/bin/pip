@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/Users/gordonchen/Documents/MACS/Year 2/Semester 2/Software Engineering/Project/VSCode/venv/bin/python" "$0" "$@"
-' '''
+#!/Users/I742551/FindMyCollege-Application/venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys

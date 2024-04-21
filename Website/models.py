@@ -1,15 +1,6 @@
 from . import db
 from flask_login import UserMixin
-from sqlalchemy.sql import func
 from sqlalchemy import JSON
-
-
-
-class Note(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(10000))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class RIASEC_Scores(db.Model):
     id=db.Column(db.Integer,primary_key=True)
@@ -28,7 +19,6 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     completed=db.Column(db.Boolean)
-    notes = db.relationship('Note')
     qualification=db.relationship('Qualification')
     subject_interests=db.relationship('Subject_interests')
     riasec_scores=db.relationship('RIASEC_Scores')
@@ -80,10 +70,8 @@ class Holland_Codes(db.Model):
 
 
 class users_courses(db.Model):
-    # __table__='my_table'
     id=db.Column(db.Integer,primary_key=True)
     user_id=db.Column(db.Integer,db.ForeignKey('user.id'))
     by_school_data=db.Column(JSON)
     general_data=db.Column(JSON)
     top_3_codes=db.Column(db.String(10))
-

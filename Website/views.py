@@ -1,22 +1,15 @@
-from flask import Blueprint, render_template, request, flash, jsonify, url_for,redirect,session
+from flask import Blueprint, render_template, request, url_for,redirect,session
 from flask_login import login_required, current_user
 from .models import *
 from . import db
-from sqlalchemy import or_
 import json
 import sqlite3 as sql
-import pandas as pd
-import time
-from itertools import chain
 from collections import defaultdict
-import numpy as np
 
 #graphing
-from urllib.parse import urlencode
 import urllib3
-import urllib.request
 import json
-import matplotlib.pyplot as plt
+
 
 conn=sql.connect('database.db')
 c=conn.cursor()
@@ -105,8 +98,6 @@ def add_portfolio():
                                         completed=True,user_id=current_user.id)
             db.session.add(new_entry)
             
-        # elif curriculum=='IB':
-        #     ib_score=request.form.get('')
         
         db.session.commit() 
         
@@ -132,7 +123,7 @@ def add_portfolio():
             riasec_array=[riasec_code.r_score,riasec_code.i_score,riasec_code.a_score,riasec_code.s_score,riasec_code.e_score,riasec_code.c_score]
             code_array=['r','i','a','s','e','c']
             top_r=[]
-            print(max(riasec_array))
+
             for i in range(3):
                 max_index=riasec_array.index(max(riasec_array))
                 top_r.append(code_array[max_index])
@@ -152,7 +143,6 @@ def add_portfolio():
             H1_RP={'A':10,'B':8.75,'C':7.5,'D':6.25,'E':5,'S':2.5,'U':0} #H1 Rank Points
             
             user_qualification=Qualification.query.filter_by(user_id=current_user.id).first()
-            print(user_qualification)
                 
             if user_qualification.curriculum == "ALevel":
                 user_score=user_qualification.alevel_score
@@ -252,7 +242,6 @@ def view_results():
             degree = degree[:-1]
             
             course_id = Degrees.query.filter_by(school=school,degree=degree).first()
-            print(school+degree+str(course_id))
             if course_id is None:
                 return redirect(url_for('views.view_results'))
             else:
@@ -342,13 +331,10 @@ def course_page(course_id):
     course=Degrees.query.filter_by(id=course_id).first()
     sch=acronym[course.school]
 
-    print(sch)
 
     
     attribute='gross_monthly_mean'
     dic=find_dictionary(sch,attribute)
-    
-    print(dic)
     
     if all(value == 0 for value in dic.values()):
         list_data=None
@@ -397,7 +383,6 @@ def all_courses_page():
             degree = degree[:-1]
             
             course_id = Degrees.query.filter_by(school=school,degree=degree).first()
-            print(school+degree+str(course_id))
             if course_id is None:
                 return redirect(url_for('views.view_results'))
             else:
@@ -434,9 +419,7 @@ def prospects():
     if request.method=='POST':
         selected_courses = request.form.getlist('course')
         # Use the selected courses in your code here
-        print("printing")
-        print(selected_courses)
-        
+
         searchInput = request.form.get('q')
         degree, school = searchInput.split("(")
         school = school[:-1]
@@ -470,14 +453,12 @@ def prospects():
         alevel_IGP=course.alevel_igp
         polytechnic_IGP=course.polytechnic_igp
         degree_rank_point=0
-        print(alevel_IGP)
         if alevel_IGP!=None:
             degree_rank_point+=H2_RP[alevel_IGP[0]]
             degree_rank_point+=H2_RP[alevel_IGP[1]]
             degree_rank_point+=H2_RP[alevel_IGP[2]]
             degree_rank_point+=H1_RP[alevel_IGP[3]]
         
-        print("printed degree rank points")
         all_degrees_search.append(str(course_degree)+" ("+str(course_school)+")")
         course_info.append([course_rate,course_salary])
         cut_offs.append([degree_rank_point,polytechnic_IGP])
