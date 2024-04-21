@@ -1,4 +1,4 @@
-#!/Users/I742551/FindMyCollege-Application/venv/bin/python3.12
+#!/Users/I742551/Desktop/FindMyCollege/venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys
